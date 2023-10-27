@@ -1,16 +1,12 @@
-
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import { ViteMinifyPlugin } from 'vite-plugin-minify';
+import react from '@vitejs/plugin-react';
 
-const root = resolve(__dirname, 'src');
 const outDir = resolve(__dirname, 'dist');
 
 export default defineConfig({
-  root,
-  plugins: [
-    ViteMinifyPlugin({}),
-  ],
+  plugins: [ViteMinifyPlugin({}), react()],
   build: {
     outDir,
     emptyOutDir: true,
@@ -18,11 +14,6 @@ export default defineConfig({
     terserOptions: {
       output: {
         comments: false,
-      },
-    },
-    rollupOptions: {
-      input: {
-        main: resolve(root, 'index.html'),
       },
     },
   },

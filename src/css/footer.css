@@ -1,0 +1,26 @@
+footer {
+  min-height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto;
+}
+
+#copyright {
+  font-size: 1.24rem;
+  font-weight: 700;
+  text-decoration-line: none;
+  letter-spacing: 0.5px;
+  color: $clr-accent-400;
+}
+
+.fa-github {
+  font-size: 1.38rem;
+  transition: transform 0.4s ease-in-out;
+}
+
+.fa-github:hover {
+  transform: rotate(360deg) scale(1.2);
+
+  border: 24px 24px 24px 24px solid red;
+}
