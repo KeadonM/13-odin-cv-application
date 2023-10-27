@@ -43,3 +43,13 @@ $app-padding: clamp(0.5rem, calc(0.1rem + 1.75vw), 2.25rem);
 // Misc
 $border-radius: 8px;
 $shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+
+@mixin column-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin row-flex {
+  display: flex;
+  flex-direction: row;
+}

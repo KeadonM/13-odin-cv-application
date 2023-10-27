@@ -1,0 +1,30 @@
+@import 'utils/variables';
+
+.input-card {
+  margin-bottom: $spc-200;
+  border-radius: $border-radius;
+  background-color: $clr-neutral-100;
+
+  max-width: 32em;
+  min-height: 3em;
+
+  input,
+  textarea {
+    margin: $spc-100;
+
+    border-radius: $border-radius;
+    outline: solid 2px $clr-neutral-500;
+  }
+
+  form {
+    @include column-flex;
+
+    label {
+      @include column-flex;
+    }
+
+    .form-row {
+      @include row-flex;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@import 'utils/variables';
+
+.preview {
+  @include column-flex;
+  align-items: center;
+
+  #resume-preview {
+    background-color: $clr-neutral-100;
+    width: 33vw;
+    max-width: 850px;
+    aspect-ratio: 8.5/11;
+    border-radius: $border-radius;
+  }
+
+  .resume-section {
+    h2 {
+      font-weight: bold;
+    }
+    margin: $spc-200;
+  }
+
+  .resume-general {
+    background-color: $clr-accent-400;
+    min-height: 10%;
+  }
+}

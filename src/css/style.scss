@@ -5,29 +5,16 @@
   font-size: $fs-400;
   background-color: $clr-neutral-200;
 
-  display: flex;
-  flex-direction: column;
+  @include column-flex;
   height: 100vh;
 }
 
 main {
-  display: flex;
-  flex-direction: column;
+  @include column-flex;
   align-items: center;
 }
 
 .build-preview-container {
   display: flex;
-
-  .preview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    #resume-preview {
-      background-color: $clr-neutral-400;
-      min-width: 300px;
-      min-height: 400px;
-    }
-  }
+  gap: $spc-400;
 }
