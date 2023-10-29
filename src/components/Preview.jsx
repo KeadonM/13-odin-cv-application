@@ -10,10 +10,17 @@ function Preview({ data }) {
     <section aria-labelledby="preview-title" className="preview">
       <h2 id="preview-title">Preview</h2>
       <div id="resume-preview">
-        <General data={data.info} />
-        <Experience data={data.info} />
-        <Education data={data.info} />
-        <Skills data={data.info} />
+        <General data={data.info.general} />
+
+        {[...data.info.experience.entries()].map((entry) => {
+          return <Experience key={entry[0]} data={entry[1]} />;
+        })}
+
+        {[...data.info.education.entries()].map((entry) => {
+          return <Education key={entry[0]} data={entry[1]} />;
+        })}
+
+        <Skills data={data.info.skills} />
       </div>
     </section>
   );

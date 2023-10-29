@@ -1,7 +1,12 @@
 import { useState } from 'react';
 
-import FormInput from './form-components/FormInput.jsx';
 import FormControls from './form-components/FormControls.jsx';
+import InputList from './form-components/InputList.jsx';
+
+import General from './form-components/FormGeneral.jsx';
+import Experience from './form-components/FormExperience.jsx';
+import Education from './form-components/FormEducation.jsx';
+import Skills from './form-components/FormSkills.jsx';
 
 import '../css/inputCard.scss';
 function InputCard({ children, onSelection }) {
@@ -12,11 +17,33 @@ function InputCard({ children, onSelection }) {
   );
 }
 
-function Builder({ updateData }) {
+function Builder({
+  resumeData,
+  updateData,
+  addExperience,
+  removeExperience,
+  addSchool,
+  removeEducation,
+}) {
   const [activeInput, setActiveInput] = useState(0);
+  const [activeId, setActiveId] = useState('');
+  const [newExperienceToggle, setNewExperienceToggle] = useState(false);
+  const [newEducationToggle, setNewEducationToggle] = useState(false);
 
   function changeActiveInput(input) {
     setActiveInput(input);
+  }
+
+  function updateActiveId(id) {
+    setActiveId(id);
+  }
+
+  function toggleNewExperience() {
+    setNewExperienceToggle(!newExperienceToggle);
+  }
+
+  function toggleNewEducation() {
+    setNewEducationToggle(!newEducationToggle);
   }
 
   return (
@@ -24,35 +51,55 @@ function Builder({ updateData }) {
       <h2 id="builder-title">Builder</h2>
 
       <InputCard onSelection={() => changeActiveInput(0)}>
-        <FormInput
-          formType="General"
-          activeInput={activeInput}
-          updateData={updateData}
-        />
+        <h3>General</h3>
+        {activeInput === 0 && <General updateData={updateData} />}
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(1)}>
-        <FormInput
-          formType="Education"
-          activeInput={activeInput}
-          updateData={updateData}
-        />
+        <h3>Experience</h3>
+        {activeInput === 1 &&
+          (newExperienceToggle ? (
+            <Experience
+              updateData={updateData}
+              toggle={toggleNewExperience}
+              id={activeId}
+            />
+          ) : (
+            <InputList
+              listType={'Experience'}
+              toggle={toggleNewExperience}
+              data={resumeData.info.experience}
+              addItem={addExperience}
+              removeItem={removeExperience}
+              updateActiveId={updateActiveId}
+            />
+          ))}
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(2)}>
-        <FormInput
-          formType="Experience"
-          activeInput={activeInput}
-          updateData={updateData}
-        />
+        <h3>Education</h3>
+        {activeInput === 2 &&
+          (newEducationToggle ? (
+            <Education
+              updateData={updateData}
+              toggle={toggleNewEducation}
+              id={activeId}
+            />
+          ) : (
+            <InputList
+              listType={'Education'}
+              toggle={toggleNewEducation}
+              data={resumeData.info.education}
+              addItem={addSchool}
+              removeItem={removeEducation}
+              updateActiveId={updateActiveId}
+            />
+          ))}
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(3)}>
-        <FormInput
-          formType="Skills"
-          activeInput={activeInput}
-          updateData={updateData}
-        />
+        <h3>Skills</h3>
+        {activeInput === 3 && <Skills updateData={updateData} />}
       </InputCard>
 
       <FormControls />

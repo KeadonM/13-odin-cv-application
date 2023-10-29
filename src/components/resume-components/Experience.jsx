@@ -5,9 +5,9 @@ function Experience({ data }) {
 
       <div>Employer:{data.employer}</div>
 
-      <div>Start Date:{data.emp_start}</div>
+      <div>Start Date:{data.exp_start}</div>
 
-      <div>End Date:{data.emp_end}</div>
+      <div>End Date:{data.exp_end}</div>
 
       <div>Location:{data.responsibility}</div>
     </div>
