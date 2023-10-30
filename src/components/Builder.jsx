@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import FormControls from './form-components/FormControls.jsx';
 import InputList from './form-components/InputList.jsx';
 
 import General from './form-components/FormGeneral.jsx';
@@ -20,6 +19,7 @@ function InputCard({ children, onSelection }) {
 function Builder({
   resumeData,
   updateData,
+  uploadPicture,
   addExperience,
   removeExperience,
   addSchool,
@@ -52,7 +52,13 @@ function Builder({
 
       <InputCard onSelection={() => changeActiveInput(0)}>
         <h3>General</h3>
-        {activeInput === 0 && <General updateData={updateData} />}
+        {activeInput === 0 && (
+          <General
+            updateData={updateData}
+            uploadPicture={uploadPicture}
+            data={resumeData.info.general}
+          />
+        )}
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(1)}>
@@ -62,6 +68,7 @@ function Builder({
             <Experience
               updateData={updateData}
               toggle={toggleNewExperience}
+              data={resumeData.info.experience.get(activeId)}
               id={activeId}
             />
           ) : (
@@ -83,6 +90,7 @@ function Builder({
             <Education
               updateData={updateData}
               toggle={toggleNewEducation}
+              data={resumeData.info.education.get(activeId)}
               id={activeId}
             />
           ) : (
@@ -101,8 +109,6 @@ function Builder({
         <h3>Skills</h3>
         {activeInput === 3 && <Skills updateData={updateData} />}
       </InputCard>
-
-      <FormControls />
     </section>
   );
 }

@@ -1,4 +1,4 @@
-function InputEducation({ updateData, toggle, id }) {
+function InputEducation({ updateData, toggle, data, id }) {
   function handleSubmit(e) {
     toggle(e);
   }
@@ -12,33 +12,62 @@ function InputEducation({ updateData, toggle, id }) {
       <div className="form-row">
         <label>
           School:
-          <input type="text" name="school" onChange={handleUpdate} />
+          <input
+            type="text"
+            name="school"
+            value={data.school}
+            onChange={handleUpdate}
+          />
         </label>
         <label>
           Location:
-          <input type="text" name="location" onChange={handleUpdate} />
+          <input
+            type="text"
+            name="location"
+            value={data.location}
+            onChange={handleUpdate}
+          />
         </label>
       </div>
 
       <label>
         Degree/Program:
-        <input type="text" name="program" onChange={handleUpdate} />
+        <input
+          type="text"
+          name="program"
+          value={data.program}
+          onChange={handleUpdate}
+        />
       </label>
 
       <div className="form-row">
         <label>
           Start Date:
-          <input type="date" name="ed_start" onChange={handleUpdate} />
+          <input
+            type="date"
+            name="ed_start"
+            value={data.ed_start}
+            onChange={handleUpdate}
+          />
         </label>
         <label>
           End Date:
-          <input type="date" name="ed_end" onChange={handleUpdate} />
+          <input
+            type="date"
+            name="ed_end"
+            value={data.ed_end}
+            onChange={handleUpdate}
+          />
         </label>
       </div>
 
       <label>
         Additional Info:
-        <textarea name="additional" onChange={handleUpdate} />
+        <textarea
+          name="additional"
+          value={data.additional}
+          onChange={handleUpdate}
+        />
       </label>
 
       <button type="button" onClick={toggle}>

@@ -1,7 +1,8 @@
-function ListItem({ name, remove }) {
+function ListItem({ id, remove, edit }) {
   return (
     <>
-      <h1>{name}</h1>
+      <h1>{id}</h1>
+      <button onClick={edit}> edit</button>
       <button onClick={remove}> delete</button>
     </>
   );
@@ -27,8 +28,12 @@ function InputList({
         return (
           <ListItem
             key={entry[0]}
-            name={entry[0]}
+            id={entry[0]}
             remove={() => removeItem(entry[0])}
+            edit={() => {
+              toggle();
+              updateActiveId(entry[0]);
+            }}
           />
         );
       })}

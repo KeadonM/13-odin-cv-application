@@ -13,7 +13,7 @@ function General({ data }) {
 
       <div>Blurb:{data.blurb}</div>
 
-      <img />
+      <img src={data.photoSrc} />
     </div>
   );
 }

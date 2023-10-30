@@ -9,7 +9,7 @@ function Experience({ data }) {
 
       <div>End Date:{data.exp_end}</div>
 
-      <div>Location:{data.responsibility}</div>
+      <div>Responsibilities:{data.responsibility}</div>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-function InputExperience({ updateData, toggle, id }) {
+function InputExperience({ updateData, toggle, data, id }) {
   function handleSubmit(e) {
     toggle(e);
   }
@@ -11,21 +11,41 @@ function InputExperience({ updateData, toggle, id }) {
     <form className="experience-form">
       <label>
         Employer/Project:
-        <input type="text" name="employer" onChange={handleUpdate} />
+        <input
+          type="text"
+          name="employer"
+          value={data.employer}
+          onChange={handleUpdate}
+        />
       </label>
       <label>
         Responsibilities:
-        <textarea type="text" name="responsibility" onChange={handleUpdate} />
+        <textarea
+          type="text"
+          name="responsibility"
+          value={data.responsibility}
+          onChange={handleUpdate}
+        />
       </label>
 
       <div className="form-row">
         <label>
           Start Date:
-          <input type="date" name="exp_start" onChange={handleUpdate} />
+          <input
+            type="date"
+            name="exp_start"
+            value={data.exp_start}
+            onChange={handleUpdate}
+          />
         </label>
         <label>
           End Date:
-          <input type="date" name="exp_end" onChange={handleUpdate} />
+          <input
+            type="date"
+            name="exp_end"
+            value={data.exp_end}
+            onChange={handleUpdate}
+          />
         </label>
       </div>
       <button type="button" onClick={toggle}>

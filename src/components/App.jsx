@@ -33,6 +33,8 @@ function App() {
         phone: '',
         email: '',
         website: '',
+        photoName: '',
+        photoSrc: '',
         blurb: '',
       },
 
@@ -41,6 +43,15 @@ function App() {
       education: new Map([]),
     },
   });
+
+  function uploadPicture(e) {
+    const dataCopy = { ...resumeData };
+
+    dataCopy.info.general.photoName = e.target.files[0].name;
+    dataCopy.info.general.photoSrc = URL.createObjectURL(e.target.files[0]);
+
+    setResumeData(dataCopy);
+  }
 
   function updateData(e, type, id) {
     console.log(
@@ -114,6 +125,7 @@ function App() {
           <Builder
             resumeData={resumeData}
             updateData={updateData}
+            uploadPicture={uploadPicture}
             addExperience={addNewExperience}
             removeExperience={removeExperience}
             addSchool={addNewSchool}
