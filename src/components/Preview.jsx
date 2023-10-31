@@ -8,7 +8,6 @@ import '../css/preview.scss';
 function Preview({ data }) {
   return (
     <section aria-labelledby="preview-title" className="preview">
-      <h2 id="preview-title">Preview</h2>
       <div id="resume-preview">
         <General data={data.info.general} settings={data.info.settings} />
 

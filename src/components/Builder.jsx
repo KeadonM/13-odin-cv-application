@@ -1,11 +1,11 @@
+import '../css/inputPanels.scss';
 import { useState } from 'react';
-
-import InputList from './form-components/InputList.jsx';
 
 import General from './form-components/FormGeneral.jsx';
 import Experience from './form-components/FormExperience.jsx';
 import Education from './form-components/FormEducation.jsx';
 import Skills from './form-components/FormSkills.jsx';
+import InputList from './form-components/InputList.jsx';
 
 function Settings({ updateData }) {
   function handleUpdate(e) {
@@ -13,21 +13,20 @@ function Settings({ updateData }) {
   }
 
   return (
-    <>
+    <div className="settings">
       <button>layout</button>
       <button>layout</button>
       <button>layout</button>
       <input type="color" name="color" onChange={handleUpdate} />
-    </>
+    </div>
   );
 }
 
-import '../css/inputCard.scss';
 function InputCard({ children, onSelection }) {
   return (
-    <div className="input-card" onClick={onSelection}>
+    <button className="input-card" onClick={onSelection}>
       {children}
-    </div>
+    </button>
   );
 }
 
@@ -65,12 +64,11 @@ function Builder({
 
   return (
     <section aria-labelledby="builder-title" className="builder">
-      <h2 id="builder-title">Builder</h2>
-
-      <Settings updateData={updateData} />
-
       <InputCard onSelection={() => changeActiveInput(0)}>
-        <h3 className={activeInput === 0 ? 'active' : ''}>General</h3>
+        <h2
+          className={activeInput === 0 ? 'active input-title' : 'input-title'}>
+          General
+        </h2>
         {activeInput === 0 && (
           <General
             updateData={updateData}
@@ -81,7 +79,10 @@ function Builder({
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(1)}>
-        <h3 className={activeInput === 1 ? 'active' : ''}>Experience</h3>
+        <h2
+          className={activeInput === 1 ? 'active input-title' : 'input-title'}>
+          Experience
+        </h2>
         {activeInput === 1 &&
           (newExperienceToggle ? (
             <Experience
@@ -103,7 +104,10 @@ function Builder({
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(2)}>
-        <h3 className={activeInput === 2 ? 'active' : ''}>Education</h3>
+        <h2
+          className={activeInput === 2 ? 'active input-title' : 'input-title'}>
+          Education
+        </h2>
         {activeInput === 2 &&
           (newEducationToggle ? (
             <Education
@@ -125,7 +129,10 @@ function Builder({
       </InputCard>
 
       <InputCard onSelection={() => changeActiveInput(3)}>
-        <h3 className={activeInput === 3 ? 'active' : ''}>Skills</h3>
+        <h2
+          className={activeInput === 3 ? 'active input-title' : 'input-title'}>
+          Skills
+        </h2>
         {activeInput === 3 && (
           <Skills
             data={resumeData.info.skills}
@@ -135,6 +142,8 @@ function Builder({
           />
         )}
       </InputCard>
+
+      <Settings updateData={updateData} />
     </section>
   );
 }

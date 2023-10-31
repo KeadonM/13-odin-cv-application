@@ -1,11 +1,11 @@
-import '../css/footer.css';
+import '../css/footer.scss';
 
 function Footer() {
   return (
     <footer>
       <a id="copyright" href="https://github.com/keadonm" target="_blank">
-        Copyright ©<script>document.write(new Date().getFullYear());</script>
-        KeadonM
+        Copyright&nbsp;<span id="copyright-logo">©</span>&nbsp;
+        <span>{new Date().getFullYear()}</span>&nbsp;KeadonM&nbsp;
         <i className="fab fa-github"></i>
       </a>
     </footer>

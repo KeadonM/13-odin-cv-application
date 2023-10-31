@@ -8,19 +8,19 @@ function InputEducation({ updateData, toggle, data, id }) {
   }
 
   return (
-    <form className="education-form">
+    <form className="education-form form">
       <div className="form-row">
         <label>
-          School:
+          School
           <input
             type="text"
-            name="school"
+            name="name"
             value={data.school}
             onChange={handleUpdate}
           />
         </label>
         <label>
-          Location:
+          Location
           <input
             type="text"
             name="location"
@@ -31,7 +31,7 @@ function InputEducation({ updateData, toggle, data, id }) {
       </div>
 
       <label>
-        Degree/Program:
+        Degree/Program
         <input
           type="text"
           name="program"
@@ -42,7 +42,7 @@ function InputEducation({ updateData, toggle, data, id }) {
 
       <div className="form-row">
         <label>
-          Start Date:
+          Start Date
           <input
             type="date"
             name="ed_start"
@@ -51,7 +51,7 @@ function InputEducation({ updateData, toggle, data, id }) {
           />
         </label>
         <label>
-          End Date:
+          End Date
           <input
             type="date"
             name="ed_end"
@@ -62,7 +62,7 @@ function InputEducation({ updateData, toggle, data, id }) {
       </div>
 
       <label>
-        Additional Info:
+        Additional Info
         <textarea
           name="additional"
           value={data.additional}
@@ -70,12 +70,14 @@ function InputEducation({ updateData, toggle, data, id }) {
         />
       </label>
 
-      <button type="button" onClick={toggle}>
-        Cancel
-      </button>
-      <button type="button" onClick={handleSubmit}>
-        Submit
-      </button>
+      <div className="form-row">
+        <button type="button" onClick={toggle}>
+          Cancel
+        </button>
+        <button type="button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </form>
   );
 }

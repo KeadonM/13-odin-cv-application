@@ -1,6 +1,6 @@
 function InputSkills({ data, updateData, addSkill, removeSkill }) {
   return (
-    <form className="general-form">
+    <form className="skills-form form">
       {[...data.entries()].map((entry) => {
         return (
           <label key={entry[0]}>
@@ -16,7 +16,7 @@ function InputSkills({ data, updateData, addSkill, removeSkill }) {
         );
       })}
 
-      <button type="button" onClick={addSkill}>
+      <button type="button" className="add-button" onClick={addSkill}>
         Add Skill
       </button>
     </form>

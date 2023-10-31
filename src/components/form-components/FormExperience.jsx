@@ -8,18 +8,18 @@ function InputExperience({ updateData, toggle, data, id }) {
   }
 
   return (
-    <form className="experience-form">
+    <form className="experience-form form">
       <label>
-        Employer/Project:
+        Employer/Project
         <input
           type="text"
-          name="employer"
+          name="name"
           value={data.employer}
           onChange={handleUpdate}
         />
       </label>
       <label>
-        Responsibilities:
+        Responsibilities
         <textarea
           type="text"
           name="responsibility"
@@ -30,7 +30,7 @@ function InputExperience({ updateData, toggle, data, id }) {
 
       <div className="form-row">
         <label>
-          Start Date:
+          Start Date
           <input
             type="date"
             name="exp_start"
@@ -39,7 +39,7 @@ function InputExperience({ updateData, toggle, data, id }) {
           />
         </label>
         <label>
-          End Date:
+          End Date
           <input
             type="date"
             name="exp_end"
@@ -48,13 +48,15 @@ function InputExperience({ updateData, toggle, data, id }) {
           />
         </label>
       </div>
-      <button type="button" onClick={toggle}>
-        Cancel
-      </button>
+      <div className="form-row">
+        <button type="button" onClick={toggle}>
+          Cancel
+        </button>
 
-      <button type="button" onClick={handleSubmit}>
-        Submit
-      </button>
+        <button type="button" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
     </form>
   );
 }

@@ -1,12 +1,18 @@
 //Colors
-$clr-accent-100: hsl(230, 25%, 95%);
-$clr-accent-200: hsl(200, 40%, 75%);
+
+$clr-primary-200: hsl(202, 100%, 79%);
+$clr-primary-400: hsl(201, 100%, 73%);
+
+$clr-secondary-100: hsl(20, 100%, 97%);
+$clr-secondary-200: hsl(25, 100%, 94%);
+$clr-secondary-400: hsl(29, 100%, 71%);
+
+$clr-accent-100: hsl(212, 100%, 98%);
+$clr-accent-200: #95d8ff;
 $clr-accent-300: hsl(211, 20%, 50%);
 $clr-accent-400: hsl(200, 20%, 50%);
 $clr-accent-600: hsl(211, 30%, 40%);
 
-$clr-accent-neutral-300: hsl(20, 100%, 97%);
-$clr-accent-neutral-400: hsl(25, 100%, 94%);
 $clr-accent-neutral-500: #938e94;
 $clr-accent-neutral-600: #5d5c61;
 
@@ -24,6 +30,7 @@ $clr-accent-shadow-400: hsla(25, 100%, 85%, 0.5);
 
 // Font Family
 $ff-primary: Roboto, Arial, sans-serif;
+$ff-secondary: Chewy, Arial, sans-serif;
 
 // Font Weight
 $fw-reg: 400;
@@ -55,6 +62,10 @@ $app-padding: clamp(0.5rem, calc(0.1rem + 1.75vw), 2.25rem);
 $border-radius: 8px;
 $shadow: 2px 2px 12px rgba(0, 0, 0, 0.25);
 
+//Fonts
+@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+
+//Mixins
 @mixin column-flex {
   display: flex;
   flex-direction: column;

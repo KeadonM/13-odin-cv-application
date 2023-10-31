@@ -4,7 +4,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
   }
 
   return (
-    <form className="general-form">
+    <form className="general-form form">
       <div className="form-row">
         <label>
           Name

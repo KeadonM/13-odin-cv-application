@@ -1,3 +1,5 @@
+@import 'utils/variables';
+
 footer {
   min-height: 5vh;
   display: flex;
@@ -6,21 +8,27 @@ footer {
   margin-top: auto;
 }
 
+#copyright-logo,
+.fa-github {
+  color: $clr-secondary-400;
+}
+
 #copyright {
   font-size: 1.24rem;
   font-weight: 700;
   text-decoration-line: none;
-  letter-spacing: 0.5px;
-  color: $clr-accent-400;
+
+  color: $clr-primary-400;
 }
 
 .fa-github {
-  font-size: 1.38rem;
+  font-size: 1.5rem;
   transition: transform 0.4s ease-in-out;
 }
+#copyright:hover {
+  .fa-github {
+    transform: rotate(360deg) scale(1.2);
 
-.fa-github:hover {
-  transform: rotate(360deg) scale(1.2);
-
-  border: 24px 24px 24px 24px solid red;
+    border: 24px 24px 24px 24px solid red;
+  }
 }

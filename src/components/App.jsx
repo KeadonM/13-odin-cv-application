@@ -5,9 +5,11 @@ import Builder from './Builder';
 import Preview from './Preview';
 import Footer from './Footer';
 
+import logo from '../assets/ResuCraftLogo-orange-5.png';
+
 function experienceObject() {
   return {
-    employer: '',
+    name: '',
     exp_start: '',
     exp_end: '',
     responsibility: '',
@@ -16,7 +18,7 @@ function experienceObject() {
 
 function educationObject() {
   return {
-    school: '',
+    name: '',
     location: '',
     ed_start: '',
     ed_end: '',
@@ -35,7 +37,7 @@ function App() {
   const [resumeData, setResumeData] = useState({
     info: {
       settings: {
-        color: '#7395ae',
+        color: '#95d8ff',
       },
 
       general: {
@@ -154,7 +156,7 @@ function App() {
   return (
     <>
       <main>
-        <h1>Resume Builder</h1>
+        <img src={logo} className="logo" />
         <div className="build-preview-container">
           <Builder
             resumeData={resumeData}
