@@ -1,4 +1,3 @@
-
 /***---RESET---***/
 
 *,
@@ -46,7 +45,8 @@ video {
 }
 
 input,
-select {
+select,
+textarea {
   border: none;
   outline: none;
 }

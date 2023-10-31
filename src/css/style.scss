@@ -3,7 +3,7 @@
 #root {
   font-family: $ff-primary;
   font-size: $fs-400;
-  background-color: $clr-neutral-200;
+  background-color: $clr-accent-100;
 
   @include column-flex;
   height: 100vh;

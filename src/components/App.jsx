@@ -25,9 +25,19 @@ function educationObject() {
   };
 }
 
+function skillObject() {
+  return {
+    skill: '',
+  };
+}
+
 function App() {
   const [resumeData, setResumeData] = useState({
     info: {
+      settings: {
+        color: '#7395ae',
+      },
+
       general: {
         name: '',
         phone: '',
@@ -41,6 +51,8 @@ function App() {
       experience: new Map([]),
 
       education: new Map([]),
+
+      skills: new Map([]),
     },
   });
 
@@ -117,6 +129,28 @@ function App() {
     setResumeData(dataCopy);
   }
 
+  function addNewSkill(e) {
+    console.log(`add new skill`);
+
+    const id = uuidv4();
+    const dataCopy = { ...resumeData };
+
+    dataCopy.info.skills.set(id, skillObject());
+    setResumeData(dataCopy);
+
+    return id;
+  }
+
+  function removeSkill(id) {
+    console.log(`removing Education ${id}`);
+
+    const dataCopy = { ...resumeData };
+
+    dataCopy.info.skills.delete(id);
+
+    setResumeData(dataCopy);
+  }
+
   return (
     <>
       <main>
@@ -130,6 +164,8 @@ function App() {
             removeExperience={removeExperience}
             addSchool={addNewSchool}
             removeEducation={removeEducation}
+            addSkill={addNewSkill}
+            removeSkill={removeSkill}
           />
           <Preview data={resumeData} />
         </div>

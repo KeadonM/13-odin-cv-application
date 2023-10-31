@@ -7,7 +7,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
     <form className="general-form">
       <div className="form-row">
         <label>
-          Name:
+          Name
           <input
             type="text"
             name="name"
@@ -17,7 +17,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         </label>
 
         <label>
-          Phone:
+          Phone
           <input
             type="tel"
             name="phone"
@@ -29,7 +29,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
 
       <div className="form-row">
         <label>
-          Email:
+          Email
           <input
             type="email"
             name="email"
@@ -39,7 +39,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         </label>
 
         <label>
-          Website:
+          Website
           <input
             type="url"
             name="website"
@@ -50,13 +50,13 @@ function InputGeneral({ updateData, uploadPicture, data }) {
       </div>
 
       <label>
-        Photo:
-        <input type="file" accept="image/*" onChange={uploadPicture} />
+        Blurb
+        <textarea name="blurb" value={data.blurb} onChange={handleUpdate} />
       </label>
 
-      <label>
-        Blurb:
-        <textarea name="blurb" value={data.blurb} onChange={handleUpdate} />
+      <label id="file">
+        Select Photo
+        <input type="file" accept="image/*" onChange={uploadPicture} />
       </label>
     </form>
   );

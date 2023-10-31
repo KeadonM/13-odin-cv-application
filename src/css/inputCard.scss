@@ -3,17 +3,26 @@
 .input-card {
   margin-bottom: $spc-200;
   border-radius: $border-radius;
-  background-color: $clr-neutral-100;
+  background-color: $clr-accent-neutral-400;
+  box-shadow: $shadow;
 
   max-width: 32em;
   min-height: 3em;
 
-  input,
-  textarea {
-    margin: $spc-100;
-
+  h3 {
+    color: $clr-accent-600;
+    font-size: 1.48rem;
+    font-weight: bold;
+    padding: $spc-200 $spc-200;
+    background-color: $clr-accent-200;
     border-radius: $border-radius;
-    outline: solid 2px $clr-neutral-500;
+
+    &.active {
+      scale: 1.015;
+      border-radius: $border-radius $border-radius calc($border-radius / 2)
+        calc($border-radius / 2);
+      box-shadow: 6px 8px 2px $clr-accent-shadow-400;
+    }
   }
 
   form {
@@ -21,6 +30,42 @@
 
     label {
       @include column-flex;
+      color: $clr-accent-300;
+      font-weight: bold;
+      font-size: 1.24rem;
+      margin: $spc-200;
+
+      input,
+      textarea {
+        padding-left: $spc-100;
+      }
+
+      textarea {
+        min-height: 4.5em;
+        resize: vertical;
+      }
+    }
+
+    input,
+    textarea,
+    #file {
+      font-weight: 400;
+      border-radius: $border-radius;
+      background-color: $clr-accent-neutral-300;
+      color: $clr-neutral-500;
+      min-height: 1.75em;
+
+      box-shadow: 2px 2px 6px $clr-accent-shadow-400;
+    }
+
+    #file {
+      @include row-flex;
+      input[type='file'] {
+        display: none;
+      }
+
+      justify-content: center;
+      align-items: center;
     }
 
     .form-row {

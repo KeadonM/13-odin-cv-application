@@ -5,6 +5,7 @@
   align-items: center;
 
   #resume-preview {
+    box-shadow: $shadow;
     background-color: $clr-neutral-100;
     width: 33vw;
     max-width: 850px;

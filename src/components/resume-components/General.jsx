@@ -1,6 +1,8 @@
-function General({ data }) {
+function General({ data, settings }) {
   return (
-    <div className="resume-section resume-general">
+    <div
+      className="resume-section resume-general"
+      style={{ backgroundColor: settings.color }}>
       <h2>General</h2>
 
       <div>Name:{data.name}</div>
