@@ -55,7 +55,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
       </label>
 
       <label id="file">
-        Select Photo
+        <i class="fa-solid fa-plus"></i>&nbsp;<i class="fa-solid fa-image"></i>
         <input type="file" accept="image/*" onChange={uploadPicture} />
       </label>
     </form>

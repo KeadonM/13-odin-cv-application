@@ -67,7 +67,8 @@ function Builder({
       <InputCard onSelection={() => changeActiveInput(0)}>
         <h2
           className={activeInput === 0 ? 'active input-title' : 'input-title'}>
-          General
+          <i class="fa-solid fa-user"></i>&nbsp; General
+          <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 0 && (
           <General
@@ -81,7 +82,8 @@ function Builder({
       <InputCard onSelection={() => changeActiveInput(1)}>
         <h2
           className={activeInput === 1 ? 'active input-title' : 'input-title'}>
-          Experience
+          <i class="fa-solid fa-briefcase"></i>&nbsp; Experience
+          <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 1 &&
           (newExperienceToggle ? (
@@ -106,7 +108,9 @@ function Builder({
       <InputCard onSelection={() => changeActiveInput(2)}>
         <h2
           className={activeInput === 2 ? 'active input-title' : 'input-title'}>
-          Education
+          <i class="fa-solid fa-graduation-cap"></i>
+          &nbsp; Education
+          <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 2 &&
           (newEducationToggle ? (
@@ -131,7 +135,9 @@ function Builder({
       <InputCard onSelection={() => changeActiveInput(3)}>
         <h2
           className={activeInput === 3 ? 'active input-title' : 'input-title'}>
-          Skills
+          <i class="fa-solid fa-book"></i>
+          &nbsp; Skills
+          <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 3 && (
           <Skills

@@ -17,7 +17,7 @@ function InputSkills({ data, updateData, addSkill, removeSkill }) {
       })}
 
       <button type="button" className="add-button" onClick={addSkill}>
-        Add Skill
+        <i class="fa-solid fa-plus"></i> <i class="fa-solid fa-book"></i>
       </button>
     </form>
   );

@@ -72,10 +72,10 @@ function InputEducation({ updateData, toggle, data, id }) {
 
       <div className="form-row">
         <button type="button" onClick={toggle}>
-          Cancel
+          <i class="fa-solid fa-xmark"></i>
         </button>
         <button type="button" onClick={handleSubmit}>
-          Submit
+          <i class="fa-solid fa-check"></i>
         </button>
       </div>
     </form>
