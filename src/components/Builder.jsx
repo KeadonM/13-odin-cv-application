@@ -13,18 +13,21 @@ function Settings({ updateData }) {
   }
 
   return (
-    <div className="settings">
+    <InputCard name="settings">
+      <h2 className="input-title">
+        <i class="fa-solid fa-gear"></i>&nbsp; Settings
+      </h2>
       <button>layout</button>
       <button>layout</button>
       <button>layout</button>
       <input type="color" name="color" onChange={handleUpdate} />
-    </div>
+    </InputCard>
   );
 }
 
-function InputCard({ children, onSelection }) {
+function InputCard({ children, onSelection, name = '' }) {
   return (
-    <button className="input-card" onClick={onSelection}>
+    <button className={'input-card ' + name} onClick={onSelection}>
       {children}
     </button>
   );
@@ -64,7 +67,9 @@ function Builder({
 
   return (
     <section aria-labelledby="builder-title" className="builder">
-      <InputCard onSelection={() => changeActiveInput(0)}>
+      <InputCard
+        name={activeInput === 0 ? 'active' : 'inactive'}
+        onSelection={() => changeActiveInput(0)}>
         <h2
           className={activeInput === 0 ? 'active input-title' : 'input-title'}>
           <i class="fa-solid fa-user"></i>&nbsp; General
@@ -79,7 +84,9 @@ function Builder({
         )}
       </InputCard>
 
-      <InputCard onSelection={() => changeActiveInput(1)}>
+      <InputCard
+        name={activeInput === 1 ? 'active' : 'inactive'}
+        onSelection={() => changeActiveInput(1)}>
         <h2
           className={activeInput === 1 ? 'active input-title' : 'input-title'}>
           <i class="fa-solid fa-briefcase"></i>&nbsp; Experience
@@ -105,7 +112,9 @@ function Builder({
           ))}
       </InputCard>
 
-      <InputCard onSelection={() => changeActiveInput(2)}>
+      <InputCard
+        name={activeInput === 2 ? 'active' : 'inactive'}
+        onSelection={() => changeActiveInput(2)}>
         <h2
           className={activeInput === 2 ? 'active input-title' : 'input-title'}>
           <i class="fa-solid fa-graduation-cap"></i>
@@ -132,7 +141,9 @@ function Builder({
           ))}
       </InputCard>
 
-      <InputCard onSelection={() => changeActiveInput(3)}>
+      <InputCard
+        name={activeInput === 3 ? 'active' : 'inactive'}
+        onSelection={() => changeActiveInput(3)}>
         <h2
           className={activeInput === 3 ? 'active input-title' : 'input-title'}>
           <i class="fa-solid fa-book"></i>

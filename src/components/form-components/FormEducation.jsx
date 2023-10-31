@@ -30,16 +30,6 @@ function InputEducation({ updateData, toggle, data, id }) {
         </label>
       </div>
 
-      <label>
-        Degree/Program
-        <input
-          type="text"
-          name="program"
-          value={data.program}
-          onChange={handleUpdate}
-        />
-      </label>
-
       <div className="form-row">
         <label>
           Start Date
@@ -60,6 +50,16 @@ function InputEducation({ updateData, toggle, data, id }) {
           />
         </label>
       </div>
+
+      <label>
+        Degree/Program
+        <input
+          type="text"
+          name="program"
+          value={data.program}
+          onChange={handleUpdate}
+        />
+      </label>
 
       <label>
         Additional Info

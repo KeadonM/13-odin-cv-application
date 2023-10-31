@@ -5,22 +5,24 @@
 }
 
 .settings {
-  @include row-flex;
-  justify-content: center;
-  gap: $spc-300;
-  margin: $spc-300;
+  min-width: 500px;
+  > {
+    @include row-flex;
+    justify-content: center;
+    gap: $spc-300;
+    margin: $spc-300;
+  }
 }
 
 .input-card {
   margin-bottom: $spc-200;
   border-radius: $border-radius;
   background-color: $clr-secondary-200;
+  color: $clr-primary-600;
+  font-weight: bold;
 
   box-shadow: $shadow;
   border: none;
-
-  max-width: 32em;
-  min-height: 3em;
 
   .input-title {
     @include row-flex;
@@ -42,6 +44,7 @@
     .fa-angle-down {
       margin-left: auto;
       margin-right: $spc-200;
+      transition: transform 300ms;
     }
 
     &.active {
@@ -52,7 +55,6 @@
 
       .fa-angle-down {
         transform: rotate(180deg);
-        transition: transform 300ms;
       }
     }
   }
@@ -61,7 +63,9 @@
     margin-top: $spc-400;
     li {
       @include row-flex;
+      align-items: center;
       margin: $spc-200;
+      gap: $spc-100;
 
       h3 {
         margin-right: auto;
@@ -70,14 +74,14 @@
   }
 
   .add-button {
-    margin-top: $spc-300;
-    margin-bottom: $spc-100;
+    margin: $spc-300 $spc-100 $spc-100 $spc-100;
+    min-width: 4.5rem;
   }
 
   button {
     padding: calc($spc-100 * 0.8) $spc-100;
-    min-height: 2.24rem;
-    min-width: 4.48rem;
+    min-height: 2rem;
+    min-width: 3.5rem;
     border-radius: $border-radius;
     border: none;
     background-color: $clr-secondary-400;
@@ -86,9 +90,20 @@
     letter-spacing: 0.24px;
   }
 
+  input,
+  textarea,
+  #file {
+    font-weight: 400;
+    border-radius: $border-radius;
+    background-color: $clr-secondary-100;
+    color: $clr-neutral-500;
+    min-height: 2.48rem;
+
+    box-shadow: 2px 2px 6px $clr-accent-shadow-400;
+  }
+
   .form {
     @include column-flex;
-    color: $clr-primary-600;
     margin: $spc-200;
     gap: $spc-200;
 
@@ -108,22 +123,11 @@
       }
     }
 
-    input,
-    textarea,
-    #file {
-      font-weight: 400;
-      border-radius: $border-radius;
-      background-color: $clr-secondary-100;
-      color: $clr-neutral-500;
-      min-height: 2.24rem;
-
-      box-shadow: 2px 2px 6px $clr-accent-shadow-400;
-    }
-
     #file {
       @include row-flex;
       background-color: $clr-secondary-400;
       color: $clr-secondary-200;
+      padding: calc($spc-100 * 0.8) $spc-100;
 
       input[type='file'] {
         display: none;

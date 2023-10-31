@@ -14,6 +14,9 @@ main {
   align-items: center;
 }
 
+.build-preview-container {
+}
+
 .logo {
   margin-bottom: $spc-300;
   max-height: 10rem;
@@ -24,4 +27,34 @@ main {
 .build-preview-container {
   display: flex;
   gap: $spc-400;
+}
+
+@media (max-width: $media-query-primary) {
+  .build-preview-container {
+    @include column-flex;
+  }
+  .builder {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(3, 0.1fr) 4fr;
+    gap: 0 $spc-400;
+    align-items: start;
+
+    .fa-angle-down {
+      rotate: 90deg;
+    }
+
+    .active {
+      grid-row: 1 / 5;
+
+      .fa-angle-down {
+        rotate: 90deg;
+      }
+    }
+
+    .settings,
+    .inactive {
+      min-width: 0px;
+    }
+  }
 }

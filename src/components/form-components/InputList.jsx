@@ -2,14 +2,13 @@ function ListItem({ name, remove, edit }) {
   return (
     <li>
       <h3>{name !== '' ? name : 'Unnamed Entry'}</h3>
-      <div className="button-container">
-        <button onClick={edit}>
-          <i class="fa-solid fa-pen-to-square"></i>
-        </button>
-        <button onClick={remove}>
-          <i class="fa-solid fa-trash"></i>
-        </button>
-      </div>
+
+      <button onClick={edit}>
+        <i class="fa-solid fa-pen-to-square"></i>
+      </button>
+      <button onClick={remove}>
+        <i class="fa-solid fa-trash"></i>
+      </button>
     </li>
   );
 }
