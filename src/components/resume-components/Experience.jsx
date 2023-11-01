@@ -1,8 +1,6 @@
 function Experience({ data }) {
   return (
-    <div className="resume-section resume-experience">
-      <h2>Experience</h2>
-
+    <div className="entry">
       <div>Employer:{data.name}</div>
 
       <div>Start Date:{data.exp_start}</div>

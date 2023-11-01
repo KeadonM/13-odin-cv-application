@@ -7,7 +7,7 @@ import Education from './form-components/FormEducation.jsx';
 import Skills from './form-components/FormSkills.jsx';
 import InputList from './form-components/InputList.jsx';
 
-function Settings({ updateData }) {
+function Settings({ updateData, loadDefaults }) {
   function handleUpdate(e) {
     updateData(e, 'settings', false);
   }
@@ -20,9 +20,10 @@ function Settings({ updateData }) {
       </h2>
 
       <div className="settings-input-container">
-        <button>layout</button>
-        <button>layout</button>
-        <button>layout</button>
+        <button onClick={loadDefaults}>Default</button>
+        <button>Layout</button>
+        <button>Layout</button>
+        <button>Layout</button>
         <input type="color" name="color" onChange={handleUpdate} />
       </div>
     </InputCard>
@@ -47,6 +48,7 @@ function Builder({
   removeEducation,
   addSkill,
   removeSkill,
+  loadDefaults,
 }) {
   const [activeInput, setActiveInput] = useState(0);
   const [activeId, setActiveId] = useState('');
@@ -166,7 +168,7 @@ function Builder({
         )}
       </InputCard>
 
-      <Settings updateData={updateData} />
+      <Settings updateData={updateData} loadDefaults={loadDefaults} />
     </section>
   );
 }

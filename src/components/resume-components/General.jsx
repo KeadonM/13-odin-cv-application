@@ -1,22 +1,55 @@
 function General({ data, settings }) {
   return (
-    <div
-      className="resume-section resume-general"
-      style={{ backgroundColor: settings.color }}>
-      <h2>General</h2>
+    <>
+      <div
+        className="resume-section person"
+        style={{ backgroundColor: settings.color }}>
+        <div className="data">
+          <img src={data.photoSrc} />
 
-      <div>Name:{data.name}</div>
+          <div className="name-title">
+            <div className="preview-title-1">{data.name}</div>
 
-      <div>Phone:{data.phone}</div>
+            <div className="preview-title-2">Title</div>
+          </div>
+        </div>
+      </div>
 
-      <div>Email:{data.email}</div>
+      <div className="resume-section about">
+        <div className="blurb preview-body-1">{data.blurb}</div>
 
-      <div>Website:{data.website}</div>
+        <div className="contact preview-body-2">
+          {data.phone !== '' ? (
+            <>
+              <i class="fa-solid fa-phone"></i>&nbsp;
+              {data.phone}
+              <hr />
+            </>
+          ) : (
+            ''
+          )}
 
-      <div>Blurb:{data.blurb}</div>
+          {data.email !== '' ? (
+            <>
+              <i class="fa-solid fa-envelope"></i>&nbsp;
+              {data.email}
+              <hr />
+            </>
+          ) : (
+            ''
+          )}
 
-      <img src={data.photoSrc} />
-    </div>
+          {data.website !== '' ? (
+            <>
+              <i class="fa-solid fa-globe"></i>&nbsp;
+              {data.website}
+            </>
+          ) : (
+            ''
+          )}
+        </div>
+      </div>
+    </>
   );
 }
 

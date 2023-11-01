@@ -1,8 +1,6 @@
 function Education({ data }) {
   return (
-    <div className="resume-section resume-education">
-      <h2>Education</h2>
-
+    <div className="entry">
       <div>School:{data.name}</div>
 
       <div>Location:{data.location}</div>

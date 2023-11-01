@@ -1,41 +1,148 @@
 @import 'utils/variables';
 
-$preview-scale-primary: clamp(600px, 33vw, 850px);
-$preview-scale-secondary: clamp(300px, 50vw, 850px);
-$preview-scale-tertiary: clamp(0px, 90vw, 850px);
+$preview-scale-primary: clamp(600px, 33vw, 800px);
+$preview-scale-secondary: clamp(300px, 50vw, 800px);
+$preview-scale-tertiary: clamp(0px, 90vw, 800px);
 
-$text-scale-primary: calc($preview-scale-primary * 0.03);
-$text-scale-secondary: calc($preview-scale-secondary * 0.03);
-$text-scale-tertiary: calc($preview-scale-tertiary * 0.03);
+$text-scale-primary: calc($preview-scale-primary * 0.025);
+$text-scale-secondary: calc($preview-scale-secondary * 0.025);
+$text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
+
+.preview-title-1 {
+  font-weight: bold;
+  font-size: 1.48em;
+}
+
+.preview-title-2 {
+  font-size: 1.24em;
+}
+
+.preview-body-1 {
+  font-size: 1em;
+}
+
+.preview-body-2 {
+  font-size: 0.74em;
+}
 
 .preview {
   @include column-flex;
   align-items: center;
+  position: relative;
 
   #resume-preview {
+    position: relative;
     box-shadow: $shadow;
     background-color: $clr-neutral-100;
     width: $preview-scale-primary;
 
     aspect-ratio: 8.5/11;
-    border-radius: $border-radius;
+    border-radius: calc($border-radius * 1.5);
     font-size: $text-scale-primary;
+
+    display: grid;
+    grid-template-areas:
+      'general person'
+      'general experience'
+      'general education'
+      'general skills';
+    grid-template-columns: 1fr 2fr;
   }
 
-  .resume-section {
-    h2 {
-      font-weight: bold;
+  .person {
+    grid-area: person;
+    height: 50%;
+    width: 150%;
+    transform: translate(-33%, 50%);
+
+    &::before,
+    &::after {
+      content: '';
+
+      position: absolute;
+      height: 3.33%;
+      width: 100%;
+      left: 50%;
+      transform: translatex(-50%);
+
+      background-color: $clr-primary-200;
     }
-    margin: $spc-200;
+
+    &::before {
+      top: -8%;
+    }
+
+    &::after {
+      bottom: -8%;
+    }
+
+    .data {
+      @include row-flex;
+      justify-content: center;
+      align-content: center;
+      height: 100%;
+
+      .name-title {
+        text-align: center;
+      }
+
+      img {
+        height: 150%;
+        border-radius: 999px;
+        position: absolute;
+        top: -25%;
+        left: calc(33% / 2);
+        transform: translateX(-50%);
+        z-index: 1;
+
+        border: calc($preview-scale-primary / 150) solid $clr-secondary-400;
+      }
+    }
   }
 
-  .resume-general {
-    background-color: $clr-accent-400;
-    min-height: 10%;
+  .about {
+    grid-area: general;
+    background-color: $clr-primary-600;
+    border-radius: inherit;
+    padding-top: 100%;
+
+    .blurb {
+      margin-left: 7.5%;
+      margin-right: 7.5%;
+    }
+
+    .contact {
+      margin-top: 15%;
+      margin-left: 7.5%;
+      margin-right: 7.5%;
+
+      i {
+        margin: 0 3.33%;
+      }
+
+      hr {
+        margin: 3.33% 0;
+      }
+    }
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 1.25%;
+      background-color: $clr-secondary-400;
+      border-radius: calc($border-radius * 1.5) 0 0 calc($border-radius * 1.5);
+    }
+  }
+
+  .experience {
+    grid-area: experience;
   }
 }
 
-@media (max-width: $media-query-primary) {
+@media (max-width: $media-query-secondary) {
   .preview {
     #resume-preview {
       width: $preview-scale-secondary;
@@ -44,7 +151,7 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.03);
   }
 }
 
-@media (max-width: $media-query-primary) {
+@media (max-width: $media-query-tertiary) {
   .preview {
     #resume-preview {
       width: $preview-scale-tertiary;

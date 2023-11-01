@@ -5,7 +5,8 @@ import Builder from './Builder';
 import Preview from './Preview';
 import Footer from './Footer';
 
-import logo from '../assets/ResuCraftLogo-orange-5.png';
+import logo from '../assets/ResuCraftLogo.png';
+import defaultPhoto from '../assets/defaultPhoto.jpg';
 
 function experienceObject() {
   return {
@@ -33,6 +34,75 @@ function skillObject() {
   };
 }
 
+function defaultData() {
+  return {
+    info: {
+      settings: {
+        color: '#95d8ff',
+      },
+
+      general: {
+        name: 'Keadon Mitchell',
+        phone: '+1 (111) 111-1111',
+        email: 'Mitchell.Keadon@outlook.com',
+        website: 'Github.com/KeadonM',
+        photoName: '',
+        photoSrc: defaultPhoto,
+        blurb:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+      },
+
+      experience: new Map([
+        [
+          uuidv4,
+          {
+            name: 'Westeel',
+            exp_start: '2018-08-01',
+            exp_end: '2020-01-01',
+            responsibility:
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
+          },
+        ],
+      ]),
+
+      education: new Map([
+        [
+          uuidv4(),
+          {
+            name: 'University of Winnipeg',
+            location: 'Winnipeg, MB, Canada',
+            ed_start: '2019-09-01',
+            ed_end: '2020-06-01',
+            program: 'Computer Science',
+            addition: 'Philosophy, Political Science, Psychology',
+          },
+        ],
+      ]),
+
+      skills: new Map([
+        [
+          uuidv4(),
+          {
+            skill: 'HTML',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            skill: 'CSS',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            skill: 'JS',
+          },
+        ],
+      ]),
+    },
+  };
+}
+
 function App() {
   const [resumeData, setResumeData] = useState({
     info: {
@@ -57,6 +127,10 @@ function App() {
       skills: new Map([]),
     },
   });
+
+  function loadDefaults() {
+    setResumeData(defaultData());
+  }
 
   function uploadPicture(e) {
     const dataCopy = { ...resumeData };
@@ -168,6 +242,7 @@ function App() {
             removeEducation={removeEducation}
             addSkill={addNewSkill}
             removeSkill={removeSkill}
+            loadDefaults={loadDefaults}
           />
           <Preview data={resumeData} />
         </div>

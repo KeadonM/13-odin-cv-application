@@ -14,12 +14,10 @@ main {
   align-items: center;
 }
 
-.build-preview-container {
-}
-
 .logo {
-  margin-bottom: $spc-300;
-  max-height: 10rem;
+  margin: $spc-500 $spc-300 $spc-500;
+  // padding-right: $spc-400;
+  max-height: 6rem;
   align-self: start;
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.15));
 }
@@ -60,6 +58,10 @@ main {
 }
 
 @media (max-width: $media-query-secondary) {
+  .logo {
+    align-self: center;
+  }
+
   .build-preview-container {
     @include column-flex;
   }
