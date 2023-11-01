@@ -58,3 +58,52 @@ main {
     }
   }
 }
+
+@media (max-width: $media-query-secondary) {
+  .build-preview-container {
+    @include column-flex;
+  }
+  .builder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 4fr;
+    gap: 0 $spc-400;
+    align-items: start;
+
+    .inactive {
+      grid-row: 1 / 2;
+    }
+
+    .active {
+      grid-row: 3 / 4;
+      grid-column: 1 / 4;
+
+      .input-title {
+        scale: 1;
+        box-shadow: 0px 6px 4px $clr-accent-shadow-400;
+      }
+    }
+
+    .settings {
+      grid-column: 1 / 4;
+      grid-row: 5 / 4;
+    }
+
+    .settings,
+    .inactive {
+      min-width: 0px;
+
+      p {
+        display: none;
+      }
+
+      .input-title {
+        justify-content: center;
+      }
+    }
+
+    .fa-angle-down {
+      display: none;
+    }
+  }
+}

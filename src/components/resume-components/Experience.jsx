@@ -3,7 +3,7 @@ function Experience({ data }) {
     <div className="resume-section resume-experience">
       <h2>Experience</h2>
 
-      <div>Employer:{data.employer}</div>
+      <div>Employer:{data.name}</div>
 
       <div>Start Date:{data.exp_start}</div>
 

@@ -2,9 +2,11 @@
 
 $preview-scale-primary: clamp(600px, 33vw, 850px);
 $preview-scale-secondary: clamp(300px, 50vw, 850px);
+$preview-scale-tertiary: clamp(0px, 90vw, 850px);
 
 $text-scale-primary: calc($preview-scale-primary * 0.03);
 $text-scale-secondary: calc($preview-scale-secondary * 0.03);
+$text-scale-tertiary: calc($preview-scale-tertiary * 0.03);
 
 .preview {
   @include column-flex;
@@ -38,6 +40,15 @@ $text-scale-secondary: calc($preview-scale-secondary * 0.03);
     #resume-preview {
       width: $preview-scale-secondary;
       font-size: $text-scale-secondary;
+    }
+  }
+}
+
+@media (max-width: $media-query-primary) {
+  .preview {
+    #resume-preview {
+      width: $preview-scale-tertiary;
+      font-size: $text-scale-tertiary;
     }
   }
 }

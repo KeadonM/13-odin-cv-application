@@ -14,7 +14,7 @@ function InputExperience({ updateData, toggle, data, id }) {
         <input
           type="text"
           name="name"
-          value={data.employer}
+          value={data.name}
           onChange={handleUpdate}
         />
       </label>

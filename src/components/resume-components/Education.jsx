@@ -3,7 +3,7 @@ function Education({ data }) {
     <div className="resume-section resume-education">
       <h2>Education</h2>
 
-      <div>School:{data.school}</div>
+      <div>School:{data.name}</div>
 
       <div>Location:{data.location}</div>
 

@@ -15,7 +15,7 @@ function InputEducation({ updateData, toggle, data, id }) {
           <input
             type="text"
             name="name"
-            value={data.school}
+            value={data.name}
             onChange={handleUpdate}
           />
         </label>

@@ -15,12 +15,16 @@ function Settings({ updateData }) {
   return (
     <InputCard name="settings">
       <h2 className="input-title">
-        <i class="fa-solid fa-gear"></i>&nbsp; Settings
+        <i class="fa-solid fa-gear"></i>
+        <p>&nbsp; Settings</p>
       </h2>
-      <button>layout</button>
-      <button>layout</button>
-      <button>layout</button>
-      <input type="color" name="color" onChange={handleUpdate} />
+
+      <div className="settings-input-container">
+        <button>layout</button>
+        <button>layout</button>
+        <button>layout</button>
+        <input type="color" name="color" onChange={handleUpdate} />
+      </div>
     </InputCard>
   );
 }
@@ -72,7 +76,8 @@ function Builder({
         onSelection={() => changeActiveInput(0)}>
         <h2
           className={activeInput === 0 ? 'active input-title' : 'input-title'}>
-          <i class="fa-solid fa-user"></i>&nbsp; General
+          <i class="fa-solid fa-user"></i>
+          <p>&nbsp; General</p>
           <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 0 && (
@@ -89,7 +94,8 @@ function Builder({
         onSelection={() => changeActiveInput(1)}>
         <h2
           className={activeInput === 1 ? 'active input-title' : 'input-title'}>
-          <i class="fa-solid fa-briefcase"></i>&nbsp; Experience
+          <i class="fa-solid fa-briefcase"></i>
+          <p>&nbsp; Experience</p>
           <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 1 &&
@@ -118,7 +124,7 @@ function Builder({
         <h2
           className={activeInput === 2 ? 'active input-title' : 'input-title'}>
           <i class="fa-solid fa-graduation-cap"></i>
-          &nbsp; Education
+          <p> &nbsp; Education</p>
           <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 2 &&
@@ -147,7 +153,7 @@ function Builder({
         <h2
           className={activeInput === 3 ? 'active input-title' : 'input-title'}>
           <i class="fa-solid fa-book"></i>
-          &nbsp; Skills
+          <p>&nbsp; Skills</p>
           <i class="fa-solid fa-angle-down"></i>
         </h2>
         {activeInput === 3 && (
