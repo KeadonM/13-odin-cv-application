@@ -1,13 +1,27 @@
-function ListItem({ name, remove, edit }) {
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPenToSquare,
+  faTrash,
+  faPlus,
+  faGraduationCap,
+  faBriefcase,
+} from '@fortawesome/free-solid-svg-icons';
+
+function ListItem({ name, remove, edit, id, type, updateName }) {
   return (
     <li>
-      <h3>{name !== '' ? name : 'Unnamed Entry'}</h3>
+      <input
+        type="text"
+        name="name"
+        onChange={(e) => updateName(e, type, id)}
+        value={name !== '' ? name : 'Unnamed Entry'}
+      />
 
       <button onClick={edit}>
-        <i class="fa-solid fa-pen-to-square"></i>
+        <FontAwesomeIcon icon={faPenToSquare} />
       </button>
       <button onClick={remove}>
-        <i class="fa-solid fa-trash"></i>
+        <FontAwesomeIcon icon={faTrash} />
       </button>
     </li>
   );
@@ -20,6 +34,7 @@ function InputList({
   addItem,
   removeItem,
   updateActiveId,
+  updateName,
 }) {
   function handleAdd(e) {
     toggle();
@@ -40,6 +55,9 @@ function InputList({
                 toggle();
                 updateActiveId(entry[0]);
               }}
+              id={entry[0]}
+              type={listType}
+              updateName={updateName}
             />
           );
         })}
@@ -48,11 +66,12 @@ function InputList({
         <div className="no-entries">No entries found...</div>
       )}
       <button className="add-button" onClick={handleAdd}>
-        <i class="fa-solid fa-plus"></i>{' '}
-        {listType === 'Education' ? (
-          <i class="fa-solid fa-graduation-cap"></i>
+        <FontAwesomeIcon icon={faPlus} />
+        &nbsp;
+        {listType === 'education' ? (
+          <FontAwesomeIcon icon={faGraduationCap} />
         ) : (
-          <i class="fa-solid fa-briefcase"></i>
+          <FontAwesomeIcon icon={faBriefcase} />
         )}
       </button>
     </>

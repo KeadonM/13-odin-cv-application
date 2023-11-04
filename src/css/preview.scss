@@ -1,15 +1,14 @@
 @import 'utils/variables';
 
-$preview-scale-primary: clamp(600px, 33vw, 800px);
-$preview-scale-secondary: clamp(300px, 50vw, 800px);
-$preview-scale-tertiary: clamp(0px, 90vw, 800px);
+$preview-scale-primary: clamp(600px, 50vw, 800px);
+$preview-scale-secondary: clamp(300px, 90vw, 800px);
+$preview-scale-tertiary: clamp(0px, 90vw, 600px);
 
 $text-scale-primary: calc($preview-scale-primary * 0.025);
 $text-scale-secondary: calc($preview-scale-secondary * 0.025);
 $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
 
 .preview-title-1 {
-  font-weight: bold;
   font-size: 1.48em;
 }
 
@@ -23,6 +22,18 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
 
 .preview-body-2 {
   font-size: 0.74em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.primary-text-clr {
+  color: $clr-primary-800;
+}
+
+.preview-row {
+  @include row-flex;
 }
 
 .preview {
@@ -47,6 +58,7 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
       'general education'
       'general skills';
     grid-template-columns: 1fr 2fr;
+    grid-template-rows: 20% repeat(2, min-content);
   }
 
   .person {
@@ -104,7 +116,7 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
     grid-area: general;
     background-color: $clr-primary-600;
     border-radius: inherit;
-    padding-top: 100%;
+    padding-top: 75%;
 
     .blurb {
       margin-left: 7.5%;
@@ -112,7 +124,7 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
     }
 
     .contact {
-      margin-top: 15%;
+      margin-top: 7.5%;
       margin-left: 7.5%;
       margin-right: 7.5%;
 
@@ -137,12 +149,53 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
     }
   }
 
-  .experience {
-    grid-area: experience;
+  .experience,
+  .education {
+    display: grid;
+    grid-template-areas:
+      'title title'
+      'entry entry';
+    grid-template-columns: 50% 50%;
+    grid-template-rows: min-content;
+    gap: 2%;
+    h2 {
+      grid-area: title;
+    }
+  }
+
+  .experience,
+  .education,
+  .skills {
+    padding-left: 4%;
+    padding-bottom: 4%;
+    .entry {
+      padding-left: 4%;
+      padding-bottom: 4%;
+    }
+    .entry-container {
+      padding-left: 2%;
+      padding-bottom: 2%;
+    }
+  }
+
+  .skills {
+    .entry-container {
+      @include row-flex;
+      gap: 1%;
+
+      .entry {
+        padding: 2%;
+        min-width: 50px;
+        text-align: center;
+        border-radius: $border-radius;
+        background-color: $clr-secondary-400;
+        color: $clr-secondary-100;
+      }
+    }
   }
 }
 
-@media (max-width: $media-query-secondary) {
+@media (max-width: $media-query-primary) {
   .preview {
     #resume-preview {
       width: $preview-scale-secondary;
@@ -151,7 +204,7 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
   }
 }
 
-@media (max-width: $media-query-tertiary) {
+@media (max-width: $media-query-secondary) {
   .preview {
     #resume-preview {
       width: $preview-scale-tertiary;

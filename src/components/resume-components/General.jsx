@@ -1,3 +1,10 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPhone,
+  faEnvelope,
+  faGlobe,
+} from '@fortawesome/free-solid-svg-icons';
+
 function General({ data, settings }) {
   return (
     <>
@@ -8,9 +15,11 @@ function General({ data, settings }) {
           <img src={data.photoSrc} />
 
           <div className="name-title">
-            <div className="preview-title-1">{data.name}</div>
+            <div className="preview-title-1 bold primary-text-clr ">
+              {data.name}
+            </div>
 
-            <div className="preview-title-2">Title</div>
+            <div className="preview-title-2 ">{data.title}</div>
           </div>
         </div>
       </div>
@@ -21,7 +30,8 @@ function General({ data, settings }) {
         <div className="contact preview-body-2">
           {data.phone !== '' ? (
             <>
-              <i class="fa-solid fa-phone"></i>&nbsp;
+              <FontAwesomeIcon icon={faPhone} />
+              &nbsp;
               {data.phone}
               <hr />
             </>
@@ -31,7 +41,8 @@ function General({ data, settings }) {
 
           {data.email !== '' ? (
             <>
-              <i class="fa-solid fa-envelope"></i>&nbsp;
+              <FontAwesomeIcon icon={faEnvelope} />
+              &nbsp;
               {data.email}
               <hr />
             </>
@@ -41,7 +52,8 @@ function General({ data, settings }) {
 
           {data.website !== '' ? (
             <>
-              <i class="fa-solid fa-globe"></i>&nbsp;
+              <FontAwesomeIcon icon={faGlobe} />
+              &nbsp;
               {data.website}
             </>
           ) : (

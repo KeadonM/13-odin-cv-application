@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faImage } from '@fortawesome/free-solid-svg-icons';
+
 function InputGeneral({ updateData, uploadPicture, data }) {
   function handleUpdate(e) {
     updateData(e, 'general', false);
@@ -17,6 +20,18 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         </label>
 
         <label>
+          Title
+          <input
+            type="text"
+            name="title"
+            value={data.title}
+            onChange={handleUpdate}
+          />
+        </label>
+      </div>
+
+      <div className="form-row">
+        <label>
           Phone
           <input
             type="tel"
@@ -25,9 +40,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
             onChange={handleUpdate}
           />
         </label>
-      </div>
 
-      <div className="form-row">
         <label>
           Email
           <input
@@ -37,17 +50,17 @@ function InputGeneral({ updateData, uploadPicture, data }) {
             onChange={handleUpdate}
           />
         </label>
-
-        <label>
-          Website
-          <input
-            type="url"
-            name="website"
-            value={data.website}
-            onChange={handleUpdate}
-          />
-        </label>
       </div>
+
+      <label>
+        Website
+        <input
+          type="url"
+          name="website"
+          value={data.website}
+          onChange={handleUpdate}
+        />
+      </label>
 
       <label>
         Blurb
@@ -55,7 +68,9 @@ function InputGeneral({ updateData, uploadPicture, data }) {
       </label>
 
       <label id="file">
-        <i class="fa-solid fa-plus"></i>&nbsp;<i class="fa-solid fa-image"></i>
+        <FontAwesomeIcon icon={faPlus} />
+        &nbsp;
+        <FontAwesomeIcon icon={faImage} />
         <input type="file" accept="image/*" onChange={uploadPicture} />
       </label>
     </form>

@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faBook } from '@fortawesome/free-solid-svg-icons';
+
 function InputSkills({ data, updateData, addSkill, removeSkill }) {
   return (
     <form className="input-list">
@@ -25,7 +28,9 @@ function InputSkills({ data, updateData, addSkill, removeSkill }) {
       )}
 
       <button type="button" className="add-button" onClick={addSkill}>
-        <i class="fa-solid fa-plus"></i> <i class="fa-solid fa-book"></i>
+        <FontAwesomeIcon icon={faPlus} />
+        &nbsp;
+        <FontAwesomeIcon icon={faBook} />
       </button>
     </form>
   );

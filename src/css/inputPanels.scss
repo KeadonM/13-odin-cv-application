@@ -10,9 +10,9 @@
   background-color: $clr-secondary-200;
   color: $clr-primary-600;
   font-weight: bold;
-
   box-shadow: $shadow;
   border: none;
+  text-align: center;
 
   .input-title {
     @include row-flex;
@@ -53,11 +53,13 @@
     margin-top: $spc-400;
     li {
       @include row-flex;
-      align-items: center;
+      justify-content: center;
       margin: $spc-200;
       gap: $spc-100;
+      margin-inline: $spc-500;
 
       h3 {
+        align-self: center;
         margin-right: auto;
       }
     }
@@ -87,8 +89,9 @@
     border-radius: $border-radius;
     background-color: $clr-secondary-100;
     color: $clr-neutral-500;
+    width: 100%;
     min-height: 2.48rem;
-
+    padding-inline: $spc-100;
     box-shadow: 2px 2px 6px $clr-accent-shadow-400;
   }
 
@@ -101,16 +104,11 @@
       @include column-flex;
       font-weight: bold;
       font-size: 1.24rem;
+    }
 
-      input,
-      textarea {
-        padding-left: $spc-100;
-      }
-
-      textarea {
-        min-height: 6rem;
-        resize: vertical;
-      }
+    textarea {
+      min-height: 6rem;
+      resize: vertical;
     }
 
     #file {

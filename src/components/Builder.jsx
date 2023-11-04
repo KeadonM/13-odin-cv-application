@@ -1,6 +1,16 @@
 import '../css/inputPanels.scss';
 import { useState } from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faGear,
+  faBook,
+  faUser,
+  faBriefcase,
+  faGraduationCap,
+  faAngleDown,
+} from '@fortawesome/free-solid-svg-icons';
+
 import General from './form-components/FormGeneral.jsx';
 import Experience from './form-components/FormExperience.jsx';
 import Education from './form-components/FormEducation.jsx';
@@ -15,7 +25,7 @@ function Settings({ updateData, loadDefaults }) {
   return (
     <InputCard name="settings">
       <h2 className="input-title">
-        <i class="fa-solid fa-gear"></i>
+        <FontAwesomeIcon icon={faGear} />
         <p>&nbsp; Settings</p>
       </h2>
 
@@ -31,10 +41,27 @@ function Settings({ updateData, loadDefaults }) {
 }
 
 function InputCard({ children, onSelection, name = '' }) {
+  const onKeyDown = (e) => {
+    const enterOrSpace =
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Spacebar' ||
+      e.which === 13 ||
+      e.which === 32;
+    if (enterOrSpace) {
+      e.preventDefault();
+      onSelection(e);
+    }
+  };
+
   return (
-    <button className={'input-card ' + name} onClick={onSelection}>
+    <section
+      tabIndex="0"
+      className={'input-card ' + name}
+      onClick={onSelection}
+      onKeyDown={onKeyDown}>
       {children}
-    </button>
+    </section>
   );
 }
 
@@ -78,9 +105,9 @@ function Builder({
         onSelection={() => changeActiveInput(0)}>
         <h2
           className={activeInput === 0 ? 'active input-title' : 'input-title'}>
-          <i class="fa-solid fa-user"></i>
+          <FontAwesomeIcon icon={faUser} />
           <p>&nbsp; General</p>
-          <i class="fa-solid fa-angle-down"></i>
+          <FontAwesomeIcon icon={faAngleDown} />
         </h2>
         {activeInput === 0 && (
           <General
@@ -96,9 +123,9 @@ function Builder({
         onSelection={() => changeActiveInput(1)}>
         <h2
           className={activeInput === 1 ? 'active input-title' : 'input-title'}>
-          <i class="fa-solid fa-briefcase"></i>
+          <FontAwesomeIcon icon={faBriefcase} />
           <p>&nbsp; Experience</p>
-          <i class="fa-solid fa-angle-down"></i>
+          <FontAwesomeIcon icon={faAngleDown} />
         </h2>
         {activeInput === 1 &&
           (newExperienceToggle ? (
@@ -110,12 +137,13 @@ function Builder({
             />
           ) : (
             <InputList
-              listType={'Experience'}
+              listType={'experience'}
               toggle={toggleNewExperience}
               data={resumeData.info.experience}
               addItem={addExperience}
               removeItem={removeExperience}
               updateActiveId={updateActiveId}
+              updateName={updateData}
             />
           ))}
       </InputCard>
@@ -125,9 +153,9 @@ function Builder({
         onSelection={() => changeActiveInput(2)}>
         <h2
           className={activeInput === 2 ? 'active input-title' : 'input-title'}>
-          <i class="fa-solid fa-graduation-cap"></i>
+          <FontAwesomeIcon icon={faGraduationCap} />
           <p> &nbsp; Education</p>
-          <i class="fa-solid fa-angle-down"></i>
+          <FontAwesomeIcon icon={faAngleDown} />
         </h2>
         {activeInput === 2 &&
           (newEducationToggle ? (
@@ -139,12 +167,13 @@ function Builder({
             />
           ) : (
             <InputList
-              listType={'Education'}
+              listType={'education'}
               toggle={toggleNewEducation}
               data={resumeData.info.education}
               addItem={addSchool}
               removeItem={removeEducation}
               updateActiveId={updateActiveId}
+              updateName={updateData}
             />
           ))}
       </InputCard>
@@ -154,9 +183,9 @@ function Builder({
         onSelection={() => changeActiveInput(3)}>
         <h2
           className={activeInput === 3 ? 'active input-title' : 'input-title'}>
-          <i class="fa-solid fa-book"></i>
+          <FontAwesomeIcon icon={faBook} />
           <p>&nbsp; Skills</p>
-          <i class="fa-solid fa-angle-down"></i>
+          <FontAwesomeIcon icon={faAngleDown} />
         </h2>
         {activeInput === 3 && (
           <Skills

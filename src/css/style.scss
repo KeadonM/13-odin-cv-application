@@ -1,23 +1,24 @@
 @import 'utils/variables';
 
 #root {
+  background-color: $clr-accent-100;
   font-family: $ff-primary;
   font-size: $fs-400;
-  background-color: $clr-accent-100;
 
   @include column-flex;
   height: 100vh;
 }
 
 main {
+  background-color: $clr-accent-100;
   @include column-flex;
   align-items: center;
 }
 
 .logo {
-  margin: $spc-500 $spc-300 $spc-500;
-  // padding-right: $spc-400;
-  max-height: 6rem;
+  margin-block: $spc-500;
+  padding-inline: $spc-400;
+  max-height: 5rem;
   align-self: start;
   filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.15));
 }
@@ -30,11 +31,12 @@ main {
 @media (max-width: $media-query-primary) {
   .build-preview-container {
     @include column-flex;
+    margin-inline: $spc-400;
   }
   .builder {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: repeat(3, 0.1fr) 4fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 0.1fr) 1fr;
     gap: 0 $spc-400;
     align-items: start;
 
@@ -43,6 +45,7 @@ main {
     }
 
     .active {
+      // max-width: 600px;
       grid-row: 1 / 5;
 
       .fa-angle-down {
@@ -64,6 +67,7 @@ main {
 
   .build-preview-container {
     @include column-flex;
+    max-width: 600px;
   }
   .builder {
     display: grid;
@@ -106,6 +110,10 @@ main {
 
     .fa-angle-down {
       display: none;
+    }
+
+    .form-row.date {
+      flex-direction: column;
     }
   }
 }

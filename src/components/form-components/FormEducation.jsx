@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+
 function InputEducation({ updateData, toggle, data, id }) {
   function handleSubmit(e) {
     toggle(e);
@@ -30,11 +33,11 @@ function InputEducation({ updateData, toggle, data, id }) {
         </label>
       </div>
 
-      <div className="form-row">
+      <div className="form-row date">
         <label>
           Start Date
           <input
-            type="date"
+            type="month"
             name="ed_start"
             value={data.ed_start}
             onChange={handleUpdate}
@@ -43,7 +46,7 @@ function InputEducation({ updateData, toggle, data, id }) {
         <label>
           End Date
           <input
-            type="date"
+            type="month"
             name="ed_end"
             value={data.ed_end}
             onChange={handleUpdate}
@@ -72,10 +75,10 @@ function InputEducation({ updateData, toggle, data, id }) {
 
       <div className="form-row">
         <button type="button" onClick={toggle}>
-          <i class="fa-solid fa-xmark"></i>
+          <FontAwesomeIcon icon={faXmark} />
         </button>
         <button type="button" onClick={handleSubmit}>
-          <i class="fa-solid fa-check"></i>
+          <FontAwesomeIcon icon={faCheck} />
         </button>
       </div>
     </form>
