@@ -1,9 +1,17 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function InputEducation({ updateData, toggle, data, id }) {
-  function handleSubmit(e) {
-    toggle(e);
+function InputEducation(props) {
+  const { defaults, id, data } = props;
+  const { updateData, removeEntry, updateActiveId } = defaults;
+
+  function handleSubmit() {
+    updateActiveId('');
+  }
+
+  function handleDelete() {
+    updateActiveId('');
+    removeEntry('education', id);
   }
 
   function handleUpdate(e) {
@@ -13,7 +21,7 @@ function InputEducation({ updateData, toggle, data, id }) {
   return (
     <form className="education-form form">
       <div className="form-row">
-        <label>
+        <label className="form-input-label">
           School
           <input
             type="text"
@@ -22,7 +30,7 @@ function InputEducation({ updateData, toggle, data, id }) {
             onChange={handleUpdate}
           />
         </label>
-        <label>
+        <label className="form-input-label">
           Location
           <input
             type="text"
@@ -34,7 +42,7 @@ function InputEducation({ updateData, toggle, data, id }) {
       </div>
 
       <div className="form-row date">
-        <label>
+        <label className="form-input-label">
           Start Date
           <input
             type="month"
@@ -43,7 +51,7 @@ function InputEducation({ updateData, toggle, data, id }) {
             onChange={handleUpdate}
           />
         </label>
-        <label>
+        <label className="form-input-label">
           End Date
           <input
             type="month"
@@ -54,7 +62,7 @@ function InputEducation({ updateData, toggle, data, id }) {
         </label>
       </div>
 
-      <label>
+      <label className="form-input-label">
         Degree/Program
         <input
           type="text"
@@ -64,7 +72,7 @@ function InputEducation({ updateData, toggle, data, id }) {
         />
       </label>
 
-      <label>
+      <label className="form-input-label">
         Additional Info
         <textarea
           name="additional"
@@ -74,8 +82,8 @@ function InputEducation({ updateData, toggle, data, id }) {
       </label>
 
       <div className="form-row">
-        <button type="button" onClick={toggle}>
-          <FontAwesomeIcon icon={faXmark} />
+        <button type="button" onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrash} />
         </button>
         <button type="button" onClick={handleSubmit}>
           <FontAwesomeIcon icon={faCheck} />

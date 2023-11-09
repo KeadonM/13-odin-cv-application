@@ -1,6 +1,8 @@
 import '../css/inputPanels.scss';
 import { useState } from 'react';
 
+import { arrayMove } from '@dnd-kit/sortable';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGear,
@@ -14,8 +16,40 @@ import {
 import General from './form-components/FormGeneral.jsx';
 import Experience from './form-components/FormExperience.jsx';
 import Education from './form-components/FormEducation.jsx';
-import Skills from './form-components/FormSkills.jsx';
-import InputList from './form-components/InputList.jsx';
+import EntriesList from './form-components/EntriesList';
+
+function InputCardTitle(props) {
+  const { onSelection, faIcon, title } = props;
+
+  const onKeyDown = (e) => {
+    const enterOrSpace =
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Spacebar' ||
+      e.which === 13 ||
+      e.which === 32;
+    if (enterOrSpace) {
+      e.preventDefault();
+      onSelection(e);
+    }
+  };
+
+  return (
+    <h2 className="input-title" onClick={onSelection} onKeyDown={onKeyDown}>
+      <FontAwesomeIcon icon={faIcon} />
+      <p>&nbsp; {title}</p>
+      <FontAwesomeIcon icon={faAngleDown} />
+    </h2>
+  );
+}
+
+function InputCard({ children, name = '' }) {
+  return (
+    <section tabIndex="0" className={'input-card ' + name}>
+      {children}
+    </section>
+  );
+}
 
 function Settings({ updateData, loadDefaults }) {
   function handleUpdate(e) {
@@ -40,75 +74,47 @@ function Settings({ updateData, loadDefaults }) {
   );
 }
 
-function InputCard({ children, onSelection, name = '' }) {
-  const onKeyDown = (e) => {
-    const enterOrSpace =
-      e.key === 'Enter' ||
-      e.key === ' ' ||
-      e.key === 'Spacebar' ||
-      e.which === 13 ||
-      e.which === 32;
-    if (enterOrSpace) {
-      e.preventDefault();
-      onSelection(e);
-    }
-  };
+export default function Builder(props) {
+  const {
+    resumeData,
+    updateData,
+    uploadPicture,
+    addEntry,
+    removeEntry,
+    uploadSkillIcon,
+    loadDefaults,
+    updateMap,
+  } = props;
 
-  return (
-    <section
-      tabIndex="0"
-      className={'input-card ' + name}
-      onClick={onSelection}
-      onKeyDown={onKeyDown}>
-      {children}
-    </section>
-  );
-}
-
-function Builder({
-  resumeData,
-  updateData,
-  uploadPicture,
-  addExperience,
-  removeExperience,
-  addSchool,
-  removeEducation,
-  addSkill,
-  removeSkill,
-  loadDefaults,
-}) {
   const [activeInput, setActiveInput] = useState(0);
   const [activeId, setActiveId] = useState('');
   const [newExperienceToggle, setNewExperienceToggle] = useState(false);
   const [newEducationToggle, setNewEducationToggle] = useState(false);
 
-  function changeActiveInput(input) {
-    setActiveInput(input);
-  }
+  const formDefaults = {
+    updateData: updateData,
+    removeEntry: removeEntry,
+    updateActiveId: updateActiveId,
+  };
 
-  function updateActiveId(id) {
-    setActiveId(id);
-  }
-
-  function toggleNewExperience() {
-    setNewExperienceToggle(!newExperienceToggle);
-  }
-
-  function toggleNewEducation() {
-    setNewEducationToggle(!newEducationToggle);
-  }
+  const entriesListDefaults = {
+    addEntry: addEntry,
+    removeEntry: removeEntry,
+    updateData: updateData,
+    updateActiveId: updateActiveId,
+    handleDragEnd: handleDragEnd,
+  };
 
   return (
     <section aria-labelledby="builder-title" className="builder">
-      <InputCard
-        name={activeInput === 0 ? 'active' : 'inactive'}
-        onSelection={() => changeActiveInput(0)}>
-        <h2
-          className={activeInput === 0 ? 'active input-title' : 'input-title'}>
-          <FontAwesomeIcon icon={faUser} />
-          <p>&nbsp; General</p>
-          <FontAwesomeIcon icon={faAngleDown} />
-        </h2>
+      {/* General Input */}
+      <InputCard name={activeInput === 0 ? 'active' : 'inactive'}>
+        <InputCardTitle
+          title="General"
+          faIcon={faUser}
+          onSelection={() => changeActiveInput(0)}
+        />
+
         {activeInput === 0 && (
           <General
             updateData={updateData}
@@ -118,81 +124,70 @@ function Builder({
         )}
       </InputCard>
 
-      <InputCard
-        name={activeInput === 1 ? 'active' : 'inactive'}
-        onSelection={() => changeActiveInput(1)}>
-        <h2
-          className={activeInput === 1 ? 'active input-title' : 'input-title'}>
-          <FontAwesomeIcon icon={faBriefcase} />
-          <p>&nbsp; Experience</p>
-          <FontAwesomeIcon icon={faAngleDown} />
-        </h2>
+      {/* Experience Input */}
+      <InputCard name={activeInput === 1 ? 'active' : 'inactive'}>
+        <InputCardTitle
+          title="Experience"
+          faIcon={faBriefcase}
+          onSelection={() => changeActiveInput(1)}
+        />
+
+        {/* Conditionally render EntriesList or Experience Form */}
         {activeInput === 1 &&
-          (newExperienceToggle ? (
+          (activeId !== '' ? (
             <Experience
-              updateData={updateData}
-              toggle={toggleNewExperience}
+              defaults={formDefaults}
               data={resumeData.info.experience.get(activeId)}
               id={activeId}
             />
           ) : (
-            <InputList
-              listType={'experience'}
-              toggle={toggleNewExperience}
+            <EntriesList
+              defaults={{ ...entriesListDefaults }}
               data={resumeData.info.experience}
-              addItem={addExperience}
-              removeItem={removeExperience}
-              updateActiveId={updateActiveId}
-              updateName={updateData}
+              listType={'experience'}
             />
           ))}
       </InputCard>
 
-      <InputCard
-        name={activeInput === 2 ? 'active' : 'inactive'}
-        onSelection={() => changeActiveInput(2)}>
-        <h2
-          className={activeInput === 2 ? 'active input-title' : 'input-title'}>
-          <FontAwesomeIcon icon={faGraduationCap} />
-          <p> &nbsp; Education</p>
-          <FontAwesomeIcon icon={faAngleDown} />
-        </h2>
+      {/* Education Input */}
+      <InputCard name={activeInput === 2 ? 'active' : 'inactive'}>
+        <InputCardTitle
+          title="Education"
+          faIcon={faGraduationCap}
+          onSelection={() => changeActiveInput(2)}
+        />
+
+        {/* Conditionally render EntriesList or Education Form */}
         {activeInput === 2 &&
-          (newEducationToggle ? (
+          (activeId !== '' ? (
             <Education
-              updateData={updateData}
-              toggle={toggleNewEducation}
+              defaults={formDefaults}
               data={resumeData.info.education.get(activeId)}
               id={activeId}
             />
           ) : (
-            <InputList
-              listType={'education'}
-              toggle={toggleNewEducation}
+            <EntriesList
+              defaults={{ ...entriesListDefaults }}
               data={resumeData.info.education}
-              addItem={addSchool}
-              removeItem={removeEducation}
-              updateActiveId={updateActiveId}
-              updateName={updateData}
+              listType={'education'}
             />
           ))}
       </InputCard>
 
-      <InputCard
-        name={activeInput === 3 ? 'active' : 'inactive'}
-        onSelection={() => changeActiveInput(3)}>
-        <h2
-          className={activeInput === 3 ? 'active input-title' : 'input-title'}>
-          <FontAwesomeIcon icon={faBook} />
-          <p>&nbsp; Skills</p>
-          <FontAwesomeIcon icon={faAngleDown} />
-        </h2>
+      {/* Skills Input */}
+      <InputCard name={activeInput === 3 ? 'active' : 'inactive'}>
+        <InputCardTitle
+          title="Skills"
+          faIcon={faBook}
+          onSelection={() => changeActiveInput(3)}
+        />
+
         {activeInput === 3 && (
-          <Skills
-            data={resumeData.info.skills}
-            updateData={updateData}
-            addSkill={addSkill}
-            removeSkill={removeSkill}
+          <EntriesList
+            defaults={{ ...entriesListDefaults }}
+            data={resumeData.info.skill}
+            listType={'skill'}
+            uploadSkillIcon={uploadSkillIcon}
           />
         )}
       </InputCard>
@@ -200,6 +195,32 @@ function Builder({
       <Settings updateData={updateData} loadDefaults={loadDefaults} />
     </section>
   );
-}
 
-export default Builder;
+  function changeActiveInput(input) {
+    setActiveId('');
+    setActiveInput(input);
+  }
+
+  function updateActiveId(id) {
+    setActiveId(id);
+  }
+
+  function handleDragEnd(event, type, data) {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      const idArray = [...data.keys()];
+      const activeIndex = idArray.indexOf(active.id);
+      const overIndex = idArray.indexOf(over.id);
+
+      const newIdArray = arrayMove(idArray, activeIndex, overIndex);
+      const dataMap = new Map([]);
+
+      newIdArray.map((id) => {
+        dataMap.set(id, data.get(id));
+      });
+
+      updateMap(type, dataMap);
+    }
+  }
+}

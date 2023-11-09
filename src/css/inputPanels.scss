@@ -4,138 +4,6 @@
   @include column-flex;
 }
 
-.input-card {
-  margin-bottom: $spc-200;
-  border-radius: $border-radius;
-  background-color: $clr-secondary-200;
-  color: $clr-primary-600;
-  font-weight: bold;
-  box-shadow: $shadow;
-  border: none;
-  text-align: center;
-
-  .input-title {
-    @include row-flex;
-    align-items: center;
-
-    text-align: start;
-    color: $clr-primary-700;
-    font-size: 1.48rem;
-    font-weight: bold;
-    padding: $spc-200 $spc-200;
-    background-color: $clr-primary-200;
-    border-radius: $border-radius;
-
-    i {
-      text-align: center;
-      width: 32px;
-    }
-
-    .fa-angle-down {
-      margin-left: auto;
-      margin-right: $spc-200;
-      transition: transform 300ms;
-    }
-
-    &.active {
-      scale: 1.015;
-      border-radius: $border-radius $border-radius calc($border-radius / 2)
-        calc($border-radius / 2);
-      box-shadow: 4px 8px 2px $clr-accent-shadow-400;
-
-      .fa-angle-down {
-        transform: rotate(180deg);
-      }
-    }
-  }
-
-  .input-list {
-    margin-top: $spc-400;
-    li {
-      @include row-flex;
-      justify-content: center;
-      margin: $spc-200;
-      gap: $spc-100;
-      margin-inline: $spc-500;
-
-      h3 {
-        align-self: center;
-        margin-right: auto;
-      }
-    }
-  }
-
-  .add-button {
-    margin: $spc-300 $spc-100 $spc-100 $spc-100;
-    min-width: 4.5rem;
-  }
-
-  button {
-    padding: calc($spc-100 * 0.8) $spc-100;
-    min-height: 2rem;
-    min-width: 3.5rem;
-    border-radius: $border-radius;
-    border: none;
-    background-color: $clr-secondary-400;
-    color: $clr-secondary-200;
-    font-size: 1.24rem;
-    letter-spacing: 0.24px;
-  }
-
-  input,
-  textarea,
-  #file {
-    font-weight: 400;
-    border-radius: $border-radius;
-    background-color: $clr-secondary-100;
-    color: $clr-neutral-500;
-    width: 100%;
-    min-height: 2.48rem;
-    padding-inline: $spc-100;
-    box-shadow: 2px 2px 6px $clr-accent-shadow-400;
-  }
-
-  .form {
-    @include column-flex;
-    margin: $spc-200;
-    gap: $spc-200;
-
-    label {
-      @include column-flex;
-      font-weight: bold;
-      font-size: 1.24rem;
-    }
-
-    textarea {
-      min-height: 6rem;
-      resize: vertical;
-    }
-
-    #file {
-      @include row-flex;
-      background-color: $clr-secondary-400;
-      color: $clr-secondary-200;
-      padding: calc($spc-100 * 0.8) $spc-100;
-
-      input[type='file'] {
-        display: none;
-      }
-
-      justify-content: center;
-      align-items: center;
-    }
-
-    .form-row {
-      @include row-flex;
-      gap: $spc-200;
-
-      > * {
-        width: 100%;
-      }
-    }
-  }
-}
-
 .settings {
   min-width: 500px;
 
@@ -149,5 +17,151 @@
     justify-content: center;
     gap: $spc-300;
     margin: $spc-300;
+  }
+}
+
+.input-card {
+  margin-bottom: $spc-200;
+  border-radius: $border-radius;
+  color: $clr-primary-600;
+  background-color: $clr-secondary-200;
+  font-weight: bold;
+  box-shadow: $shadow;
+  border: none;
+  text-align: center;
+
+  &.active {
+    .input-title {
+      scale: 1.015;
+      border-radius: $border-radius $border-radius calc($border-radius / 2)
+        calc($border-radius / 2);
+      box-shadow: 4px 8px 2px $clr-accent-shadow-400;
+
+      .fa-angle-down {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .input-title {
+    @include row-flex;
+    align-items: center;
+
+    text-align: start;
+    color: $clr-primary-700;
+    font-size: 1.48rem;
+    font-weight: bold;
+    padding: $spc-200 $spc-200;
+    background-color: $clr-primary-200;
+    border-radius: $border-radius;
+
+    [data-icon] {
+      text-align: center;
+      width: 34px;
+    }
+
+    .fa-angle-down {
+      margin-left: auto;
+      margin-right: $spc-200;
+      transition: transform 300ms;
+    }
+  }
+
+  .input-list {
+    margin-top: $spc-400;
+    .list-item-row {
+      @include row-flex;
+      justify-content: center;
+      align-items: center;
+      margin: $spc-200;
+      gap: $spc-100;
+      margin-inline: $spc-500;
+
+      .grip-dots {
+        cursor: grab;
+        margin-right: $spc-100;
+        font-size: 1.5rem;
+        color: $clr-secondary-400;
+      }
+      input {
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        color: $clr-primary-600;
+      }
+    }
+  }
+
+  .add-button {
+    margin: $spc-300 $spc-100 $spc-100 $spc-100;
+    min-width: 4.5rem;
+  }
+
+  .form-input-label {
+    @include column-flex;
+    font-weight: bold;
+    font-size: $fs-500;
+
+    input,
+    textarea {
+      margin-top: calc($spc-100 / 3);
+    }
+  }
+
+  input,
+  textarea {
+    font-weight: 400;
+    font-size: calc($fs-400 * 1.1);
+    border-radius: $border-radius;
+    color: $clr-neutral-400;
+    background-color: $clr-secondary-100;
+    min-height: 2.48rem;
+    padding-inline: $spc-100;
+    box-shadow: 2px 2px 6px $clr-accent-shadow-400;
+  }
+
+  button,
+  .skill-icon-input,
+  #file {
+    padding: calc($spc-100 * 0.8) $spc-100;
+    min-height: 2.6rem;
+    min-width: 3.5rem;
+    border-radius: $border-radius;
+    border: none;
+    background-color: $clr-secondary-400;
+    color: $clr-secondary-200;
+    font-size: 1.24rem;
+    letter-spacing: 0.24px;
+    box-shadow: 2px 2px 6px $clr-accent-shadow-400;
+  }
+
+  #file,
+  .skill-icon-input {
+    @include row-flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  input[type='file'] {
+    display: none;
+  }
+
+  .form {
+    @include column-flex;
+    margin: $spc-200;
+    gap: $spc-200;
+
+    textarea {
+      min-height: 7rem;
+      resize: vertical;
+    }
+
+    .form-row {
+      @include row-flex;
+      gap: $spc-200;
+
+      > * {
+        width: 100%;
+      }
+    }
   }
 }

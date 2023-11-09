@@ -184,12 +184,22 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
       gap: 1%;
 
       .entry {
+        @include row-flex;
+        justify-content: center;
+        align-items: center;
+
+        height: calc($preview-scale-primary * 0.066);
+
         padding: 2%;
         min-width: 50px;
-        text-align: center;
         border-radius: $border-radius;
         background-color: $clr-secondary-400;
         color: $clr-secondary-100;
+
+        .skill-icon {
+          height: 100%;
+          padding-left: calc($preview-scale-primary * 0.0125);
+        }
       }
     }
   }
@@ -201,6 +211,18 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
       width: $preview-scale-secondary;
       font-size: $text-scale-secondary;
     }
+
+    .skills {
+      .entry-container {
+        .entry {
+          height: calc($preview-scale-secondary * 0.066);
+
+          .skill-icon {
+            padding-left: calc($preview-scale-secondary * 0.0125);
+          }
+        }
+      }
+    }
   }
 }
 
@@ -209,6 +231,18 @@ $text-scale-tertiary: calc($preview-scale-tertiary * 0.025);
     #resume-preview {
       width: $preview-scale-tertiary;
       font-size: $text-scale-tertiary;
+    }
+
+    .skills {
+      .entry-container {
+        .entry {
+          height: calc($preview-scale-tertiary * 0.066);
+
+          .skill-icon {
+            padding-left: calc($preview-scale-tertiary * 0.0125);
+          }
+        }
+      }
     }
   }
 }

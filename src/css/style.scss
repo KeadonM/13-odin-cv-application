@@ -45,8 +45,11 @@ main {
     }
 
     .active {
-      // max-width: 600px;
       grid-row: 1 / 5;
+
+      .form {
+        min-width: 420px;
+      }
 
       .fa-angle-down {
         rotate: 90deg;

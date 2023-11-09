@@ -34,11 +34,11 @@ function Preview({ data }) {
         </div>
 
         <div className="resume-section skills">
-          {[...data.info.skills.entries()].length !== 0 && (
+          {[...data.info.skill.entries()].length !== 0 && (
             <h2 className="preview-title-2 bold primary-text-clr ">Skills</h2>
           )}
           <div className="entry-container">
-            {[...data.info.skills.entries()].map((entry) => {
+            {[...data.info.skill.entries()].map((entry) => {
               return <Skills key={entry[0]} data={entry[1]} />;
             })}
           </div>

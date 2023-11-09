@@ -8,30 +8,27 @@ import Footer from './Footer';
 import logo from '../assets/ResuCraftLogo.png';
 import defaultPhoto from '../assets/defaultPhoto.jpg';
 
-function experienceObject() {
+function dataObjectFactory() {
   return {
-    name: '',
-    position: '',
-    exp_start: '',
-    exp_end: '',
-    responsibility: '',
-  };
-}
-
-function educationObject() {
-  return {
-    name: '',
-    location: '',
-    ed_start: '',
-    ed_end: '',
-    program: '',
-    addition: '',
-  };
-}
-
-function skillObject() {
-  return {
-    skill: '',
+    experience: {
+      name: '',
+      position: '',
+      exp_start: '',
+      exp_end: '',
+      responsibility: '',
+    },
+    education: {
+      name: '',
+      location: '',
+      ed_start: '',
+      ed_end: '',
+      program: '',
+      addition: '',
+    },
+    skill: {
+      name: '',
+      photoSrc: '',
+    },
   };
 }
 
@@ -48,7 +45,6 @@ function defaultData() {
         phone: '+1 (111) 111-1111',
         email: 'Mitchell.Keadon@outlook.com',
         website: 'Github.com/KeadonM',
-        photoName: '',
         photoSrc: defaultPhoto,
         blurb:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
@@ -56,7 +52,7 @@ function defaultData() {
 
       experience: new Map([
         [
-          uuidv4,
+          uuidv4(),
           {
             name: 'Westeel',
             position: 'Load Inspector',
@@ -82,23 +78,26 @@ function defaultData() {
         ],
       ]),
 
-      skills: new Map([
+      skill: new Map([
         [
           uuidv4(),
           {
-            skill: 'HTML',
+            name: 'HTML',
+            photoSrc: '',
           },
         ],
         [
           uuidv4(),
           {
-            skill: 'CSS',
+            name: 'CSS',
+            photoSrc: '',
           },
         ],
         [
           uuidv4(),
           {
-            skill: 'JS',
+            name: 'JS',
+            photoSrc: '',
           },
         ],
       ]),
@@ -115,10 +114,10 @@ function App() {
 
       general: {
         name: '',
+        title: '',
         phone: '',
         email: '',
         website: '',
-        photoName: '',
         photoSrc: '',
         blurb: '',
       },
@@ -127,7 +126,7 @@ function App() {
 
       education: new Map([]),
 
-      skills: new Map([]),
+      skill: new Map([]),
     },
   });
 
@@ -145,10 +144,6 @@ function App() {
   }
 
   function updateData(e, type, id) {
-    console.log(
-      `change state of ${e.target.name} in id ${id} to value ${e.target.value}`
-    );
-
     const dataCopy = { ...resumeData };
 
     if (id !== false) {
@@ -164,68 +159,41 @@ function App() {
     setResumeData(dataCopy);
   }
 
-  function addNewExperience(e) {
-    console.log(`add new experience`);
+  function addEntry(type) {
+    console.log('Adding a ' + type + ' entry');
 
     const id = uuidv4();
     const dataCopy = { ...resumeData };
 
-    dataCopy.info.experience.set(id, experienceObject());
+    dataCopy.info[type].set(id, dataObjectFactory()[type]);
     setResumeData(dataCopy);
 
     return id;
   }
 
-  function removeExperience(id) {
-    console.log(`removing experience ${id}`);
-
+  function removeEntry(type, id) {
     const dataCopy = { ...resumeData };
 
-    dataCopy.info.experience.delete(id);
+    dataCopy.info[type].delete(id);
 
     setResumeData(dataCopy);
   }
 
-  function addNewSchool(e) {
-    console.log(`add new school`);
-
-    const id = uuidv4();
+  function uploadSkillIcon(e, id) {
     const dataCopy = { ...resumeData };
 
-    dataCopy.info.education.set(id, educationObject());
-    setResumeData(dataCopy);
+    const element = dataCopy.info.skill.get(id);
+    element.photoSrc = URL.createObjectURL(e.target.files[0]);
 
-    return id;
-  }
-
-  function removeEducation(id) {
-    console.log(`removing Education ${id}`);
-
-    const dataCopy = { ...resumeData };
-
-    dataCopy.info.education.delete(id);
+    dataCopy.info.skill.set(id, element);
 
     setResumeData(dataCopy);
   }
 
-  function addNewSkill(e) {
-    console.log(`add new skill`);
-
-    const id = uuidv4();
+  function updateMap(type, map) {
     const dataCopy = { ...resumeData };
 
-    dataCopy.info.skills.set(id, skillObject());
-    setResumeData(dataCopy);
-
-    return id;
-  }
-
-  function removeSkill(id) {
-    console.log(`removing Education ${id}`);
-
-    const dataCopy = { ...resumeData };
-
-    dataCopy.info.skills.delete(id);
+    dataCopy.info[type] = map;
 
     setResumeData(dataCopy);
   }
@@ -239,13 +207,11 @@ function App() {
             resumeData={resumeData}
             updateData={updateData}
             uploadPicture={uploadPicture}
-            addExperience={addNewExperience}
-            removeExperience={removeExperience}
-            addSchool={addNewSchool}
-            removeEducation={removeEducation}
-            addSkill={addNewSkill}
-            removeSkill={removeSkill}
+            addEntry={addEntry}
+            removeEntry={removeEntry}
+            uploadSkillIcon={uploadSkillIcon}
             loadDefaults={loadDefaults}
+            updateMap={updateMap}
           />
           <Preview data={resumeData} />
         </div>
