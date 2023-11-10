@@ -19,18 +19,23 @@ function General({ data, settings }) {
               {data.name}
             </div>
 
-            <div className="preview-title-2 ">{data.title}</div>
+            <div className="preview-title-3 secondary-text-clr">
+              {data.title}
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="resume-section about">
-        <div className="blurb preview-body-1">{data.blurb}</div>
+      <div className="resume-section about secondary-text-clr">
+        <div className="blurb preview-body-1 ">{data.blurb}</div>
 
-        <div className="contact preview-body-2">
+        <div className="contact preview-body-2 ">
           {data.phone !== '' ? (
             <>
-              <FontAwesomeIcon icon={faPhone} />
+              <FontAwesomeIcon
+                className="preview-info-icon primary-text-clr "
+                icon={faPhone}
+              />
               &nbsp;
               {data.phone}
               <hr />
@@ -41,7 +46,10 @@ function General({ data, settings }) {
 
           {data.email !== '' ? (
             <>
-              <FontAwesomeIcon icon={faEnvelope} />
+              <FontAwesomeIcon
+                className="preview-info-icon primary-text-clr "
+                icon={faEnvelope}
+              />
               &nbsp;
               {data.email}
               <hr />
@@ -52,7 +60,10 @@ function General({ data, settings }) {
 
           {data.website !== '' ? (
             <>
-              <FontAwesomeIcon icon={faGlobe} />
+              <FontAwesomeIcon
+                className="preview-info-icon primary-text-clr "
+                icon={faGlobe}
+              />
               &nbsp;
               {data.website}
             </>

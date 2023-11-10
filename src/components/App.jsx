@@ -28,6 +28,7 @@ function dataObjectFactory() {
     skill: {
       name: '',
       photoSrc: '',
+      iconScale: '50',
     },
   };
 }
@@ -84,6 +85,7 @@ function defaultData() {
           {
             name: 'HTML',
             photoSrc: '',
+            iconScale: 50,
           },
         ],
         [
@@ -91,6 +93,7 @@ function defaultData() {
           {
             name: 'CSS',
             photoSrc: '',
+            iconScale: 50,
           },
         ],
         [
@@ -98,6 +101,71 @@ function defaultData() {
           {
             name: 'JS',
             photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'SCSS',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'TS',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'REACT',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'GIT',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'VITE',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'NPM',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'VERCEL',
+            photoSrc: '',
+            iconScale: 50,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'FIGMA',
+            photoSrc: '',
+            iconScale: 50,
           },
         ],
       ]),
@@ -144,6 +212,17 @@ function App() {
   }
 
   function updateData(e, type, id) {
+    console.log(
+      'Updating: ' +
+        e.target.name +
+        ' in ' +
+        type +
+        ' to ' +
+        e.target.value +
+        ' at id: ' +
+        id
+    );
+
     const dataCopy = { ...resumeData };
 
     if (id !== false) {
@@ -183,7 +262,21 @@ function App() {
     const dataCopy = { ...resumeData };
 
     const element = dataCopy.info.skill.get(id);
+    console.log(element);
     element.photoSrc = URL.createObjectURL(e.target.files[0]);
+
+    dataCopy.info.skill.set(id, element);
+
+    e.target.value = null;
+    setResumeData(dataCopy);
+  }
+
+  function removeSkillIcon(id) {
+    const dataCopy = { ...resumeData };
+
+    const element = dataCopy.info.skill.get(id);
+    element.photoSrc = '';
+    element.iconScale = '50';
 
     dataCopy.info.skill.set(id, element);
 
@@ -210,6 +303,7 @@ function App() {
             addEntry={addEntry}
             removeEntry={removeEntry}
             uploadSkillIcon={uploadSkillIcon}
+            removeSkillIcon={removeSkillIcon}
             loadDefaults={loadDefaults}
             updateMap={updateMap}
           />

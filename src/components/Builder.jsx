@@ -82,6 +82,7 @@ export default function Builder(props) {
     addEntry,
     removeEntry,
     uploadSkillIcon,
+    removeSkillIcon,
     loadDefaults,
     updateMap,
   } = props;
@@ -188,6 +189,7 @@ export default function Builder(props) {
             data={resumeData.info.skill}
             listType={'skill'}
             uploadSkillIcon={uploadSkillIcon}
+            removeSkillIcon={removeSkillIcon}
           />
         )}
       </InputCard>

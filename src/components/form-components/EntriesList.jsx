@@ -22,12 +22,13 @@ import { CSS } from '@dnd-kit/utilities';
 function SortableListItem(props) {
   const {
     id,
-    name,
+    data,
     listType,
     updateData,
     removeEntry,
     updateActiveId,
     uploadSkillIcon,
+    removeSkillIcon,
   } = props;
 
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -50,8 +51,9 @@ function SortableListItem(props) {
         <input
           type="text"
           name="name"
-          value={name}
+          value={data.name}
           onChange={(e) => updateData(e, listType, id)}
+          maxLength={listType === 'skill' ? 15 : 48}
         />
 
         {listType === 'skill' ? (
@@ -60,7 +62,8 @@ function SortableListItem(props) {
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => uploadSkillIcon(e, id)}></input>
+              onChange={(e) => uploadSkillIcon(e, id)}
+            />
           </label>
         ) : (
           <button onClick={handleEditButton}>
@@ -72,6 +75,33 @@ function SortableListItem(props) {
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
+
+      {data.photoSrc !== '' && data.photoSrc !== undefined && (
+        <div className="list-item-row icon-scale-row">
+          <label htmlFor={'icon-' + id}>Icon Scale</label>
+          <input
+            type="range"
+            name="iconScale"
+            min={1}
+            max={99}
+            value={data.iconScale}
+            onChange={(e) => updateData(e, listType, id)}
+          />
+          <input
+            className="icon-scale-num-input"
+            id={'icon-' + id}
+            type="number"
+            name="iconScale"
+            min={1}
+            max={99}
+            value={data.iconScale}
+            onChange={(e) => updateData(e, listType, id)}
+          />
+          <button onClick={() => removeSkillIcon(id)}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
+      )}
     </li>
   );
 
@@ -81,7 +111,7 @@ function SortableListItem(props) {
 }
 
 export default function EntriesList(props) {
-  const { defaults, data, listType, uploadSkillIcon } = props;
+  const { defaults, data, listType, uploadSkillIcon, removeSkillIcon } = props;
   const { addEntry, removeEntry, updateData, updateActiveId, handleDragEnd } =
     defaults;
 
@@ -115,12 +145,13 @@ export default function EntriesList(props) {
               handle={true}
               key={entry[0]}
               id={entry[0]}
-              name={entry[1].name}
+              data={entry[1]}
               listType={listType}
               updateData={updateData}
               removeEntry={removeEntry}
               updateActiveId={updateActiveId}
               uploadSkillIcon={uploadSkillIcon}
+              removeSkillIcon={removeSkillIcon}
             />
           ))}
         </SortableContext>
