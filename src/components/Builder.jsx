@@ -8,14 +8,16 @@ import {
   faGear,
   faBook,
   faUser,
+  faAddressBook,
   faBriefcase,
   faGraduationCap,
   faChessBishop,
   faAngleDown,
-  faChess,
+  faGrip,
 } from '@fortawesome/free-solid-svg-icons';
 
 import General from './form-components/FormGeneral.jsx';
+import Contact from './form-components/FormContact.jsx';
 import Experience from './form-components/FormExperience.jsx';
 import Education from './form-components/FormEducation.jsx';
 import EntriesList from './form-components/EntriesList';
@@ -38,6 +40,7 @@ function InputCardTitle(props) {
 
   return (
     <h2 className="input-title" onClick={onSelection} onKeyDown={onKeyDown}>
+      <FontAwesomeIcon icon={faGrip} />
       <FontAwesomeIcon icon={faIcon} bounce={active} />
       <p>&nbsp; {title}</p>
       <FontAwesomeIcon icon={faAngleDown} />
@@ -68,7 +71,8 @@ function Settings({ updateData, loadDefaults }) {
       <div className="settings-input-container">
         <button>Print</button>
         <button onClick={loadDefaults}>Default</button>
-        <button>Layout</button>
+        <button>Icons</button>
+        <button>Theme</button>
         <button>watermark</button>
         <input type="color" name="color" onChange={handleUpdate} />
       </div>
@@ -89,7 +93,7 @@ export default function Builder(props) {
     updateMap,
   } = props;
 
-  const [activeInput, setActiveInput] = useState(0);
+  const [activeInput, setActiveInput] = useState('General');
   const [activeId, setActiveId] = useState('');
 
   const formDefaults = {
@@ -109,15 +113,15 @@ export default function Builder(props) {
   return (
     <section aria-labelledby="builder-title" className="builder">
       {/* General Input */}
-      <InputCard name={activeInput === 0 ? 'active' : 'inactive'}>
+      <InputCard name={activeInput === 'General' ? 'active' : 'inactive'}>
         <InputCardTitle
           title="General"
           faIcon={faUser}
-          active={activeInput === 0}
-          onSelection={() => changeActiveInput(0)}
+          active={activeInput === 'General'}
+          onSelection={() => changeActiveInput('General')}
         />
 
-        {activeInput === 0 && (
+        {activeInput === 'General' && (
           <General
             updateData={updateData}
             uploadPicture={uploadPicture}
@@ -126,17 +130,35 @@ export default function Builder(props) {
         )}
       </InputCard>
 
+      {/* Contact Input */}
+      <InputCard name={activeInput === 'Contact' ? 'active' : 'inactive'}>
+        <InputCardTitle
+          title="Contact"
+          faIcon={faAddressBook}
+          active={activeInput === 'Contact'}
+          onSelection={() => changeActiveInput('Contact')}
+        />
+
+        {activeInput === 'Contact' && (
+          <Contact
+            updateData={updateData}
+            uploadPicture={uploadPicture}
+            data={resumeData.info.general}
+          />
+        )}
+      </InputCard>
+
       {/* Experience Input */}
-      <InputCard name={activeInput === 1 ? 'active' : 'inactive'}>
+      <InputCard name={activeInput === 'Experience' ? 'active' : 'inactive'}>
         <InputCardTitle
           title="Experience"
           faIcon={faBriefcase}
-          active={activeInput === 1}
-          onSelection={() => changeActiveInput(1)}
+          active={activeInput === 'Experience'}
+          onSelection={() => changeActiveInput('Experience')}
         />
 
         {/* Conditionally render EntriesList or Experience Form */}
-        {activeInput === 1 &&
+        {activeInput === 'Experience' &&
           (activeId !== '' ? (
             <Experience
               defaults={formDefaults}
@@ -153,16 +175,16 @@ export default function Builder(props) {
       </InputCard>
 
       {/* Education Input */}
-      <InputCard name={activeInput === 2 ? 'active' : 'inactive'}>
+      <InputCard name={activeInput === 'Education' ? 'active' : 'inactive'}>
         <InputCardTitle
           title="Education"
           faIcon={faGraduationCap}
-          active={activeInput === 2}
-          onSelection={() => changeActiveInput(2)}
+          active={activeInput === 'Education'}
+          onSelection={() => changeActiveInput('Education')}
         />
 
         {/* Conditionally render EntriesList or Education Form */}
-        {activeInput === 2 &&
+        {activeInput === 'Education' &&
           (activeId !== '' ? (
             <Education
               defaults={formDefaults}
@@ -179,15 +201,15 @@ export default function Builder(props) {
       </InputCard>
 
       {/* Skills Input */}
-      <InputCard name={activeInput === 3 ? 'active' : 'inactive'}>
+      <InputCard name={activeInput === 'Skills' ? 'active' : 'inactive'}>
         <InputCardTitle
           title="Skills"
           faIcon={faBook}
-          active={activeInput === 3}
-          onSelection={() => changeActiveInput(3)}
+          active={activeInput === 'Skills'}
+          onSelection={() => changeActiveInput('Skills')}
         />
 
-        {activeInput === 3 && (
+        {activeInput === 'Skills' && (
           <EntriesList
             defaults={{ ...entriesListDefaults }}
             data={resumeData.info.skill}
@@ -199,15 +221,15 @@ export default function Builder(props) {
       </InputCard>
 
       {/* Interests Input */}
-      <InputCard name={activeInput === 4 ? 'active' : 'inactive'}>
+      <InputCard name={activeInput === 'Interests' ? 'active' : 'inactive'}>
         <InputCardTitle
           title="Interests"
           faIcon={faChessBishop}
-          active={activeInput === 4}
-          onSelection={() => changeActiveInput(4)}
+          active={activeInput === 'Interests'}
+          onSelection={() => changeActiveInput('Interests')}
         />
 
-        {activeInput === 4 && (
+        {activeInput === 'Interests' && (
           <EntriesList
             defaults={{ ...entriesListDefaults }}
             data={resumeData.info.skill}
@@ -224,7 +246,9 @@ export default function Builder(props) {
 
   function changeActiveInput(input) {
     setActiveId('');
-    setActiveInput(input);
+
+    if (input !== activeInput) setActiveInput(input);
+    else setActiveInput('');
   }
 
   function updateActiveId(id) {

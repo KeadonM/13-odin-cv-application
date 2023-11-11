@@ -15,6 +15,7 @@
   .settings-input-container {
     @include row-flex;
     justify-content: center;
+    flex-wrap: wrap;
     gap: $spc-300;
     margin: $spc-300;
   }

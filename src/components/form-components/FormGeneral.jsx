@@ -30,34 +30,12 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         </label>
       </div>
 
-      <div className="form-row">
-        <label className="form-input-label">
-          Phone
-          <input
-            type="tel"
-            name="phone"
-            value={data.phone}
-            onChange={handleUpdate}
-          />
-        </label>
-
-        <label className="form-input-label">
-          Email
-          <input
-            type="email"
-            name="email"
-            value={data.email}
-            onChange={handleUpdate}
-          />
-        </label>
-      </div>
-
       <label className="form-input-label">
-        Website
+        Blurb Title
         <input
-          type="url"
-          name="website"
-          value={data.website}
+          type="text"
+          name="title"
+          value={data.title}
           onChange={handleUpdate}
         />
       </label>

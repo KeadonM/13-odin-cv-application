@@ -80,6 +80,17 @@ function defaultData() {
         [
           uuidv4(),
           {
+            name: 'Duck Farm',
+            position: 'Developer - Personal',
+            exp_start: '2018-08',
+            exp_end: '2020-01',
+            responsibility:
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
+          },
+        ],
+        [
+          uuidv4(),
+          {
             name: 'AGI Westeel',
             position: 'Load Inspector',
             exp_start: '2018-08',
@@ -225,6 +236,42 @@ function defaultData() {
           uuidv4(),
           {
             name: 'Counter Strike',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Cooking',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Photography',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Travel',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Philosophy',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Bouldering',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Open Source',
           },
         ],
       ]),

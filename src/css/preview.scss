@@ -67,7 +67,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
 }
 
 .preview-tertiary-clr-400 {
-  color: $clr-secondary-050;
+  color: $clr-secondary-100;
 }
 
 .preview-row {
@@ -180,18 +180,27 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
       filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
     }
 
+    .resume-section-data {
+      padding-left: 7.5%;
+      padding-right: 7.5%;
+    }
+
     .blurb,
     .contact,
     .interests {
-      padding-left: 10.5%;
-      padding-right: 7.5%;
       margin-bottom: 7.5%;
 
       .general-section-title {
         margin-bottom: 2.5%;
         .preview-general-icon {
-          margin-right: 5%;
+          margin-right: 3.33%;
+
+          min-width: 12.5%;
         }
+      }
+
+      > :not(:first-child) {
+        margin-left: 2.5%;
       }
     }
 
@@ -201,7 +210,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
       }
 
       .preview-info-icon {
-        margin-left: 10.5%;
+        margin-left: 2.5%;
         margin-right: 2.5%;
 
         font-size: 1.24em;
@@ -218,8 +227,32 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
     }
 
     .interests {
-      > :not(:first-child) {
-        margin-left: 7.5%;
+      ul {
+        @include row-flex;
+        flex-wrap: wrap;
+
+        li {
+          @include row-flex;
+          justify-content: center;
+          align-items: center;
+
+          margin: 1%;
+
+          height: calc($preview-scale-primary * 0.05);
+
+          padding: 2%;
+          min-width: 25%;
+          border-radius: calc($preview-corner-radius-primary * 0.75);
+          background-color: $clr-secondary-500;
+          color: $clr-secondary-100;
+
+          text-shadow: 2px 2px 4px $clr-secondary-500;
+
+          .skill-icon {
+            height: 100%;
+            padding-left: calc($preview-scale-primary * 0.0125);
+          }
+        }
       }
     }
 
@@ -256,6 +289,10 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
       }
     }
 
+    .entry {
+      margin-bottom: 3.33%;
+    }
+
     .date {
       margin-top: 1.33%;
       margin-right: 3.33%;
@@ -285,9 +322,6 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
       }
     }
 
-    .entry-container {
-      padding-bottom: 2%;
-    }
     .entry {
       overflow-wrap: break-word;
     }

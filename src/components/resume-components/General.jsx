@@ -37,92 +37,96 @@ function General({ data, settings }) {
       </div>
 
       <div className="resume-section about preview-tertiary-clr-400">
-        <div className="blurb">
-          <h2 className="general-section-title preview-title-2 ">
-            <FontAwesomeIcon
-              className="preview-general-icon preview-secondary-clr-400 "
-              icon={faUser}
-            />
-            About Me
-          </h2>
+        <div className="resume-section-data">
+          <div className="blurb">
+            <h2 className="general-section-title preview-title-2 ">
+              <FontAwesomeIcon
+                className="preview-general-icon preview-secondary-clr-400 "
+                icon={faUser}
+              />
+              About Me
+            </h2>
 
-          <div className="preview-body-3">
-            {' '}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{dataGeneral.blurb}
+            <div className="preview-body-3">
+              {' '}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              {dataGeneral.blurb}
+            </div>
           </div>
-        </div>
 
-        <div className="contact">
-          <h2 className="general-section-title preview-title-2">
-            <FontAwesomeIcon
-              className="preview-general-icon preview-secondary-clr-400 "
-              icon={faAddressBook}
-            />
-            Contact Me
-          </h2>
-          <div className="preview-body-4">
-            {dataGeneral.phone !== '' ? (
-              <>
-                <div className="preview-row">
-                  <FontAwesomeIcon
-                    className="preview-info-icon preview-secondary-clr-400 "
-                    icon={faPhone}
-                  />
-                  &nbsp;
-                  <div>{dataGeneral.phone}</div>
-                </div>
-                <hr />
-              </>
-            ) : (
-              ''
-            )}
+          <div className="contact">
+            <h2 className="general-section-title preview-title-2">
+              <FontAwesomeIcon
+                className="preview-general-icon preview-secondary-clr-400 "
+                icon={faAddressBook}
+              />
+              Contact Me
+            </h2>
 
-            {dataGeneral.email !== '' ? (
-              <>
-                <div className="preview-row">
-                  <FontAwesomeIcon
-                    className="preview-info-icon preview-secondary-clr-400 "
-                    icon={faEnvelope}
-                  />
-                  &nbsp;
-                  <div>{dataGeneral.email}</div>
-                </div>
-                <hr />
-              </>
-            ) : (
-              ''
-            )}
+            <div className="preview-body-4">
+              {dataGeneral.phone !== '' ? (
+                <>
+                  <div className="preview-row">
+                    <FontAwesomeIcon
+                      className="preview-info-icon preview-secondary-clr-400 "
+                      icon={faPhone}
+                    />
+                    &nbsp;
+                    <div>{dataGeneral.phone}</div>
+                  </div>
+                  <hr />
+                </>
+              ) : (
+                ''
+              )}
 
-            {dataGeneral.website !== '' ? (
-              <>
-                <div className="preview-row">
-                  <FontAwesomeIcon
-                    className="preview-info-icon preview-secondary-clr-400 "
-                    icon={faGlobe}
-                  />
-                  &nbsp;
-                  <div>{dataGeneral.website}</div>
-                </div>
-              </>
-            ) : (
-              ''
-            )}
+              {dataGeneral.email !== '' ? (
+                <>
+                  <div className="preview-row">
+                    <FontAwesomeIcon
+                      className="preview-info-icon preview-secondary-clr-400 "
+                      icon={faEnvelope}
+                    />
+                    &nbsp;
+                    <div>{dataGeneral.email}</div>
+                  </div>
+                  <hr />
+                </>
+              ) : (
+                ''
+              )}
+
+              {dataGeneral.website !== '' ? (
+                <>
+                  <div className="preview-row">
+                    <FontAwesomeIcon
+                      className="preview-info-icon preview-secondary-clr-400 "
+                      icon={faGlobe}
+                    />
+                    &nbsp;
+                    <div>{dataGeneral.website}</div>
+                  </div>
+                </>
+              ) : (
+                ''
+              )}
+            </div>
           </div>
-        </div>
 
-        <div className="interests">
-          <h2 className="general-section-title preview-title-2">
-            <FontAwesomeIcon
-              className="preview-general-icon preview-secondary-clr-400 "
-              icon={faChessBishop}
-            />
-            Interests
-          </h2>
+          <div className="interests">
+            <h2 className="general-section-title preview-title-2">
+              <FontAwesomeIcon
+                className="preview-general-icon preview-secondary-clr-400 "
+                icon={faChessBishop}
+              />
+              Interests
+            </h2>
 
-          <div className="preview-body-4">
-            {[...dataInterest.entries()].map((entry) => {
-              return <Skills key={entry[0]} data={entry[1]} />;
-            })}
+            <ul className="preview-body-4">
+              {[...dataInterest.entries()].map((entry) => {
+                return <li key={entry[0]}>{entry[1].name}</li>;
+              })}
+            </ul>
           </div>
         </div>
 
