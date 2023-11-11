@@ -1,23 +1,36 @@
 function Education({ data }) {
-  return (
-    <div className="entry">
-      <div className="preview-body-1 bold">{data.name}</div>
+  let date;
 
-      <div className="preview-body-2 preview-row">
+  if (data.ed_start !== '') {
+    date = (
+      <div className="preview-primary-clr-400 preview-body-4 bold italic date">
         <div>{`${data.ed_start.slice(5)}/${data.ed_start.slice(0, 4)}`}</div>
-        &nbsp;&#8211;&nbsp;
+
         <div>
-          {data.ed_start !== ''
+          {data.ed_end !== ''
             ? `${data.ed_end.slice(5)}/${data.ed_end.slice(0, 4)}`
             : 'Present'}
         </div>
       </div>
+    );
+  }
 
-      <div className="preview-body-2">{data.location}</div>
+  return (
+    <div className="entry preview-row">
+      {date}
+      <div className="entry-info ">
+        <div className="preview-secondary-clr-400 preview-body-1 title bold">
+          {data.name}
+        </div>
 
-      <div className="preview-body-2">{data.program}</div>
+        <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
+          {data.program}
+        </div>
 
-      <div className="preview-body-2">Additional Info:{data.additional}</div>
+        <div className="preview-body-4">
+          &nbsp;&nbsp;&nbsp;&nbsp;{data.addition}
+        </div>
+      </div>
     </div>
   );
 }

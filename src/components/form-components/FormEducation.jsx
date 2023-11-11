@@ -75,8 +75,8 @@ function InputEducation(props) {
       <label className="form-input-label">
         Additional Info
         <textarea
-          name="additional"
-          value={data.additional}
+          name="addition"
+          value={data.addition}
           onChange={handleUpdate}
         />
       </label>

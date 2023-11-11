@@ -30,6 +30,9 @@ function dataObjectFactory() {
       photoSrc: '',
       iconScale: '50',
     },
+    interest: {
+      name: '',
+    },
   };
 }
 
@@ -55,7 +58,29 @@ function defaultData() {
         [
           uuidv4(),
           {
-            name: 'Westeel',
+            name: 'ResuCraft',
+            position: 'Developer - Personal',
+            exp_start: '2023-10',
+            exp_end: '',
+            responsibility:
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Conspicuous Ink',
+            position: 'Full Stack - Freelance',
+            exp_start: '2023-03',
+            exp_end: '2023-04',
+            responsibility:
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'AGI Westeel',
             position: 'Load Inspector',
             exp_start: '2018-08',
             exp_end: '2020-01',
@@ -69,12 +94,25 @@ function defaultData() {
         [
           uuidv4(),
           {
+            name: 'The Odin Project',
+            location: '',
+            ed_start: '2022-08',
+            ed_end: '2023-10',
+            program: 'JavaScript Curriculum',
+            addition:
+              'Philosophy, Political Science, Psychology, Philosophy, Political Science, Psychology',
+          },
+        ],
+        [
+          uuidv4(),
+          {
             name: 'University of Winnipeg',
             location: 'Winnipeg, MB, Canada',
             ed_start: '2019-09',
             ed_end: '2020-06',
             program: 'Computer Science',
-            addition: 'Philosophy, Political Science, Psychology',
+            addition:
+              'Philosophy, Political Science, Psychology, Philosophy, Political Science, Psychology',
           },
         ],
       ]),
@@ -169,6 +207,27 @@ function defaultData() {
           },
         ],
       ]),
+
+      interest: new Map([
+        [
+          uuidv4(),
+          {
+            name: 'Poker',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Bowling',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'Counter Strike',
+          },
+        ],
+      ]),
     },
   };
 }
@@ -195,6 +254,8 @@ function App() {
       education: new Map([]),
 
       skill: new Map([]),
+
+      interest: new Map([]),
     },
   });
 

@@ -14,12 +14,6 @@ $clr-secondary-500: hsl(30, 90%, 60%);
 $clr-secondary-600: hsl(0, 20%, 50%);
 
 $clr-accent-100: hsl(212, 100%, 98%);
-$clr-accent-200: #95d8ff;
-
-$clr-accent-400: hsl(200, 20%, 50%);
-
-$clr-accent-neutral-500: #938e94;
-$clr-accent-neutral-600: #5d5c61;
 
 $clr-neutral-100: hsl(0, 0%, 100%);
 $clr-neutral-150: hsl(0, 0%, 97%);
@@ -33,6 +27,8 @@ $clr-neutral-900: hsl(0, 0%, 0%);
 
 $clr-accent-shadow-400: hsla(25, 100%, 85%, 0.5);
 $clr-accent-shadow-500: hsla(25, 100%, 80%, 0.5);
+
+$clr-primary-shadow-600: hsl(211, 20%, 50, 0.33);
 
 // Font Family
 $ff-primary: Roboto, Arial, sans-serif;

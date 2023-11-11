@@ -10,7 +10,9 @@ import {
   faUser,
   faBriefcase,
   faGraduationCap,
+  faChessBishop,
   faAngleDown,
+  faChess,
 } from '@fortawesome/free-solid-svg-icons';
 
 import General from './form-components/FormGeneral.jsx';
@@ -19,7 +21,7 @@ import Education from './form-components/FormEducation.jsx';
 import EntriesList from './form-components/EntriesList';
 
 function InputCardTitle(props) {
-  const { onSelection, faIcon, title } = props;
+  const { onSelection, faIcon, faFlip = false, active = false, title } = props;
 
   const onKeyDown = (e) => {
     const enterOrSpace =
@@ -36,7 +38,7 @@ function InputCardTitle(props) {
 
   return (
     <h2 className="input-title" onClick={onSelection} onKeyDown={onKeyDown}>
-      <FontAwesomeIcon icon={faIcon} />
+      <FontAwesomeIcon icon={faIcon} bounce={active} />
       <p>&nbsp; {title}</p>
       <FontAwesomeIcon icon={faAngleDown} />
     </h2>
@@ -64,10 +66,10 @@ function Settings({ updateData, loadDefaults }) {
       </h2>
 
       <div className="settings-input-container">
+        <button>Print</button>
         <button onClick={loadDefaults}>Default</button>
         <button>Layout</button>
-        <button>Layout</button>
-        <button>Layout</button>
+        <button>watermark</button>
         <input type="color" name="color" onChange={handleUpdate} />
       </div>
     </InputCard>
@@ -89,8 +91,6 @@ export default function Builder(props) {
 
   const [activeInput, setActiveInput] = useState(0);
   const [activeId, setActiveId] = useState('');
-  const [newExperienceToggle, setNewExperienceToggle] = useState(false);
-  const [newEducationToggle, setNewEducationToggle] = useState(false);
 
   const formDefaults = {
     updateData: updateData,
@@ -113,6 +113,7 @@ export default function Builder(props) {
         <InputCardTitle
           title="General"
           faIcon={faUser}
+          active={activeInput === 0}
           onSelection={() => changeActiveInput(0)}
         />
 
@@ -130,6 +131,7 @@ export default function Builder(props) {
         <InputCardTitle
           title="Experience"
           faIcon={faBriefcase}
+          active={activeInput === 1}
           onSelection={() => changeActiveInput(1)}
         />
 
@@ -155,6 +157,7 @@ export default function Builder(props) {
         <InputCardTitle
           title="Education"
           faIcon={faGraduationCap}
+          active={activeInput === 2}
           onSelection={() => changeActiveInput(2)}
         />
 
@@ -180,10 +183,31 @@ export default function Builder(props) {
         <InputCardTitle
           title="Skills"
           faIcon={faBook}
+          active={activeInput === 3}
           onSelection={() => changeActiveInput(3)}
         />
 
         {activeInput === 3 && (
+          <EntriesList
+            defaults={{ ...entriesListDefaults }}
+            data={resumeData.info.skill}
+            listType={'skill'}
+            uploadSkillIcon={uploadSkillIcon}
+            removeSkillIcon={removeSkillIcon}
+          />
+        )}
+      </InputCard>
+
+      {/* Interests Input */}
+      <InputCard name={activeInput === 4 ? 'active' : 'inactive'}>
+        <InputCardTitle
+          title="Interests"
+          faIcon={faChessBishop}
+          active={activeInput === 4}
+          onSelection={() => changeActiveInput(4)}
+        />
+
+        {activeInput === 4 && (
           <EntriesList
             defaults={{ ...entriesListDefaults }}
             data={resumeData.info.skill}
