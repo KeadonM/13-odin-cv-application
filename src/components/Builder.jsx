@@ -87,8 +87,8 @@ export default function Builder(props) {
     uploadPicture,
     addEntry,
     removeEntry,
-    uploadSkillIcon,
-    removeSkillIcon,
+    uploadIcon,
+    removeIcon,
     loadDefaults,
     updateMap,
   } = props;
@@ -143,7 +143,7 @@ export default function Builder(props) {
           <Contact
             updateData={updateData}
             uploadPicture={uploadPicture}
-            data={resumeData.info.general}
+            data={resumeData.info.contact}
           />
         )}
       </InputCard>
@@ -214,8 +214,8 @@ export default function Builder(props) {
             defaults={{ ...entriesListDefaults }}
             data={resumeData.info.skill}
             listType={'skill'}
-            uploadSkillIcon={uploadSkillIcon}
-            removeSkillIcon={removeSkillIcon}
+            uploadIcon={uploadIcon}
+            removeIcon={removeIcon}
           />
         )}
       </InputCard>
@@ -232,10 +232,10 @@ export default function Builder(props) {
         {activeInput === 'Interests' && (
           <EntriesList
             defaults={{ ...entriesListDefaults }}
-            data={resumeData.info.skill}
-            listType={'skill'}
-            uploadSkillIcon={uploadSkillIcon}
-            removeSkillIcon={removeSkillIcon}
+            data={resumeData.info.interest}
+            listType={'interest'}
+            uploadIcon={uploadIcon}
+            removeIcon={removeIcon}
           />
         )}
       </InputCard>

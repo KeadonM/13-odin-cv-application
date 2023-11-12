@@ -8,7 +8,7 @@ import {
 import General from './resume-components/General.jsx';
 import Education from './resume-components/Education.jsx';
 import Experience from './resume-components/Experience.jsx';
-import Skills from './resume-components/Skills.jsx';
+import ListEntry from './resume-components/ListEntry.jsx';
 
 import '../css/preview.scss';
 
@@ -50,11 +50,11 @@ function Preview({ data }) {
               <FontAwesomeIcon icon={faBook} /> - Skills
             </h2>
           )}
-          <div className="entry-container">
+          <ul className="entry-container">
             {[...data.info.skill.entries()].map((entry) => {
-              return <Skills key={entry[0]} data={entry[1]} />;
+              return <ListEntry key={entry[0]} data={entry[1]} type="skill" />;
             })}
-          </div>
+          </ul>
         </div>
       </div>
     </section>

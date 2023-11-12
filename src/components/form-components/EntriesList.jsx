@@ -7,6 +7,7 @@ import {
   faGraduationCap,
   faBriefcase,
   faBook,
+  faChessBishop,
   faImage,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -27,8 +28,8 @@ function SortableListItem(props) {
     updateData,
     removeEntry,
     updateActiveId,
-    uploadSkillIcon,
-    removeSkillIcon,
+    uploadIcon,
+    removeIcon,
   } = props;
 
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -49,6 +50,7 @@ function SortableListItem(props) {
           {...listeners}
         />
         <input
+          className="name-input"
           type="text"
           name="name"
           value={data.name}
@@ -56,13 +58,13 @@ function SortableListItem(props) {
           maxLength={listType === 'skill' ? 15 : 48}
         />
 
-        {listType === 'skill' ? (
+        {listType === 'skill' || listType === 'interest' ? (
           <label className="skill-icon-input">
             <FontAwesomeIcon icon={faImage} />
             <input
               type="file"
               accept="image/*"
-              onChange={(e) => uploadSkillIcon(e, id)}
+              onChange={(e) => uploadIcon(e, listType, id)}
             />
           </label>
         ) : (
@@ -78,7 +80,8 @@ function SortableListItem(props) {
 
       {data.photoSrc !== '' && data.photoSrc !== undefined && (
         <div className="list-item-row icon-scale-row">
-          <label htmlFor={'icon-' + id}>Icon Scale</label>
+          <FontAwesomeIcon icon={faGrip} className="grip-dots" />
+
           <input
             type="range"
             name="iconScale"
@@ -87,19 +90,24 @@ function SortableListItem(props) {
             value={data.iconScale}
             onChange={(e) => updateData(e, listType, id)}
           />
-          <input
-            className="icon-scale-num-input"
-            id={'icon-' + id}
-            type="number"
-            name="iconScale"
-            min={1}
-            max={99}
-            value={data.iconScale}
-            onChange={(e) => updateData(e, listType, id)}
-          />
-          <button onClick={() => removeSkillIcon(id)}>
-            <FontAwesomeIcon icon={faTrash} />
-          </button>
+
+          <div className="scale-title-container">
+            <div className="list-item-row">
+              <input
+                className="icon-scale-num-input"
+                id={'icon-' + id}
+                type="number"
+                name="iconScale"
+                min={1}
+                max={99}
+                value={data.iconScale}
+                onChange={(e) => updateData(e, listType, id)}
+              />
+              <button onClick={() => removeIcon(listType, id)}>
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </li>
@@ -111,7 +119,7 @@ function SortableListItem(props) {
 }
 
 export default function EntriesList(props) {
-  const { defaults, data, listType, uploadSkillIcon, removeSkillIcon } = props;
+  const { defaults, data, listType, uploadIcon, removeIcon } = props;
   const { addEntry, removeEntry, updateData, updateActiveId, handleDragEnd } =
     defaults;
 
@@ -119,6 +127,7 @@ export default function EntriesList(props) {
     experience: faBriefcase,
     education: faGraduationCap,
     skill: faBook,
+    interest: faChessBishop,
   };
 
   function handleAdd() {
@@ -135,6 +144,7 @@ export default function EntriesList(props) {
       collisionDetection={closestCenter}
       onDragEnd={(event) => handleDragEnd(event, listType, data)}>
       {/* sortable unordered list */}
+      <button>columns</button>
       <ul className="input-list">
         <SortableContext
           items={[...data.keys()]}
@@ -150,8 +160,8 @@ export default function EntriesList(props) {
               updateData={updateData}
               removeEntry={removeEntry}
               updateActiveId={updateActiveId}
-              uploadSkillIcon={uploadSkillIcon}
-              removeSkillIcon={removeSkillIcon}
+              uploadIcon={uploadIcon}
+              removeIcon={removeIcon}
             />
           ))}
         </SortableContext>

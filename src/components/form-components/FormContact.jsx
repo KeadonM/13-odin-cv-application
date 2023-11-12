@@ -3,7 +3,7 @@ import { faPlus, faImage } from '@fortawesome/free-solid-svg-icons';
 
 function InputContact({ updateData, uploadPicture, data }) {
   function handleUpdate(e) {
-    updateData(e, 'general', false);
+    updateData(e, 'contact', false);
   }
 
   return (
@@ -12,8 +12,8 @@ function InputContact({ updateData, uploadPicture, data }) {
         Section Title
         <input
           type="text"
-          name="title"
-          value={data.title}
+          name="sectionTitle"
+          value={data.sectionTitle}
           onChange={handleUpdate}
         />
       </label>
@@ -46,7 +46,7 @@ function InputContact({ updateData, uploadPicture, data }) {
           <input
             type="url"
             name="website"
-            value={data.linkedin}
+            value={data.linkedIn}
             onChange={handleUpdate}
           />
         </label>

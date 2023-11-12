@@ -59,10 +59,7 @@ main {
 
       .active {
         grid-row: 1 / 7;
-
-        .form {
-          min-width: 420px;
-        }
+        min-width: 480px;
 
         .fa-angle-down {
           rotate: 90deg;
@@ -94,14 +91,20 @@ main {
 
     &:has(.active) {
       grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: 1fr;
 
       .inactive {
         grid-column: auto;
+
+        .fa-grip {
+          display: none;
+        }
       }
 
       .active {
         grid-row: 2 / 4;
         grid-column: 1 / 6;
+        min-width: 0;
 
         .input-title {
           scale: 1;
@@ -129,10 +132,6 @@ main {
 
     .fa-angle-down {
       display: none;
-    }
-
-    .form-row.date {
-      flex-direction: column;
     }
   }
 }

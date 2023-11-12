@@ -5,8 +5,6 @@
 }
 
 .settings {
-  min-width: 500px;
-
   .input-title {
     border-radius: $border-radius $border-radius calc($border-radius / 2)
       calc($border-radius / 2);
@@ -76,14 +74,16 @@
     margin-top: $spc-400;
 
     li {
-      width: max-content;
+      width: 90%;
+      max-width: 400px;
     }
 
     .list-item-row {
       @include row-flex;
+      justify-content: flex-end;
       align-items: center;
-
       gap: $spc-100;
+      color: $clr-secondary-600;
 
       .grip-dots {
         cursor: grab;
@@ -94,19 +94,41 @@
         filter: drop-shadow(4px 4px 2px $clr-accent-shadow-400);
       }
 
+      .name-input {
+        width: 100%;
+      }
+
       input {
         font-weight: bold;
         letter-spacing: 0.5px;
-        color: $clr-secondary-600;
       }
 
       &.icon-scale-row {
-        margin-top: $spc-200;
-        justify-content: flex-end;
+        align-items: center;
+        margin-top: $spc-100;
+
+        .fa-grip {
+          opacity: 0;
+          cursor: default;
+        }
+
+        .scale-label {
+          min-width: 100px;
+          padding: calc($spc-100 * 0.33);
+          background-color: $clr-secondary-100;
+          border-radius: $border-radius;
+          box-shadow: 2px 2px 6px $clr-accent-shadow-400;
+        }
 
         input[type='range'] {
-          max-width: 11.5rem;
+          width: 100%;
           box-shadow: none;
+          min-height: 0;
+        }
+
+        .scale-title-container {
+          @include column-flex;
+          gap: $spc-100;
         }
       }
     }
@@ -135,7 +157,7 @@
     border-radius: $border-radius;
     color: $clr-secondary-600;
     background-color: $clr-secondary-100;
-    min-height: 2.48rem;
+    min-height: 2.755rem;
     padding-inline: $spc-100;
     box-shadow: 2px 2px 6px $clr-accent-shadow-400;
   }
@@ -148,7 +170,7 @@
   .skill-icon-input,
   #file {
     padding: calc($spc-100 * 0.8) $spc-100;
-    min-height: 2.6rem;
+    min-height: 2.755rem;
     min-width: 3.5rem;
     border-radius: $border-radius;
     border: none;
@@ -190,8 +212,34 @@
       gap: $spc-200;
 
       > * {
+        min-width: 0;
         width: 100%;
       }
     }
+  }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  input[type='range'] {
+    -webkit-appearance: none;
+    height: 14px;
+    overflow: hidden;
+    background-color: $clr-secondary-100;
+
+    filter: drop-shadow(4px 4px 2px $clr-accent-shadow-400);
+  }
+
+  input[type='range']::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    height: 10px;
+    color: $clr-secondary-600;
+  }
+
+  input[type='range']::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+
+    background: $clr-secondary-600;
+    box-shadow: -150px 0 0 160px $clr-secondary-600;
   }
 }

@@ -79,7 +79,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
 }
 
 .title {
-  margin-bottom: -3.33%;
+  line-height: 100%;
 }
 
 .subtitle {
@@ -188,7 +188,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
     .blurb,
     .contact,
     .interests {
-      margin-bottom: 7.5%;
+      margin-bottom: 10%;
 
       .general-section-title {
         margin-bottom: 2.5%;
@@ -201,6 +201,13 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
 
       > :not(:first-child) {
         margin-left: 2.5%;
+
+        filter: opacity(90%);
+
+        li:nth-child(even) {
+          background-color: $clr-primary-700;
+          text-shadow: none;
+        }
       }
     }
 
@@ -282,30 +289,24 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
     .entry-container {
       display: grid;
       grid-template-areas: 'entry entry';
-      grid-template-columns: 50% 50%;
+      grid-template-columns: 47.5% 47.5%;
       grid-template-rows: min-content;
-      h2 {
-        grid-area: title;
-      }
+
+      justify-content: space-between;
     }
 
     .entry {
       margin-bottom: 3.33%;
     }
 
-    .date {
-      margin-top: 1.33%;
-      margin-right: 3.33%;
-    }
-
-    .subtitle {
-      padding-left: 4%;
-      margin-bottom: -1.5%;
-    }
-
     .entry-info {
-      > :not(:first-child) {
-        padding-left: 4%;
+      width: 100%;
+
+      .preview-row {
+        justify-content: space-between;
+        align-items: flex-start;
+
+        gap: 2.5%;
       }
     }
   }
@@ -314,16 +315,17 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
   .education,
   .skills {
     padding-inline: 4%;
-    padding-bottom: 4%;
+    padding-bottom: 3%;
 
     h2 {
+      padding-bottom: 1.5%;
       svg {
         filter: drop-shadow(2px 2px 1px $clr-primary-shadow-600);
       }
     }
 
-    .entry {
-      overflow-wrap: break-word;
+    .entry-container {
+      padding-left: 1.5%;
     }
   }
 
@@ -333,22 +335,19 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.015);
     .entry-container {
       @include row-flex;
       flex-wrap: wrap;
+      gap: 2%;
 
       .entry {
         @include row-flex;
         justify-content: center;
         align-items: center;
-
-        margin: 1%;
-
-        height: calc($preview-scale-primary * 0.066);
-
+        margin-bottom: 2%;
         padding: 2%;
         min-width: 12.5%;
+        height: calc($preview-scale-primary * 0.066);
         border-radius: $preview-corner-radius-primary;
         background-color: $clr-secondary-400;
         color: $clr-secondary-100;
-
         text-shadow: 2px 2px 4px $clr-secondary-500;
 
         .skill-icon {

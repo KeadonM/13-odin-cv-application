@@ -34,8 +34,8 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         Blurb Title
         <input
           type="text"
-          name="title"
-          value={data.title}
+          name="blurbTitle"
+          value={data.blurbTitle}
           onChange={handleUpdate}
         />
       </label>

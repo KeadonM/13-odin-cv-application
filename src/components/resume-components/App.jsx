@@ -48,18 +48,12 @@ function defaultData() {
       general: {
         name: 'Keadon Mitchell',
         title: 'Full Stack Developer',
-        blurbTitle: 'About Me',
-        blurb:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-        photoSrc: defaultPhoto,
-      },
-
-      contact: {
-        sectionTitle: 'Contact Me',
         phone: '+1 (111) 111-1111',
         email: 'Mitchell.Keadon@outlook.com',
-        linkedIn: 'KeadonM',
         website: 'Github.com/KeadonM',
+        photoSrc: defaultPhoto,
+        blurb:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
       },
 
       experience: new Map([
@@ -71,7 +65,7 @@ function defaultData() {
             exp_start: '2023-10',
             exp_end: '',
             responsibility:
-              'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
           },
         ],
         [
@@ -82,18 +76,7 @@ function defaultData() {
             exp_start: '2023-03',
             exp_end: '2023-04',
             responsibility:
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
-          },
-        ],
-        [
-          uuidv4(),
-          {
-            name: 'AGI Westeel',
-            position: 'Load Inspector',
-            exp_start: '2018-08',
-            exp_end: '2020-01',
-            responsibility:
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
           },
         ],
         [
@@ -104,7 +87,18 @@ function defaultData() {
             exp_start: '2018-08',
             exp_end: '2020-01',
             responsibility:
-              'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'AGI Westeel',
+            position: 'Load Inspector',
+            exp_start: '2018-08',
+            exp_end: '2020-01',
+            responsibility:
+              '-Load inspection -Load inspection -Load inspection -Load inspection',
           },
         ],
       ]),
@@ -119,7 +113,7 @@ function defaultData() {
             ed_end: '2023-10',
             program: 'JavaScript Curriculum',
             addition:
-              'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+              'Philosophy, Political Science, Psychology, Philosophy, Political Science, Psychology',
           },
         ],
         [
@@ -131,7 +125,7 @@ function defaultData() {
             ed_end: '2020-06',
             program: 'Computer Science',
             addition:
-              'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+              'Philosophy, Political Science, Psychology, Philosophy, Political Science, Psychology',
           },
         ],
       ]),
@@ -315,17 +309,11 @@ function App() {
       general: {
         name: '',
         title: '',
-        blurbTitle: '',
-        blurb: '',
-        photoSrc: '',
-      },
-
-      contact: {
-        sectionTitle: '',
         phone: '',
         email: '',
-        linkedIn: '',
         website: '',
+        photoSrc: '',
+        blurb: '',
       },
 
       experience: new Map([]),
@@ -352,7 +340,7 @@ function App() {
   }
 
   function updateData(e, type, id) {
-    console.log(
+    removeIcon(
       'Updating: ' +
         e.target.name +
         ' in ' +
@@ -379,7 +367,7 @@ function App() {
   }
 
   function addEntry(type) {
-    console.log('Adding a ' + type + ' entry');
+    removeIcon('Adding a ' + type + ' entry');
 
     const id = uuidv4();
     const dataCopy = { ...resumeData };
@@ -399,7 +387,6 @@ function App() {
   }
 
   function uploadIcon(e, type, id) {
-    console.log('uploading icon ' + type + ' ' + id);
     const dataCopy = { ...resumeData };
 
     const element = dataCopy.info[type].get(id);
@@ -434,7 +421,6 @@ function App() {
   return (
     <>
       <main>
-        <img src={logo} className="logo" />
         <div className="build-preview-container">
           <Builder
             resumeData={resumeData}

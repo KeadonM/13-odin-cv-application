@@ -17,19 +17,22 @@ function Education({ data }) {
 
   return (
     <div className="entry preview-row">
-      {date}
-      <div className="entry-info ">
-        <div className="preview-secondary-clr-400 preview-body-1 title bold">
-          {data.name}
+      <div className="entry-info">
+        <div className="preview-row">
+          <div className="title-subtitle-container">
+            <div className="preview-secondary-clr-400 preview-body-1 title bold">
+              {data.name}
+            </div>
+
+            <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
+              {data.program}
+            </div>
+          </div>
+
+          {date}
         </div>
 
-        <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
-          {data.program}
-        </div>
-
-        <div className="preview-body-4">
-          &nbsp;&nbsp;&nbsp;&nbsp;{data.addition}
-        </div>
+        <div className="preview-body-4">{data.addition}</div>
       </div>
     </div>
   );

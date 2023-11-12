@@ -17,19 +17,22 @@ function Experience({ data }) {
 
   return (
     <div className="entry preview-row">
-      {date}
       <div className="entry-info">
-        <div className="preview-secondary-clr-400 preview-body-1 title bold">
-          {data.position}
+        <div className="preview-row">
+          <div className="title-subtitle-container">
+            <div className=" preview-secondary-clr-400 preview-body-1 title bold">
+              {data.position}
+            </div>
+
+            <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
+              {data.name}
+            </div>
+          </div>
+
+          {date}
         </div>
 
-        <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
-          {data.name}
-        </div>
-
-        <div className="preview-body-4">
-          &nbsp;&nbsp;&nbsp;&nbsp;{data.responsibility}
-        </div>
+        <div className="preview-body-4">{data.responsibility}</div>
       </div>
     </div>
   );

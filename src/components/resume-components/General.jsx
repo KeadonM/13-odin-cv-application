@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import {
   faPhone,
   faEnvelope,
@@ -8,13 +9,12 @@ import {
   faChessBishop,
 } from '@fortawesome/free-solid-svg-icons';
 
-import Skills from './Skills';
+import ListEntry from './ListEntry.jsx';
 
 function General({ data, settings }) {
   const dataGeneral = data.general;
+  const dataContact = data.contact;
   const dataInterest = data.interest;
-
-  console.log(dataInterest);
 
   return (
     <>
@@ -44,7 +44,7 @@ function General({ data, settings }) {
                 className="preview-general-icon preview-secondary-clr-400 "
                 icon={faUser}
               />
-              About Me
+              {dataGeneral.blurbTitle}
             </h2>
 
             <div className="preview-body-3">
@@ -60,11 +60,11 @@ function General({ data, settings }) {
                 className="preview-general-icon preview-secondary-clr-400 "
                 icon={faAddressBook}
               />
-              Contact Me
+              {dataContact.sectionTitle}
             </h2>
 
             <div className="preview-body-4">
-              {dataGeneral.phone !== '' ? (
+              {dataContact.phone !== '' ? (
                 <>
                   <div className="preview-row">
                     <FontAwesomeIcon
@@ -72,7 +72,7 @@ function General({ data, settings }) {
                       icon={faPhone}
                     />
                     &nbsp;
-                    <div>{dataGeneral.phone}</div>
+                    <div>{dataContact.phone}</div>
                   </div>
                   <hr />
                 </>
@@ -80,7 +80,7 @@ function General({ data, settings }) {
                 ''
               )}
 
-              {dataGeneral.email !== '' ? (
+              {dataContact.email !== '' ? (
                 <>
                   <div className="preview-row">
                     <FontAwesomeIcon
@@ -88,7 +88,7 @@ function General({ data, settings }) {
                       icon={faEnvelope}
                     />
                     &nbsp;
-                    <div>{dataGeneral.email}</div>
+                    <div>{dataContact.email}</div>
                   </div>
                   <hr />
                 </>
@@ -96,7 +96,23 @@ function General({ data, settings }) {
                 ''
               )}
 
-              {dataGeneral.website !== '' ? (
+              {dataContact.linkedIn !== '' ? (
+                <>
+                  <div className="preview-row">
+                    <FontAwesomeIcon
+                      className="preview-info-icon preview-secondary-clr-400 "
+                      icon={faLinkedin}
+                    />
+                    &nbsp;
+                    <div>{dataContact.linkedIn}</div>
+                  </div>
+                  <hr />
+                </>
+              ) : (
+                ''
+              )}
+
+              {dataContact.website !== '' ? (
                 <>
                   <div className="preview-row">
                     <FontAwesomeIcon
@@ -104,7 +120,7 @@ function General({ data, settings }) {
                       icon={faGlobe}
                     />
                     &nbsp;
-                    <div>{dataGeneral.website}</div>
+                    <div>{dataContact.website}</div>
                   </div>
                 </>
               ) : (
@@ -124,7 +140,9 @@ function General({ data, settings }) {
 
             <ul className="preview-body-4">
               {[...dataInterest.entries()].map((entry) => {
-                return <li key={entry[0]}>{entry[1].name}</li>;
+                return (
+                  <ListEntry key={entry[0]} data={entry[1]} type="interest" />
+                );
               })}
             </ul>
           </div>
