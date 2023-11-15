@@ -2,6 +2,7 @@
 
 .builder {
   @include column-flex;
+  min-width: 500px;
 }
 
 .input-label {
@@ -11,7 +12,15 @@
 }
 
 .settings {
-  max-width: 550px;
+  container-type: inline-size;
+  @container (max-width: 446px) {
+    .toggles,
+    .colors,
+    .actions {
+      width: 225px;
+    }
+  }
+
   .input-title {
     border-radius: $border-radius $border-radius calc($border-radius / 2)
       calc($border-radius / 2);
@@ -32,23 +41,41 @@
     gap: $spc-300;
   }
 
-  .link-button,
-  #color-selector {
-    width: 60px;
-    height: 34px;
-    border-radius: 34px;
+  .settings-column {
+    @include column-flex;
+    justify-content: flex-end;
   }
 
-  .link-button {
-    width: 44px;
+  .colors {
+    .link-button,
+    #color-selector {
+      width: 60px;
+      height: 34px;
+      border-radius: 34px;
+    }
 
-    .slider {
-      @include row-flex;
-      justify-content: center;
-      align-items: center;
+    .link-button {
+      width: 45px;
+      align-self: flex-end;
 
-      background-color: $clr-secondary-400;
-      color: $clr-secondary-200;
+      .slider {
+        @include row-flex;
+        justify-content: center;
+        align-items: center;
+
+        background-color: $clr-secondary-400;
+        color: $clr-secondary-200;
+      }
+    }
+
+    .contrast-slider {
+      margin-bottom: $spc-100;
+
+      input {
+        height: 12px;
+        width: 95%;
+        min-height: 0;
+      }
     }
   }
 }
@@ -132,13 +159,6 @@
         filter: drop-shadow(4px 4px 2px $clr-accent-shadow-400);
         border-radius: $border-radius;
 
-        // &:active {
-        //   outline: 2px solid $clr-secondary-600;
-
-        //   // filter: drop-shadow(2px 2px 0 $clr-secondary-600);
-        //   color: $clr-secondary-600;
-        // }
-
         &:focus {
           color: $clr-secondary-600;
           outline: none;
@@ -186,9 +206,10 @@
   }
 
   .columns-add-container {
+    margin: $spc-300 $spc-100 $spc-200 $spc-100;
     @include row-flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     gap: $spc-200;
 
     .columns-button {
@@ -196,7 +217,6 @@
     }
 
     .add-button {
-      margin: $spc-300 $spc-100 $spc-100 $spc-100;
       min-width: 4.5rem;
     }
   }

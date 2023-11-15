@@ -36,7 +36,7 @@ main {
   .builder {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, 0.1fr) 1fr;
+    grid-template-rows: auto;
     gap: 0 $spc-400;
     align-items: start;
 
@@ -44,27 +44,27 @@ main {
       grid-column: 1 / 3;
     }
 
-    &:has(.active) {
-      grid-template-rows: repeat(5, 0.1fr) 1fr;
+    .active ~ .inactive,
+    .active ~ .settings {
+      min-width: 0;
+      grid-column: 2 / 3;
 
       .fa-angle-down {
         rotate: 90deg;
       }
+    }
 
-      .inactive,
-      .settings {
-        min-width: 0;
-        grid-column: 2 / 3;
+    .active {
+      grid-row: 1 / 7;
+      min-width: 480px;
+
+      .fa-angle-down {
+        rotate: 90deg;
       }
+    }
 
-      .active {
-        grid-row: 1 / 7;
-        min-width: 480px;
-
-        .fa-angle-down {
-          rotate: 90deg;
-        }
-      }
+    &:has(.active) {
+      grid-template-rows: repeat(5, 0.1fr) 1fr;
     }
   }
 }
@@ -79,8 +79,9 @@ main {
     max-width: 600px;
   }
   .builder {
+    min-width: 0px;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: auto;
     grid-template-rows: 1fr;
     gap: 0 $spc-400;
     align-items: start;
@@ -89,32 +90,27 @@ main {
       grid-column: 1 / 7;
     }
 
+    .active ~ .inactive {
+      grid-column: auto;
+    }
+
+    .active ~ .settings {
+      grid-column: 1 / 6;
+    }
+
+    .active {
+      grid-row: 2 / 4;
+      grid-column: 1 / 6;
+      min-width: 0;
+
+      .input-title {
+        scale: 1;
+        box-shadow: 0px 6px 4px $clr-accent-shadow-400;
+      }
+    }
+
     &:has(.active) {
-      grid-template-columns: repeat(5, 1fr);
       grid-template-rows: 1fr;
-
-      .inactive {
-        grid-column: auto;
-
-        .fa-grip {
-          display: none;
-        }
-      }
-
-      .active {
-        grid-row: 2 / 4;
-        grid-column: 1 / 6;
-        min-width: 0;
-
-        .input-title {
-          scale: 1;
-          box-shadow: 0px 6px 4px $clr-accent-shadow-400;
-        }
-      }
-
-      .settings {
-        grid-column: 1 / 6;
-      }
     }
 
     .settings,

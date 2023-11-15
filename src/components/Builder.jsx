@@ -16,7 +16,6 @@ import {
   faGraduationCap,
   faChessBishop,
   faAngleDown,
-  faGrip,
   faDownload,
   faLink,
   faLinkSlash,
@@ -256,7 +255,6 @@ function InputCardTitle(props) {
       className="input-title"
       onClick={onSelection}
       onKeyDown={onKeyDown}>
-      <FontAwesomeIcon icon={faGrip} />
       <FontAwesomeIcon icon={faIcon} bounce={active} />
       <p>&nbsp; {title}</p>
       <FontAwesomeIcon icon={faAngleDown} />
@@ -281,81 +279,7 @@ function Settings({ updateData, updateColor, loadDefaults, data }) {
       </h2>
 
       <div className="settings-input-container">
-        <div className="settings-row">
-          <div className="settings-row">
-            <div className="input-label">
-              Color
-              <label
-                id="color-selector"
-                style={{ backgroundColor: data.colors.primaryColor }}>
-                <input
-                  className="visually-hidden"
-                  type="color"
-                  name="color"
-                  value={data.colors.primaryColor}
-                  onChange={(e) => updateColor(e.target.value, 'primary')}
-                />
-              </label>
-            </div>
-
-            <label className="switch link-button ">
-              <input
-                type="checkbox"
-                checked={data.linkedColors}
-                name="linkedColors"
-                onChange={handleUpdate}
-              />
-              <span className="slider round no-thumb">
-                <FontAwesomeIcon
-                  icon={data.linkedColors === true ? faLink : faLinkSlash}
-                />
-              </span>
-            </label>
-
-            <div className="input-label">
-              Comp
-              <label
-                id="color-selector"
-                style={{ backgroundColor: data.colors.secondaryColor }}>
-                <input
-                  className="visually-hidden"
-                  type="color"
-                  name="color"
-                  value={data.colors.secondaryColor}
-                  onChange={(e) => updateColor(e.target.value, 'secondary')}
-                />
-              </label>
-            </div>
-          </div>
-
-          {/* <label htmlFor="" className="input-label">
-            comp
-            <input
-              type="range"
-              min={0}
-              max={1}
-              step={0.01}
-              value={data.colors.complementScale}
-              onChange={(e) =>
-                updateColor(undefined, 'none', undefined, e.target.value)
-              }
-            />
-          </label> */}
-
-          <label htmlFor="" className="input-label">
-            Contrast
-            <input
-              type="range"
-              min={0.2}
-              max={1}
-              step={0.01}
-              value={data.colors.contrastFactor}
-              onChange={(e) => updateColor(undefined, 'none', e.target.value)}
-            />
-          </label>
-        </div>
-
-        <div className="settings-row">
+        <div className="toggles settings-row">
           <div className="input-label">
             <span>
               <FontAwesomeIcon icon={faTrademark} />
@@ -399,7 +323,63 @@ function Settings({ updateData, updateColor, loadDefaults, data }) {
           </div>
         </div>
 
-        <div className="settings-row">
+        <div className="colors settings-column">
+          <label className="input-label contrast-slider">
+            <input
+              type="range"
+              min={0.2}
+              max={1}
+              step={0.01}
+              value={data.colors.contrastFactor}
+              onChange={(e) => updateColor(undefined, 'none', e.target.value)}
+            />
+          </label>
+          <div className="settings-row">
+            <div className="input-label">
+              <label
+                id="color-selector"
+                style={{ backgroundColor: data.colors.primaryColor }}>
+                <input
+                  className="visually-hidden"
+                  type="color"
+                  name="color"
+                  value={data.colors.primaryColor}
+                  onChange={(e) => updateColor(e.target.value, 'primary')}
+                />
+              </label>
+            </div>
+
+            <label className="switch link-button ">
+              <input
+                type="checkbox"
+                checked={data.linkedColors}
+                name="linkedColors"
+                onChange={handleUpdate}
+              />
+              <span className="slider round no-thumb">
+                <FontAwesomeIcon
+                  icon={data.linkedColors === true ? faLink : faLinkSlash}
+                />
+              </span>
+            </label>
+
+            <div className="input-label">
+              <label
+                id="color-selector"
+                style={{ backgroundColor: data.colors.secondaryColor }}>
+                <input
+                  className="visually-hidden"
+                  type="color"
+                  name="color"
+                  value={data.colors.secondaryColor}
+                  onChange={(e) => updateColor(e.target.value, 'secondary')}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div className="actions settings-row">
           <button>
             <FontAwesomeIcon icon={faDownload} />
           </button>
@@ -409,7 +389,7 @@ function Settings({ updateData, updateColor, loadDefaults, data }) {
           </button>
 
           <button onClick={loadDefaults}>
-            Load <FontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon icon={faUser} />
           </button>
         </div>
       </div>
