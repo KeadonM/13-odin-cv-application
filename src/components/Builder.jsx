@@ -1,4 +1,5 @@
 import '../css/inputPanels.scss';
+import '../css/toggleSwitch.scss';
 import { useState } from 'react';
 
 import { arrayMove } from '@dnd-kit/sortable';
@@ -6,6 +7,8 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGear,
+  faPrint,
+  faTrademark,
   faBook,
   faUser,
   faAddressBook,
@@ -14,6 +17,9 @@ import {
   faChessBishop,
   faAngleDown,
   faGrip,
+  faDownload,
+  faLink,
+  faLinkSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
 import General from './form-components/FormGeneral.jsx';
@@ -22,68 +28,11 @@ import Experience from './form-components/FormExperience.jsx';
 import Education from './form-components/FormEducation.jsx';
 import EntriesList from './form-components/EntriesList';
 
-function InputCardTitle(props) {
-  const { onSelection, faIcon, faFlip = false, active = false, title } = props;
-
-  const onKeyDown = (e) => {
-    const enterOrSpace =
-      e.key === 'Enter' ||
-      e.key === ' ' ||
-      e.key === 'Spacebar' ||
-      e.which === 13 ||
-      e.which === 32;
-    if (enterOrSpace) {
-      e.preventDefault();
-      onSelection(e);
-    }
-  };
-
-  return (
-    <h2 className="input-title" onClick={onSelection} onKeyDown={onKeyDown}>
-      <FontAwesomeIcon icon={faGrip} />
-      <FontAwesomeIcon icon={faIcon} bounce={active} />
-      <p>&nbsp; {title}</p>
-      <FontAwesomeIcon icon={faAngleDown} />
-    </h2>
-  );
-}
-
-function InputCard({ children, name = '' }) {
-  return (
-    <section tabIndex="0" className={'input-card ' + name}>
-      {children}
-    </section>
-  );
-}
-
-function Settings({ updateData, loadDefaults }) {
-  function handleUpdate(e) {
-    updateData(e, 'settings', false);
-  }
-
-  return (
-    <InputCard name="settings">
-      <h2 className="input-title">
-        <FontAwesomeIcon icon={faGear} />
-        <p>&nbsp; Settings</p>
-      </h2>
-
-      <div className="settings-input-container">
-        <button>Print</button>
-        <button onClick={loadDefaults}>Default</button>
-        <button>Icons</button>
-        <button>Theme</button>
-        <button>watermark</button>
-        <input type="color" name="color" onChange={handleUpdate} />
-      </div>
-    </InputCard>
-  );
-}
-
 export default function Builder(props) {
   const {
     resumeData,
     updateData,
+    updateColor,
     uploadPicture,
     addEntry,
     removeEntry,
@@ -103,6 +52,7 @@ export default function Builder(props) {
   };
 
   const entriesListDefaults = {
+    settings: resumeData.info.settings,
     addEntry: addEntry,
     removeEntry: removeEntry,
     updateData: updateData,
@@ -111,7 +61,7 @@ export default function Builder(props) {
   };
 
   return (
-    <section aria-labelledby="builder-title" className="builder">
+    <section className="builder">
       {/* General Input */}
       <InputCard name={activeInput === 'General' ? 'active' : 'inactive'}>
         <InputCardTitle
@@ -166,11 +116,13 @@ export default function Builder(props) {
               id={activeId}
             />
           ) : (
-            <EntriesList
-              defaults={{ ...entriesListDefaults }}
-              data={resumeData.info.experience}
-              listType={'experience'}
-            />
+            <div>
+              <EntriesList
+                defaults={{ ...entriesListDefaults }}
+                data={resumeData.info.experience}
+                listType={'experience'}
+              />
+            </div>
           ))}
       </InputCard>
 
@@ -192,11 +144,13 @@ export default function Builder(props) {
               id={activeId}
             />
           ) : (
-            <EntriesList
-              defaults={{ ...entriesListDefaults }}
-              data={resumeData.info.education}
-              listType={'education'}
-            />
+            <div>
+              <EntriesList
+                defaults={{ ...entriesListDefaults }}
+                data={resumeData.info.education}
+                listType={'education'}
+              />
+            </div>
           ))}
       </InputCard>
 
@@ -240,7 +194,12 @@ export default function Builder(props) {
         )}
       </InputCard>
 
-      <Settings updateData={updateData} loadDefaults={loadDefaults} />
+      <Settings
+        updateData={updateData}
+        updateColor={updateColor}
+        loadDefaults={loadDefaults}
+        data={resumeData.info.settings}
+      />
     </section>
   );
 
@@ -273,4 +232,187 @@ export default function Builder(props) {
       updateMap(type, dataMap);
     }
   }
+}
+
+function InputCardTitle(props) {
+  const { onSelection, faIcon, active = false, title } = props;
+
+  const onKeyDown = (e) => {
+    const enterOrSpace =
+      e.key === 'Enter' ||
+      e.key === ' ' ||
+      e.key === 'Spacebar' ||
+      e.which === 13 ||
+      e.which === 32;
+    if (enterOrSpace) {
+      e.preventDefault();
+      onSelection(e);
+    }
+  };
+
+  return (
+    <h2
+      tabIndex="0"
+      className="input-title"
+      onClick={onSelection}
+      onKeyDown={onKeyDown}>
+      <FontAwesomeIcon icon={faGrip} />
+      <FontAwesomeIcon icon={faIcon} bounce={active} />
+      <p>&nbsp; {title}</p>
+      <FontAwesomeIcon icon={faAngleDown} />
+    </h2>
+  );
+}
+
+function InputCard({ children, name = '' }) {
+  return <section className={'input-card ' + name}>{children}</section>;
+}
+
+function Settings({ updateData, updateColor, loadDefaults, data }) {
+  function handleUpdate(e) {
+    updateData(e, 'settings', false);
+  }
+
+  return (
+    <InputCard name="settings">
+      <h2 className="input-title">
+        <FontAwesomeIcon icon={faGear} />
+        <p>&nbsp; Settings</p>
+      </h2>
+
+      <div className="settings-input-container">
+        <div className="settings-row">
+          <div className="settings-row">
+            <div className="input-label">
+              Color
+              <label
+                id="color-selector"
+                style={{ backgroundColor: data.colors.primaryColor }}>
+                <input
+                  className="visually-hidden"
+                  type="color"
+                  name="color"
+                  value={data.colors.primaryColor}
+                  onChange={(e) => updateColor(e.target.value, 'primary')}
+                />
+              </label>
+            </div>
+
+            <label className="switch link-button ">
+              <input
+                type="checkbox"
+                checked={data.linkedColors}
+                name="linkedColors"
+                onChange={handleUpdate}
+              />
+              <span className="slider round no-thumb">
+                <FontAwesomeIcon
+                  icon={data.linkedColors === true ? faLink : faLinkSlash}
+                />
+              </span>
+            </label>
+
+            <div className="input-label">
+              Comp
+              <label
+                id="color-selector"
+                style={{ backgroundColor: data.colors.secondaryColor }}>
+                <input
+                  className="visually-hidden"
+                  type="color"
+                  name="color"
+                  value={data.colors.secondaryColor}
+                  onChange={(e) => updateColor(e.target.value, 'secondary')}
+                />
+              </label>
+            </div>
+          </div>
+
+          {/* <label htmlFor="" className="input-label">
+            comp
+            <input
+              type="range"
+              min={0}
+              max={1}
+              step={0.01}
+              value={data.colors.complementScale}
+              onChange={(e) =>
+                updateColor(undefined, 'none', undefined, e.target.value)
+              }
+            />
+          </label> */}
+
+          <label htmlFor="" className="input-label">
+            Contrast
+            <input
+              type="range"
+              min={0.2}
+              max={1}
+              step={0.01}
+              value={data.colors.contrastFactor}
+              onChange={(e) => updateColor(undefined, 'none', e.target.value)}
+            />
+          </label>
+        </div>
+
+        <div className="settings-row">
+          <div className="input-label">
+            <span>
+              <FontAwesomeIcon icon={faTrademark} />
+            </span>
+
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={data.trademark}
+                name="trademark"
+                onChange={handleUpdate}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+
+          <div className="input-label">
+            Icons
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={data.icons}
+                name="icons"
+                onChange={handleUpdate}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+
+          <div className="input-label">
+            Theme
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={data.theme}
+                name="theme"
+                onChange={handleUpdate}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+        </div>
+
+        <div className="settings-row">
+          <button>
+            <FontAwesomeIcon icon={faDownload} />
+          </button>
+
+          <button>
+            <FontAwesomeIcon icon={faPrint} />
+          </button>
+
+          <button onClick={loadDefaults}>
+            Load <FontAwesomeIcon icon={faUser} />
+          </button>
+        </div>
+      </div>
+    </InputCard>
+  );
 }

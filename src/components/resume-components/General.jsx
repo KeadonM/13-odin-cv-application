@@ -20,137 +20,199 @@ function General({ data, settings }) {
     <>
       <div
         className="resume-section person"
-        style={{ backgroundColor: settings.color }}>
+        style={{
+          '--clr': settings.colors.primaryColor,
+        }}>
         <div className="data">
-          <img src={dataGeneral.photoSrc} />
+          <img
+            style={{
+              '--clr': settings.colors.secondaryColor,
+            }}
+            src={dataGeneral.photoSrc}
+          />
 
           <div className="name-title">
-            <div className="preview-title-1 title bold preview-primary-clr-400">
+            <div
+              className="preview-title-1 title bold preview-primary-clr-400"
+              style={{
+                '--clr': settings.colors.primaryColorDesatDark,
+              }}>
               {dataGeneral.name}
             </div>
 
-            <div className="preview-title-3 subtitle bold italic preview-tertiary-clr-400">
+            <div
+              className="preview-title-3 subtitle bold italic preview-tertiary-clr-400"
+              style={{
+                '--clr': settings.colors.lightColor,
+              }}>
               {dataGeneral.title}
             </div>
           </div>
         </div>
       </div>
 
-      <div className="resume-section about preview-tertiary-clr-400">
-        <div className="resume-section-data">
-          <div className="blurb">
+      <div
+        className="about preview-tertiary-clr-400"
+        style={{
+          '--clr': settings.colors.lightColor,
+          '--clr-bg': settings.colors.primaryColorDesat,
+          '--clr-before': settings.colors.secondaryColor,
+        }}>
+        <div className="blurb resume-section">
+          {dataGeneral.blurbTitle !== '' && (
             <h2 className="general-section-title preview-title-2 ">
               <FontAwesomeIcon
                 className="preview-general-icon preview-secondary-clr-400 "
                 icon={faUser}
+                style={{
+                  '--clr': settings.colors.secondaryColorDark,
+                  display: settings.icons === true ? 'inline' : 'none',
+                }}
               />
               {dataGeneral.blurbTitle}
             </h2>
+          )}
 
-            <div className="preview-body-3">
-              {' '}
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              {dataGeneral.blurb}
-            </div>
+          <div className="preview-body-3">
+            {' '}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {dataGeneral.blurb}
           </div>
+        </div>
 
-          <div className="contact">
+        <div className="contact resume-section">
+          {dataContact.sectionTitle !== '' && (
             <h2 className="general-section-title preview-title-2">
               <FontAwesomeIcon
                 className="preview-general-icon preview-secondary-clr-400 "
                 icon={faAddressBook}
+                style={{
+                  '--clr': settings.colors.secondaryColorDark,
+                  display: settings.icons === true ? 'inline' : 'none',
+                }}
               />
               {dataContact.sectionTitle}
             </h2>
+          )}
 
-            <div className="preview-body-4">
-              {dataContact.phone !== '' ? (
-                <>
-                  <div className="preview-row">
-                    <FontAwesomeIcon
-                      className="preview-info-icon preview-secondary-clr-400 "
-                      icon={faPhone}
-                    />
-                    &nbsp;
-                    <div>{dataContact.phone}</div>
-                  </div>
-                  <hr />
-                </>
-              ) : (
-                ''
-              )}
+          <div className="preview-body-4 contact-info">
+            {dataContact.phone !== '' ? (
+              <>
+                <div className="preview-row">
+                  <FontAwesomeIcon
+                    className="preview-info-icon preview-secondary-clr-400 "
+                    icon={faPhone}
+                    style={{
+                      '--clr': settings.colors.secondaryColorDark,
+                      display: settings.icons === true ? 'inline' : 'none',
+                    }}
+                  />
+                  &nbsp;
+                  <div>{dataContact.phone}</div>
+                </div>
+                <hr />
+              </>
+            ) : (
+              ''
+            )}
 
-              {dataContact.email !== '' ? (
-                <>
-                  <div className="preview-row">
-                    <FontAwesomeIcon
-                      className="preview-info-icon preview-secondary-clr-400 "
-                      icon={faEnvelope}
-                    />
-                    &nbsp;
-                    <div>{dataContact.email}</div>
-                  </div>
-                  <hr />
-                </>
-              ) : (
-                ''
-              )}
+            {dataContact.email !== '' ? (
+              <>
+                <div className="preview-row">
+                  <FontAwesomeIcon
+                    className="preview-info-icon preview-secondary-clr-400 "
+                    icon={faEnvelope}
+                    style={{
+                      '--clr': settings.colors.secondaryColorDark,
+                      display: settings.icons === true ? 'inline' : 'none',
+                    }}
+                  />
+                  &nbsp;
+                  <div>{dataContact.email}</div>
+                </div>
+                <hr />
+              </>
+            ) : (
+              ''
+            )}
 
-              {dataContact.linkedIn !== '' ? (
-                <>
-                  <div className="preview-row">
-                    <FontAwesomeIcon
-                      className="preview-info-icon preview-secondary-clr-400 "
-                      icon={faLinkedin}
-                    />
-                    &nbsp;
-                    <div>{dataContact.linkedIn}</div>
-                  </div>
-                  <hr />
-                </>
-              ) : (
-                ''
-              )}
+            {dataContact.linkedIn !== '' ? (
+              <>
+                <div className="preview-row">
+                  <FontAwesomeIcon
+                    className="preview-info-icon preview-secondary-clr-400 "
+                    icon={faLinkedin}
+                    style={{
+                      '--clr': settings.colors.secondaryColorDark,
+                      display: settings.icons === true ? 'inline' : 'none',
+                    }}
+                  />
+                  &nbsp;
+                  <div>{dataContact.linkedIn}</div>
+                </div>
+                <hr />
+              </>
+            ) : (
+              ''
+            )}
 
-              {dataContact.website !== '' ? (
-                <>
-                  <div className="preview-row">
-                    <FontAwesomeIcon
-                      className="preview-info-icon preview-secondary-clr-400 "
-                      icon={faGlobe}
-                    />
-                    &nbsp;
-                    <div>{dataContact.website}</div>
-                  </div>
-                </>
-              ) : (
-                ''
-              )}
-            </div>
+            {dataContact.website !== '' ? (
+              <>
+                <div className="preview-row">
+                  <FontAwesomeIcon
+                    className="preview-info-icon preview-secondary-clr-400 "
+                    icon={faGlobe}
+                    style={{
+                      '--clr': settings.colors.secondaryColorDark,
+                      display: settings.icons === true ? 'inline' : 'none',
+                    }}
+                  />
+                  &nbsp;
+                  <div>{dataContact.website}</div>
+                </div>
+              </>
+            ) : (
+              ''
+            )}
           </div>
+        </div>
 
-          <div className="interests">
+        <div className="interests resume-section">
+          {[...dataInterest.entries()].length > 0 && (
             <h2 className="general-section-title preview-title-2">
               <FontAwesomeIcon
                 className="preview-general-icon preview-secondary-clr-400 "
                 icon={faChessBishop}
+                style={{
+                  '--clr': settings.colors.secondaryColorDark,
+                  display: settings.icons === true ? 'inline' : 'none',
+                }}
               />
               Interests
             </h2>
+          )}
 
-            <ul className="preview-body-4">
-              {[...dataInterest.entries()].map((entry) => {
-                return (
-                  <ListEntry key={entry[0]} data={entry[1]} type="interest" />
-                );
-              })}
-            </ul>
+          <ul className="preview-body-4">
+            {[...dataInterest.entries()].map((entry) => {
+              return (
+                <ListEntry
+                  key={entry[0]}
+                  data={entry[1]}
+                  clr={settings.colors.secondaryColorDark}
+                  clrShadow={settings.colors.secondaryColorDark}
+                  type="interest"
+                  settings={settings}
+                />
+              );
+            })}
+          </ul>
+        </div>
+
+        {settings.trademark === true && (
+          <div className="watermark preview-body-3 italic ">
+            Created with ResuCraft™
           </div>
-        </div>
-
-        <div className="watermark preview-body-3 italic ">
-          Created with ResuCraft
-        </div>
+        )}
       </div>
     </>
   );

@@ -62,6 +62,7 @@ function SortableListItem(props) {
           <label className="skill-icon-input">
             <FontAwesomeIcon icon={faImage} />
             <input
+              className="visually-hidden"
               type="file"
               accept="image/*"
               onChange={(e) => uploadIcon(e, listType, id)}
@@ -85,7 +86,7 @@ function SortableListItem(props) {
           <input
             type="range"
             name="iconScale"
-            min={1}
+            min={10}
             max={99}
             value={data.iconScale}
             onChange={(e) => updateData(e, listType, id)}
@@ -98,7 +99,7 @@ function SortableListItem(props) {
                 id={'icon-' + id}
                 type="number"
                 name="iconScale"
-                min={1}
+                min={10}
                 max={99}
                 value={data.iconScale}
                 onChange={(e) => updateData(e, listType, id)}
@@ -120,8 +121,14 @@ function SortableListItem(props) {
 
 export default function EntriesList(props) {
   const { defaults, data, listType, uploadIcon, removeIcon } = props;
-  const { addEntry, removeEntry, updateData, updateActiveId, handleDragEnd } =
-    defaults;
+  const {
+    settings,
+    addEntry,
+    removeEntry,
+    updateData,
+    updateActiveId,
+    handleDragEnd,
+  } = defaults;
 
   const icons = {
     experience: faBriefcase,
@@ -138,13 +145,32 @@ export default function EntriesList(props) {
     }
   }
 
+  const columnsToggle = (() => {
+    if (listType === 'experience' || listType === 'education') {
+      return (
+        <div className="input-label">
+          Columns
+          <label className="switch">
+            <input
+              type="checkbox"
+              checked={settings[listType + 'Columns']}
+              name={listType + 'Columns'}
+              onChange={(e) => updateData(e, 'settings', false)}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
+      );
+    }
+  })();
+
   return (
     // draggable context
     <DndContext
       collisionDetection={closestCenter}
       onDragEnd={(event) => handleDragEnd(event, listType, data)}>
       {/* sortable unordered list */}
-      <button>columns</button>
+
       <ul className="input-list">
         <SortableContext
           items={[...data.keys()]}
@@ -172,12 +198,16 @@ export default function EntriesList(props) {
         <div className="no-entries">No entries found...</div>
       )}
 
-      {/* add entry button */}
-      <button className="add-button" onClick={handleAdd}>
-        <FontAwesomeIcon icon={faPlus} />
-        &nbsp;
-        <FontAwesomeIcon icon={icons[listType]} />
-      </button>
+      <div className="columns-add-container">
+        {columnsToggle}
+
+        {/* add entry button */}
+        <button className="add-button" onClick={handleAdd}>
+          <FontAwesomeIcon icon={faPlus} />
+          &nbsp;
+          <FontAwesomeIcon icon={icons[listType]} />
+        </button>
+      </div>
     </DndContext>
   );
 }

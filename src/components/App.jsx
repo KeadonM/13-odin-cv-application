@@ -1,6 +1,12 @@
 import { v4 as uuidv4, v4 } from 'uuid';
 import { useState } from 'react';
 
+import {
+  findComplement,
+  incrementSaturation,
+  incrementBrightness,
+} from './utils/colors.js';
+
 import Builder from './Builder';
 import Preview from './Preview';
 import Footer from './Footer';
@@ -42,7 +48,27 @@ function defaultData() {
   return {
     info: {
       settings: {
-        color: '#95d8ff',
+        colors: {
+          primaryColor: '#95d8ff',
+          secondaryColor: '#ffb36b',
+
+          primaryColorDesat: '#667f99',
+          primaryColorDesatDark: '#42658a',
+
+          secondaryColorDark: '#f5993d',
+
+          lightColor: '#fffcfa',
+          darkColor: '#000000',
+          complementScale: 0.5,
+          contrastFactor: 0.5,
+        },
+
+        theme: true,
+        icons: true,
+        trademark: true,
+        experienceColumns: true,
+        educationColumns: true,
+        linkedColors: true,
       },
 
       general: {
@@ -309,7 +335,27 @@ function App() {
   const [resumeData, setResumeData] = useState({
     info: {
       settings: {
-        color: '#95d8ff',
+        colors: {
+          primaryColor: '#95d8ff',
+          secondaryColor: '#ffb36b',
+
+          primaryColorDesat: '#667f99',
+          primaryColorDesatDark: '#42658a',
+
+          secondaryColorDark: '#f5993d',
+
+          lightColor: '#fffcfa',
+          darkColor: '#000000',
+
+          complementScale: 0.5,
+          contrastFactor: 0.5,
+        },
+        theme: true,
+        icons: true,
+        trademark: true,
+        experienceColumns: true,
+        educationColumns: true,
+        linkedColors: true,
       },
 
       general: {
@@ -342,15 +388,6 @@ function App() {
     setResumeData(defaultData());
   }
 
-  function uploadPicture(e) {
-    const dataCopy = { ...resumeData };
-
-    dataCopy.info.general.photoName = e.target.files[0].name;
-    dataCopy.info.general.photoSrc = URL.createObjectURL(e.target.files[0]);
-
-    setResumeData(dataCopy);
-  }
-
   function updateData(e, type, id) {
     console.log(
       'Updating: ' +
@@ -372,8 +409,91 @@ function App() {
 
       dataCopy.info[type].set(id, element);
     } else {
-      dataCopy.info[type][e.target.name] = e.target.value;
+      if (e.target.value !== 'on') {
+        dataCopy.info[type][e.target.name] = e.target.value;
+      } else {
+        dataCopy.info[type][e.target.name] = e.target.checked;
+      }
     }
+
+    setResumeData(dataCopy);
+  }
+
+  function updateColor(
+    color = resumeData.info.settings.colors.primaryColor,
+    colorType = 'primary',
+    contrastFactor = resumeData.info.settings.colors.contrastFactor,
+    complementScale = resumeData.info.settings.colors.complementScale
+  ) {
+    const dataCopy = { ...resumeData };
+
+    let primaryColor = resumeData.info.settings.colors.primaryColor;
+    let secondaryColor = resumeData.info.settings.colors.secondaryColor;
+
+    if (resumeData.info.settings.linkedColors) {
+      if (colorType === 'primary') {
+        primaryColor = color;
+        secondaryColor = findComplement(color);
+      } else if (colorType === 'secondary') {
+        primaryColor = findComplement(color);
+        secondaryColor = color;
+      }
+    } else if (colorType !== 'none') {
+      if (colorType === 'primary') primaryColor = color;
+      else secondaryColor = color;
+    }
+
+    const primaryColorDesat = incrementBrightness(
+      incrementSaturation(primaryColor, -contrastFactor * 0.33),
+      -contrastFactor * 0.33
+    );
+
+    const primaryColorDesatDark = incrementBrightness(
+      incrementSaturation(primaryColorDesat, contrastFactor * 0.1),
+      -contrastFactor * 0.1
+    );
+
+    const secondaryColorDark = incrementBrightness(
+      secondaryColor,
+      -contrastFactor * 0.25
+    );
+
+    const lightColor = incrementBrightness(
+      primaryColor,
+      Math.min(0.5, contrastFactor * 0.66)
+    );
+
+    const darkColor = incrementBrightness(
+      primaryColorDesat,
+      -contrastFactor * 1.5
+    );
+
+    const colors = {
+      primaryColor: primaryColor,
+      secondaryColor: secondaryColor,
+
+      primaryColorDesat: primaryColorDesat,
+      primaryColorDesatDark: primaryColorDesatDark,
+
+      secondaryColorDark: secondaryColorDark,
+
+      lightColor: lightColor,
+      darkColor: darkColor,
+
+      complementScale: complementScale,
+      contrastFactor: contrastFactor,
+    };
+
+    dataCopy.info.settings.colors = colors;
+
+    setResumeData(dataCopy);
+  }
+
+  function uploadPicture(e) {
+    const dataCopy = { ...resumeData };
+
+    dataCopy.info.general.photoName = e.target.files[0].name;
+    dataCopy.info.general.photoSrc = URL.createObjectURL(e.target.files[0]);
 
     setResumeData(dataCopy);
   }
@@ -439,6 +559,7 @@ function App() {
           <Builder
             resumeData={resumeData}
             updateData={updateData}
+            updateColor={updateColor}
             uploadPicture={uploadPicture}
             addEntry={addEntry}
             removeEntry={removeEntry}
@@ -447,7 +568,7 @@ function App() {
             loadDefaults={loadDefaults}
             updateMap={updateMap}
           />
-          <Preview data={resumeData} />
+          <Preview data={resumeData} settings={resumeData.info.settings} />
         </div>
       </main>
 

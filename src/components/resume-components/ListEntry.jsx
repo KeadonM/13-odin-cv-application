@@ -1,6 +1,13 @@
-function ListEntry({ data, type }) {
+function ListEntry({ data, type, clr, clrShadow, settings }) {
   return (
-    <li className="entry preview-body-1 bold">
+    <li
+      className="entry preview-body-1 bold"
+      style={{
+        '--clr': settings.colors.lightColor,
+        '--clr-bg': clr,
+        '--clr-bg-alt': settings.colors.primaryColorDesatDark,
+        '--clr-shadow': clrShadow,
+      }}>
       <div>{data.name}</div>
       {data.photoSrc !== '' && (
         <img

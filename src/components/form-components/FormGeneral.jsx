@@ -49,7 +49,12 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         <FontAwesomeIcon icon={faPlus} />
         &nbsp;
         <FontAwesomeIcon icon={faImage} />
-        <input type="file" accept="image/*" onChange={uploadPicture} />
+        <input
+          className="visually-hidden"
+          type="file"
+          accept="image/*"
+          onChange={uploadPicture}
+        />
       </label>
     </form>
   );

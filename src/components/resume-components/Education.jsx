@@ -1,4 +1,4 @@
-function Education({ data }) {
+function Education({ data, settings }) {
   let date;
 
   if (data.ed_start !== '') {
@@ -16,11 +16,19 @@ function Education({ data }) {
   }
 
   return (
-    <div className="entry preview-row">
+    <div
+      className="entry preview-row"
+      style={{
+        '--clr': settings.colors.primaryColorDesatDark,
+      }}>
       <div className="entry-info">
         <div className="preview-row">
           <div className="title-subtitle-container">
-            <div className="preview-secondary-clr-400 preview-body-1 title bold">
+            <div
+              className="preview-secondary-clr-400 preview-body-1 title bold"
+              style={{
+                '--clr': settings.colors.secondaryColorDark,
+              }}>
               {data.name}
             </div>
 
@@ -32,7 +40,7 @@ function Education({ data }) {
           {date}
         </div>
 
-        <div className="preview-body-4">{data.addition}</div>
+        <p className="preview-body-4">{data.addition}</p>
       </div>
     </div>
   );

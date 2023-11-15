@@ -45,7 +45,7 @@ function InputContact({ updateData, uploadPicture, data }) {
           LinkedIn
           <input
             type="url"
-            name="website"
+            name="linkedIn"
             value={data.linkedIn}
             onChange={handleUpdate}
           />
