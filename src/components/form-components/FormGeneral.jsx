@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faImage, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 function InputGeneral({ updateData, uploadPicture, data }) {
   function handleUpdate(e) {
@@ -45,17 +45,22 @@ function InputGeneral({ updateData, uploadPicture, data }) {
         <textarea name="blurb" value={data.blurb} onChange={handleUpdate} />
       </label>
 
-      <label id="file">
-        <FontAwesomeIcon icon={faPlus} />
-        &nbsp;
-        <FontAwesomeIcon icon={faImage} />
-        <input
-          className="visually-hidden"
-          type="file"
-          accept="image/*"
-          onChange={uploadPicture}
-        />
-      </label>
+      <div className="form-row file-row">
+        <label id="file">
+          <FontAwesomeIcon icon={faPlus} />
+          &nbsp;
+          <FontAwesomeIcon icon={faImage} />
+          <input
+            className="visually-hidden"
+            type="file"
+            accept="image/*"
+            onChange={uploadPicture}
+          />
+        </label>
+        <button type="button" onClick={() => uploadPicture('delete')}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
     </form>
   );
 }

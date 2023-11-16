@@ -15,8 +15,12 @@ import ListEntry from './resume-components/ListEntry.jsx';
 
 import '../css/preview.scss';
 
-function Preview({ data, settings }) {
-  const ref = useRef(null);
+import { forwardRef } from 'react';
+
+export const Preview = forwardRef((props, ref) => {
+  const { data, settings } = props;
+
+  // const ref = useRef(null);
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -27,123 +31,124 @@ function Preview({ data, settings }) {
   });
 
   return (
-    <section
-      className={
-        settings.theme === true ? 'preview theme' : 'preview no-theme'
-      }>
+    <section className="preview no-print">
       {Math.floor((width / height) * 100) < 77 && (
         <div id="size-warning">
           Your resume may need to be printed on multiple pages!
         </div>
       )}
+      <div className="preview-shadow">
+        <div
+          id="resume-preview"
+          ref={ref}
+          style={{
+            '--clr-bg': settings.colors.lightColor,
+          }}
+          className={settings.theme === true ? 'theme' : 'no-theme'}>
+          <General data={data.info} settings={settings} />
 
-      <div
-        id="resume-preview"
-        ref={ref}
-        style={{
-          '--clr-bg': settings.colors.lightColor,
-        }}>
-        <General data={data.info} settings={settings} />
-
-        <div className="resume-section experience">
-          {[...data.info.experience.entries()].length !== 0 && (
-            <h2
-              className="preview-title-2 bold preview-primary-clr-400"
-              style={{
-                '--clr': settings.colors.primaryColorDesatDark,
-              }}>
-              <span
+          <div className="resume-section experience">
+            {[...data.info.experience.entries()].length !== 0 && (
+              <h2
+                className="preview-title-2 bold preview-primary-clr-400"
                 style={{
-                  display: settings.icons === true ? 'inline' : 'none',
+                  '--clr': settings.colors.primaryColorDesatDark,
                 }}>
-                <FontAwesomeIcon icon={faBriefcase} /> -&nbsp;
-              </span>
-              Experience
-            </h2>
-          )}
-          <div
-            className={
-              settings.experienceColumns === true
-                ? 'entry-container'
-                : 'entry-container single-column'
-            }>
-            {[...data.info.experience.entries()].map((entry) => {
-              return (
-                <Experience
-                  key={entry[0]}
-                  data={entry[1]}
-                  settings={settings}
-                />
-              );
-            })}
+                <span
+                  style={{
+                    display: settings.icons === true ? 'inline' : 'none',
+                  }}>
+                  <FontAwesomeIcon icon={faBriefcase} /> -&nbsp;
+                </span>
+                Experience
+              </h2>
+            )}
+            <div
+              className={
+                settings.experienceColumns === true
+                  ? 'entry-container'
+                  : 'entry-container single-column'
+              }>
+              {[...data.info.experience.entries()].map((entry) => {
+                return (
+                  <Experience
+                    key={entry[0]}
+                    data={entry[1]}
+                    settings={settings}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        <div className="resume-section education">
-          {[...data.info.education.entries()].length !== 0 && (
-            <h2
-              className="preview-title-2 bold preview-primary-clr-400"
-              style={{
-                '--clr': settings.colors.primaryColorDesatDark,
-              }}>
-              <span
+          <div className="resume-section education">
+            {[...data.info.education.entries()].length !== 0 && (
+              <h2
+                className="preview-title-2 bold preview-primary-clr-400"
                 style={{
-                  display: settings.icons === true ? 'inline' : 'none',
+                  '--clr': settings.colors.primaryColorDesatDark,
                 }}>
-                <FontAwesomeIcon icon={faGraduationCap} /> -&nbsp;
-              </span>
-              Education
-            </h2>
-          )}
-          <div
-            className={
-              settings.educationColumns === true
-                ? 'entry-container'
-                : 'entry-container single-column'
-            }>
-            {[...data.info.education.entries()].map((entry) => {
-              return (
-                <Education key={entry[0]} data={entry[1]} settings={settings} />
-              );
-            })}
+                <span
+                  style={{
+                    display: settings.icons === true ? 'inline' : 'none',
+                  }}>
+                  <FontAwesomeIcon icon={faGraduationCap} /> -&nbsp;
+                </span>
+                Education
+              </h2>
+            )}
+            <div
+              className={
+                settings.educationColumns === true
+                  ? 'entry-container'
+                  : 'entry-container single-column'
+              }>
+              {[...data.info.education.entries()].map((entry) => {
+                return (
+                  <Education
+                    key={entry[0]}
+                    data={entry[1]}
+                    settings={settings}
+                  />
+                );
+              })}
+            </div>
           </div>
-        </div>
 
-        <div className="resume-section skills">
-          {[...data.info.skill.entries()].length !== 0 && (
-            <h2
-              className="preview-title-2 bold preview-primary-clr-400"
-              style={{
-                '--clr': settings.colors.primaryColorDesatDark,
-              }}>
-              <span
+          <div className="resume-section skills">
+            {[...data.info.skill.entries()].length !== 0 && (
+              <h2
+                className="preview-title-2 bold preview-primary-clr-400"
                 style={{
-                  display: settings.icons === true ? 'inline' : 'none',
+                  '--clr': settings.colors.primaryColorDesatDark,
                 }}>
-                <FontAwesomeIcon icon={faBook} /> -&nbsp;
-              </span>
-              Skills
-            </h2>
-          )}
+                <span
+                  style={{
+                    display: settings.icons === true ? 'inline' : 'none',
+                  }}>
+                  <FontAwesomeIcon icon={faBook} /> -&nbsp;
+                </span>
+                Skills
+              </h2>
+            )}
 
-          <ul className="entry-container">
-            {[...data.info.skill.entries()].map((entry) => {
-              return (
-                <ListEntry
-                  key={entry[0]}
-                  data={entry[1]}
-                  clr={settings.colors.secondaryColor}
-                  clrShadow={settings.colors.secondaryColorDark}
-                  type="skill"
-                  settings={settings}
-                />
-              );
-            })}
-          </ul>
+            <ul className="entry-container">
+              {[...data.info.skill.entries()].map((entry) => {
+                return (
+                  <ListEntry
+                    key={entry[0]}
+                    data={entry[1]}
+                    clr={settings.colors.secondaryColor}
+                    clrShadow={settings.colors.secondaryColorDark}
+                    type="skill"
+                    settings={settings}
+                  />
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
   );
-}
-
-export default Preview;
+});

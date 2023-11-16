@@ -24,12 +24,14 @@ function General({ data, settings }) {
           '--clr': settings.colors.primaryColor,
         }}>
         <div className="data">
-          <img
-            style={{
-              '--clr': settings.colors.secondaryColor,
-            }}
-            src={dataGeneral.photoSrc}
-          />
+          {dataGeneral.photoSrc !== '' && (
+            <img
+              style={{
+                '--clr': settings.colors.secondaryColor,
+              }}
+              src={dataGeneral.photoSrc}
+            />
+          )}
 
           <div className="name-title">
             <div

@@ -131,6 +131,10 @@
     }
   }
 
+  .no-entries {
+    color: $clr-secondary-600;
+  }
+
   .input-list {
     @include column-flex;
     align-items: center;
@@ -316,6 +320,14 @@
       > * {
         min-width: 0;
         width: 100%;
+      }
+
+      &.file-row {
+        gap: $spc-100;
+        button {
+          flex-grow: 1;
+          max-width: 3.5rem;
+        }
       }
     }
   }

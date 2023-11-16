@@ -7,8 +7,6 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faGear,
-  faPrint,
-  faTrademark,
   faBook,
   faUser,
   faAddressBook,
@@ -16,9 +14,6 @@ import {
   faGraduationCap,
   faChessBishop,
   faAngleDown,
-  faDownload,
-  faLink,
-  faLinkSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
 import General from './form-components/FormGeneral.jsx';
@@ -26,6 +21,7 @@ import Contact from './form-components/FormContact.jsx';
 import Experience from './form-components/FormExperience.jsx';
 import Education from './form-components/FormEducation.jsx';
 import EntriesList from './form-components/EntriesList';
+import Settings from './form-components/settings.jsx';
 
 export default function Builder(props) {
   const {
@@ -193,12 +189,18 @@ export default function Builder(props) {
         )}
       </InputCard>
 
-      <Settings
-        updateData={updateData}
-        updateColor={updateColor}
-        loadDefaults={loadDefaults}
-        data={resumeData.info.settings}
-      />
+      <InputCard name="settings">
+        <h2 className="input-title">
+          <FontAwesomeIcon icon={faGear} />
+          <p>&nbsp; Settings</p>
+        </h2>
+        <Settings
+          updateData={updateData}
+          updateColor={updateColor}
+          loadDefaults={loadDefaults}
+          data={resumeData.info.settings}
+        />
+      </InputCard>
     </section>
   );
 
@@ -264,135 +266,4 @@ function InputCardTitle(props) {
 
 function InputCard({ children, name = '' }) {
   return <section className={'input-card ' + name}>{children}</section>;
-}
-
-function Settings({ updateData, updateColor, loadDefaults, data }) {
-  function handleUpdate(e) {
-    updateData(e, 'settings', false);
-  }
-
-  return (
-    <InputCard name="settings">
-      <h2 className="input-title">
-        <FontAwesomeIcon icon={faGear} />
-        <p>&nbsp; Settings</p>
-      </h2>
-
-      <div className="settings-input-container">
-        <div className="toggles settings-row">
-          <div className="input-label">
-            <span>
-              <FontAwesomeIcon icon={faTrademark} />
-            </span>
-
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={data.trademark}
-                name="trademark"
-                onChange={handleUpdate}
-              />
-              <span className="slider round"></span>
-            </label>
-          </div>
-
-          <div className="input-label">
-            Icons
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={data.icons}
-                name="icons"
-                onChange={handleUpdate}
-              />
-              <span className="slider round"></span>
-            </label>
-          </div>
-
-          <div className="input-label">
-            Theme
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={data.theme}
-                name="theme"
-                onChange={handleUpdate}
-              />
-              <span className="slider round"></span>
-            </label>
-          </div>
-        </div>
-
-        <div className="colors settings-column">
-          <label className="input-label contrast-slider">
-            <input
-              type="range"
-              min={0.2}
-              max={1}
-              step={0.01}
-              value={data.colors.contrastFactor}
-              onChange={(e) => updateColor(undefined, 'none', e.target.value)}
-            />
-          </label>
-          <div className="settings-row">
-            <div className="input-label">
-              <label
-                id="color-selector"
-                style={{ backgroundColor: data.colors.primaryColor }}>
-                <input
-                  className="visually-hidden"
-                  type="color"
-                  name="color"
-                  value={data.colors.primaryColor}
-                  onChange={(e) => updateColor(e.target.value, 'primary')}
-                />
-              </label>
-            </div>
-
-            <label className="switch link-button ">
-              <input
-                type="checkbox"
-                checked={data.linkedColors}
-                name="linkedColors"
-                onChange={handleUpdate}
-              />
-              <span className="slider round no-thumb">
-                <FontAwesomeIcon
-                  icon={data.linkedColors === true ? faLink : faLinkSlash}
-                />
-              </span>
-            </label>
-
-            <div className="input-label">
-              <label
-                id="color-selector"
-                style={{ backgroundColor: data.colors.secondaryColor }}>
-                <input
-                  className="visually-hidden"
-                  type="color"
-                  name="color"
-                  value={data.colors.secondaryColor}
-                  onChange={(e) => updateColor(e.target.value, 'secondary')}
-                />
-              </label>
-            </div>
-          </div>
-        </div>
-
-        <div className="actions settings-row">
-          <button>
-            <FontAwesomeIcon icon={faDownload} />
-          </button>
-
-          <button>
-            <FontAwesomeIcon icon={faPrint} />
-          </button>
-
-          <button onClick={loadDefaults}>
-            <FontAwesomeIcon icon={faUser} />
-          </button>
-        </div>
-      </div>
-    </InputCard>
-  );
 }

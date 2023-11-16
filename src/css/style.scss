@@ -9,18 +9,70 @@
   height: 100vh;
 }
 
+header {
+  @include row-flex;
+  align-items: center;
+  margin-block: $spc-500;
+  padding-inline: $spc-400;
+  gap: $spc-400;
+  width: 100%;
+
+  .icon,
+  .logo {
+    align-self: flex-end;
+    margin-right: auto;
+    min-width: 0;
+    max-height: 5rem;
+    filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.1));
+  }
+
+  .icon {
+    display: none;
+    max-height: 4rem;
+  }
+
+  .header-actions {
+    @include row-flex;
+    gap: $spc-200;
+
+    button {
+      padding: calc($spc-100 * 0.8) $spc-100;
+      min-height: 2.755rem;
+      min-width: 3.5rem;
+      border-radius: $border-radius;
+      border: none;
+      background-color: $clr-secondary-400;
+      color: $clr-secondary-200;
+      font-size: 1.24rem;
+      letter-spacing: 0.24px;
+      box-shadow: 2px 2px 6px $clr-accent-shadow-500;
+      text-shadow: 2px 2px 4px $clr-secondary-500;
+
+      svg {
+        filter: drop-shadow(2px 2px 1px $clr-secondary-500);
+      }
+
+      &:focus {
+        outline: 2px solid $clr-secondary-600;
+      }
+    }
+  }
+
+  @media (max-width: 25em) {
+    .logo {
+      display: none;
+    }
+
+    .icon {
+      display: block;
+    }
+  }
+}
+
 main {
   background-color: $clr-accent-100;
   @include column-flex;
   align-items: center;
-}
-
-.logo {
-  margin-block: $spc-500;
-  padding-inline: $spc-400;
-  max-height: 5rem;
-  align-self: start;
-  filter: drop-shadow(4px 4px 4px rgba(0, 0, 0, 0.15));
 }
 
 .build-preview-container {
