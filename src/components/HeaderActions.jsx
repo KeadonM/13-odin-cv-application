@@ -1,18 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPrint, faUser, faDownload } from '@fortawesome/free-solid-svg-icons';
+
 import ReactToPrint from 'react-to-print';
 
-export default function HeaderActions({ loadDefaults, previewRef }) {
+export default function HeaderActions({ data, loadDefaults, previewRef }) {
   return (
     <div className="header-actions">
-      <button>
+      {/* <button onClick={console.log(data)}>Data</button> */}
+
+      {/* <button onClick={handleDownload}>
         <FontAwesomeIcon icon={faDownload} />
-      </button>
+      </button> */}
 
       <ReactToPrint
         trigger={() => {
           return (
             <button>
+              <span>Print &nbsp;</span>
               <FontAwesomeIcon icon={faPrint} />
             </button>
           );
@@ -22,7 +26,7 @@ export default function HeaderActions({ loadDefaults, previewRef }) {
       />
 
       <button onClick={loadDefaults}>
-        <FontAwesomeIcon icon={faUser} />
+        <span>Load &nbsp;</span> <FontAwesomeIcon icon={faUser} />
       </button>
     </div>
   );

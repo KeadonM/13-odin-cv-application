@@ -16,11 +16,10 @@ import Builder from './Builder';
 import { Preview } from './Preview';
 import Footer from './Footer';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPrint, faUser, faDownload } from '@fortawesome/free-solid-svg-icons';
-import { useReactToPrint } from 'react-to-print';
-
 function App() {
+  const previewRef = useRef();
+  const [activeId, setActiveId] = useState('');
+  const [activeInput, setActiveInput] = useState('General');
   const [resumeData, setResumeData] = useState({
     info: {
       settings: {
@@ -74,28 +73,26 @@ function App() {
     },
   });
 
-  const previewRef = useRef();
-
-  // const handlePrint = useReactToPrint({
-  //   content: () => previewRef.current,
-  //   copyStyles: true,
-  // });
-
   return (
     <>
       <header>
         <img src={logo} className="logo" />
         <img src={icon} className="icon" />
-        {/* <button onClick={handlePrint}>
-          <FontAwesomeIcon icon={faPrint} />
-        </button> */}
-        <HeaderActions loadDefaults={loadDefaults} previewRef={previewRef} />
+        <HeaderActions
+          data={resumeData}
+          loadDefaults={loadDefaults}
+          previewRef={previewRef}
+        />
       </header>
 
       <main>
         <div className="build-preview-container">
           <Builder
             resumeData={resumeData}
+            activeId={activeId}
+            setActiveId={setActiveId}
+            activeInput={activeInput}
+            changeActiveInput={changeActiveInput}
             updateData={updateData}
             updateColor={updateColor}
             uploadPicture={uploadPicture}
@@ -117,7 +114,15 @@ function App() {
     </>
   );
 
+  function changeActiveInput(input) {
+    setActiveId('');
+
+    if (input !== activeInput) setActiveInput(input);
+    else setActiveInput('');
+  }
+
   function loadDefaults() {
+    setActiveInput('General');
     setResumeData(defaultData());
   }
 

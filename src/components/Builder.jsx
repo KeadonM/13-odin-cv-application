@@ -26,6 +26,10 @@ import Settings from './form-components/settings.jsx';
 export default function Builder(props) {
   const {
     resumeData,
+    activeId,
+    setActiveId,
+    activeInput,
+    changeActiveInput,
     updateData,
     updateColor,
     uploadPicture,
@@ -36,9 +40,6 @@ export default function Builder(props) {
     loadDefaults,
     updateMap,
   } = props;
-
-  const [activeInput, setActiveInput] = useState('General');
-  const [activeId, setActiveId] = useState('');
 
   const formDefaults = {
     updateData: updateData,
@@ -203,13 +204,6 @@ export default function Builder(props) {
       </InputCard>
     </section>
   );
-
-  function changeActiveInput(input) {
-    setActiveId('');
-
-    if (input !== activeInput) setActiveInput(input);
-    else setActiveInput('');
-  }
 
   function updateActiveId(id) {
     setActiveId(id);

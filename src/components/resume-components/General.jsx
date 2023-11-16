@@ -7,6 +7,7 @@ import {
   faUser,
   faAddressBook,
   faChessBishop,
+  faLink,
 } from '@fortawesome/free-solid-svg-icons';
 
 import ListEntry from './ListEntry.jsx';
@@ -75,11 +76,7 @@ function General({ data, settings }) {
             </h2>
           )}
 
-          <div className="preview-body-3">
-            {' '}
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            {dataGeneral.blurb}
-          </div>
+          <p className="preview-body-3 text-area">{dataGeneral.blurb}</p>
         </div>
 
         <div className="contact resume-section">
@@ -110,7 +107,10 @@ function General({ data, settings }) {
                     }}
                   />
                   &nbsp;
-                  <div>{dataContact.phone}</div>
+                  <a href={`tel:${dataContact.phone}`}>
+                    <span>{dataContact.phone}</span>
+                    <FontAwesomeIcon icon={faLink} />
+                  </a>
                 </div>
                 <hr />
               </>
@@ -130,7 +130,10 @@ function General({ data, settings }) {
                     }}
                   />
                   &nbsp;
-                  <div>{dataContact.email}</div>
+                  <a href={`mailto:${dataContact.email}`}>
+                    <span>{dataContact.email}</span>
+                    <FontAwesomeIcon icon={faLink} />
+                  </a>
                 </div>
                 <hr />
               </>
@@ -150,7 +153,12 @@ function General({ data, settings }) {
                     }}
                   />
                   &nbsp;
-                  <div>{dataContact.linkedIn}</div>
+                  <a
+                    href={ensureLinkedInUrl(dataContact.linkedIn)}
+                    target="_blank">
+                    <span>{dataContact.linkedIn}</span>
+                    <FontAwesomeIcon icon={faLink} />
+                  </a>
                 </div>
                 <hr />
               </>
@@ -170,7 +178,12 @@ function General({ data, settings }) {
                     }}
                   />
                   &nbsp;
-                  <div>{dataContact.website}</div>
+                  <a
+                    href={ensureHttpProtocol(dataContact.website)}
+                    target="_blank">
+                    <span>{dataContact.website}</span>
+                    <FontAwesomeIcon icon={faLink} />
+                  </a>
                 </div>
               </>
             ) : (
@@ -211,9 +224,11 @@ function General({ data, settings }) {
         </div>
 
         {settings.trademark === true && (
-          <div className="watermark preview-body-3 italic ">
+          <a
+            href="https://github.com/keadonm"
+            className="watermark preview-body-3 italic ">
             Created with ResuCraft™
-          </div>
+          </a>
         )}
       </div>
     </>
@@ -221,3 +236,33 @@ function General({ data, settings }) {
 }
 
 export default General;
+
+function ensureHttpProtocol(link) {
+  link = link.toLowerCase();
+
+  const httpRegex = /^(http:\/\/|https:\/\/)/;
+
+  if (!httpRegex.test(link)) {
+    return 'http://' + link;
+  }
+
+  return link;
+}
+
+function ensureLinkedInUrl(input) {
+  input = input.toLowerCase();
+
+  // Check if the input contains "linkedin.com/in/"
+  if (!input.includes('linkedin.com/in/')) {
+    // If it doesn't, check if the input contains "linkedin.com/"
+    if (input.includes('linkedin.com/')) {
+      // If it does, add "in/" after "linkedin.com/"
+      input = input.replace('linkedin.com/', 'linkedin.com/in/');
+    } else {
+      // If it doesn't contain "linkedin.com/", prepend "https://www.linkedin.com/in/"
+      return 'https://www.linkedin.com/in/' + input;
+    }
+  }
+
+  return ensureHttpProtocol(input);
+}

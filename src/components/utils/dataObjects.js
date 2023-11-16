@@ -70,7 +70,7 @@ export function defaultData() {
       contact: {
         sectionTitle: 'Contact Me',
         phone: '+1 (111) 111-1111',
-        email: 'Mitchell.Keadon@outlook.com',
+        email: 'Mitchell.Keadon@outlook .com ',
         linkedIn: 'KeadonM',
         website: 'Github.com/KeadonM',
       },

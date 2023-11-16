@@ -40,7 +40,7 @@ function Experience({ data, settings }) {
           {date}
         </div>
 
-        <p className="preview-body-4">{data.responsibility}</p>
+        <p className="preview-body-4 text-area">{data.responsibility}</p>
       </div>
     </div>
   );

@@ -32,7 +32,7 @@ function InputContact({ updateData, uploadPicture, data }) {
         <label className="form-input-label">
           Email
           <input
-            type="email"
+            type="text"
             name="email"
             value={data.email}
             onChange={handleUpdate}

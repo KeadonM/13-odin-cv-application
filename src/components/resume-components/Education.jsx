@@ -40,7 +40,7 @@ function Education({ data, settings }) {
           {date}
         </div>
 
-        <p className="preview-body-4">{data.addition}</p>
+        <p className="preview-body-4 text-area">{data.addition}</p>
       </div>
     </div>
   );

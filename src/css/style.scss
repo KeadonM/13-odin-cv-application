@@ -34,11 +34,11 @@ header {
   .header-actions {
     @include row-flex;
     gap: $spc-200;
+    font-weight: bold;
 
     button {
-      padding: calc($spc-100 * 0.8) $spc-100;
-      min-height: 2.755rem;
-      min-width: 3.5rem;
+      padding: calc($spc-100 * 1.4);
+      min-width: 3rem;
       border-radius: $border-radius;
       border: none;
       background-color: $clr-secondary-400;
@@ -55,6 +55,11 @@ header {
       &:focus {
         outline: 2px solid $clr-secondary-600;
       }
+    }
+  }
+  @media (max-width: 40em) {
+    span {
+      display: none;
     }
   }
 
