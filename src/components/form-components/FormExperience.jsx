@@ -1,9 +1,22 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faCheck,
+  faPlus,
+  faList,
+} from '@fortawesome/free-solid-svg-icons';
+
+import EntriesList from './EntriesList';
 
 function InputExperience(props) {
   const { defaults, id, data } = props;
-  const { updateData, removeEntry, updateActiveId } = defaults;
+  const {
+    updateData,
+    addEntry,
+    removeEntry,
+    updateActiveId,
+    entriesListDefaults,
+  } = defaults;
 
   function handleSubmit() {
     updateActiveId('');
@@ -16,6 +29,9 @@ function InputExperience(props) {
 
   function handleUpdate(e) {
     updateData(e, 'experience', id);
+  }
+  function handleAddBulletPoint() {
+    addEntry('experience', id, true);
   }
 
   return (
@@ -45,22 +61,33 @@ function InputExperience(props) {
         <label className="form-input-label">
           Start Date
           <input
-            type="month"
+            type="text"
             name="exp_start"
             value={data.exp_start}
             onChange={handleUpdate}
           />
         </label>
+
         <label className="form-input-label">
           End Date
           <input
-            type="month"
+            type="text"
             name="exp_end"
             value={data.exp_end}
             onChange={handleUpdate}
           />
         </label>
       </div>
+
+      <label className="form-input-label">
+        Link
+        <input
+          type="text"
+          name="link"
+          value={data.link}
+          onChange={handleUpdate}
+        />
+      </label>
 
       <label className="form-input-label">
         Responsibilities
@@ -72,9 +99,24 @@ function InputExperience(props) {
         />
       </label>
 
+      {[...data.bulletPoints.entries()].length > 0 && (
+        <EntriesList
+          defaults={{ ...entriesListDefaults }}
+          data={data.bulletPoints}
+          listType={'experience'}
+          isBulletPoint={true}
+          parentId={id}
+        />
+      )}
+
       <div className="form-row">
         <button type="button" onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button type="button" onClick={handleAddBulletPoint}>
+          <FontAwesomeIcon icon={faPlus} />
+          &nbsp;
+          <FontAwesomeIcon icon={faList} />
         </button>
         <button type="button" onClick={handleSubmit}>
           <FontAwesomeIcon icon={faCheck} />

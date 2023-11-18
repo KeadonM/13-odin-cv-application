@@ -1,9 +1,21 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faCheck } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTrash,
+  faCheck,
+  faPlus,
+  faList,
+} from '@fortawesome/free-solid-svg-icons';
+import EntriesList from './EntriesList';
 
 function InputEducation(props) {
   const { defaults, id, data } = props;
-  const { updateData, removeEntry, updateActiveId } = defaults;
+  const {
+    updateData,
+    addEntry,
+    removeEntry,
+    updateActiveId,
+    entriesListDefaults,
+  } = defaults;
 
   function handleSubmit() {
     updateActiveId('');
@@ -18,11 +30,15 @@ function InputEducation(props) {
     updateData(e, 'education', id);
   }
 
+  function handleAddBulletPoint() {
+    addEntry('education', id, true);
+  }
+
   return (
     <form className="education-form form">
       <div className="form-row">
         <label className="form-input-label">
-          School
+          Institute
           <input
             type="text"
             name="name"
@@ -31,11 +47,11 @@ function InputEducation(props) {
           />
         </label>
         <label className="form-input-label">
-          Location
+          Program
           <input
             type="text"
-            name="location"
-            value={data.location}
+            name="program"
+            value={data.program}
             onChange={handleUpdate}
           />
         </label>
@@ -45,16 +61,17 @@ function InputEducation(props) {
         <label className="form-input-label">
           Start Date
           <input
-            type="month"
+            type="date"
             name="ed_start"
             value={data.ed_start}
             onChange={handleUpdate}
           />
         </label>
+
         <label className="form-input-label">
           End Date
           <input
-            type="month"
+            type="date"
             name="ed_end"
             value={data.ed_end}
             onChange={handleUpdate}
@@ -63,11 +80,11 @@ function InputEducation(props) {
       </div>
 
       <label className="form-input-label">
-        Degree/Program
+        Link
         <input
           type="text"
-          name="program"
-          value={data.program}
+          name="link"
+          value={data.link}
           onChange={handleUpdate}
         />
       </label>
@@ -81,9 +98,24 @@ function InputEducation(props) {
         />
       </label>
 
+      {[...data.bulletPoints.entries()].length > 0 && (
+        <EntriesList
+          defaults={{ ...entriesListDefaults }}
+          data={data.bulletPoints}
+          listType={'education'}
+          isBulletPoint={true}
+          parentId={id}
+        />
+      )}
+
       <div className="form-row">
         <button type="button" onClick={handleDelete}>
           <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button type="button" onClick={handleAddBulletPoint}>
+          <FontAwesomeIcon icon={faPlus} />
+          &nbsp;
+          <FontAwesomeIcon icon={faList} />
         </button>
         <button type="button" onClick={handleSubmit}>
           <FontAwesomeIcon icon={faCheck} />

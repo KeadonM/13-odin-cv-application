@@ -9,6 +9,8 @@ import {
   faBook,
   faChessBishop,
   faImage,
+  faEye,
+  faEyeSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { DndContext, closestCenter } from '@dnd-kit/core';
@@ -26,10 +28,13 @@ function SortableListItem(props) {
     data,
     listType,
     updateData,
+    updateBulletPoint,
     removeEntry,
     updateActiveId,
     uploadIcon,
     removeIcon,
+    isBulletPoint,
+    parentId,
   } = props;
 
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -39,6 +44,11 @@ function SortableListItem(props) {
     transform: CSS.Transform.toString(transform),
     transition,
   };
+
+  function handleUpdate(e) {
+    if (!isBulletPoint) updateData(e, listType, id);
+    else updateBulletPoint(e, listType, id, parentId);
+  }
 
   return (
     <li ref={setNodeRef} style={style}>
@@ -54,27 +64,47 @@ function SortableListItem(props) {
           type="text"
           name="name"
           value={data.name}
-          onChange={(e) => updateData(e, listType, id)}
+          onChange={handleUpdate}
           maxLength={listType === 'skill' ? 15 : 48}
         />
 
         {listType === 'skill' || listType === 'interest' ? (
-          <label className="skill-icon-input">
-            <FontAwesomeIcon icon={faImage} />
-            <input
-              className="visually-hidden"
-              type="file"
-              accept="image/*"
-              onChange={(e) => uploadIcon(e, listType, id)}
-            />
-          </label>
+          data.photoSrc === '' ? (
+            <label className="skill-icon-input">
+              <FontAwesomeIcon icon={faImage} />
+              <input
+                className="visually-hidden"
+                type="file"
+                accept="image/*"
+                onChange={(e) => uploadIcon(e, listType, id)}
+              />{' '}
+            </label>
+          ) : (
+            <label className="switch switch-button">
+              <input
+                type="checkbox"
+                checked={data.nameVisible}
+                name="nameVisible"
+                onChange={(e) => updateData(e, listType, id)}
+              />
+              <span className="slider round no-thumb">
+                <FontAwesomeIcon
+                  icon={data.nameVisible === true ? faEye : faEyeSlash}
+                />
+              </span>
+            </label>
+          )
         ) : (
-          <button onClick={handleEditButton}>
-            <FontAwesomeIcon icon={faPenToSquare} />
-          </button>
+          isBulletPoint === false && (
+            <button onClick={handleEditButton}>
+              <FontAwesomeIcon icon={faPenToSquare} />
+            </button>
+          )
         )}
 
-        <button onClick={() => removeEntry(listType, id)}>
+        <button
+          type="button"
+          onClick={() => removeEntry(listType, id, isBulletPoint, parentId)}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
@@ -120,12 +150,21 @@ function SortableListItem(props) {
 }
 
 export default function EntriesList(props) {
-  const { defaults, data, listType, uploadIcon, removeIcon } = props;
+  const {
+    defaults,
+    data,
+    listType,
+    uploadIcon,
+    removeIcon,
+    isBulletPoint = false,
+    parentId,
+  } = props;
   const {
     settings,
     addEntry,
     removeEntry,
     updateData,
+    updateBulletPoint,
     updateActiveId,
     handleDragEnd,
   } = defaults;
@@ -168,9 +207,10 @@ export default function EntriesList(props) {
     // draggable context
     <DndContext
       collisionDetection={closestCenter}
-      onDragEnd={(event) => handleDragEnd(event, listType, data)}>
+      onDragEnd={(event) =>
+        handleDragEnd(event, listType, data, isBulletPoint, parentId)
+      }>
       {/* sortable unordered list */}
-
       <ul className="input-list">
         <SortableContext
           items={[...data.keys()]}
@@ -188,6 +228,9 @@ export default function EntriesList(props) {
               updateActiveId={updateActiveId}
               uploadIcon={uploadIcon}
               removeIcon={removeIcon}
+              isBulletPoint={isBulletPoint}
+              parentId={parentId}
+              updateBulletPoint={updateBulletPoint}
             />
           ))}
         </SortableContext>
@@ -198,16 +241,18 @@ export default function EntriesList(props) {
         <div className="no-entries">No entries found...</div>
       )}
 
-      <div className="columns-add-container">
-        {columnsToggle}
+      {isBulletPoint === false && (
+        <div className="columns-add-container">
+          {columnsToggle}
 
-        {/* add entry button */}
-        <button className="add-button" onClick={handleAdd}>
-          <FontAwesomeIcon icon={faPlus} />
-          &nbsp;
-          <FontAwesomeIcon icon={icons[listType]} />
-        </button>
-      </div>
+          {/* add entry button */}
+          <button className="add-button" onClick={handleAdd}>
+            <FontAwesomeIcon icon={faPlus} />
+            &nbsp;
+            <FontAwesomeIcon icon={icons[listType]} />
+          </button>
+        </div>
+      )}
     </DndContext>
   );
 }

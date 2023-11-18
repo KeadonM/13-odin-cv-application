@@ -34,45 +34,83 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
     border-radius: $preview-corner-radius-primary;
     overflow: hidden;
   }
+  margin-bottom: 1rem;
 }
 
 #resume-preview {
+  word-break: break-word;
+  overflow-wrap: break-word;
+
   .text-area {
     white-space: pre-wrap;
   }
-}
 
-.experience,
-.education {
-  .entry-container {
-    &.single-column {
-      @include column-flex;
+  .experience,
+  .education {
+    .title-subtitle-container {
+      width: 100%;
+    }
+    .subtitle {
+      @include row-flex;
+      align-items: center;
 
-      p {
-        margin-right: 10%;
+      .fa-link {
+        font-size: 0.66em;
       }
     }
 
-    display: grid;
-    grid-template-areas: 'entry entry';
-    grid-template-columns: 48% 48%;
-    grid-template-rows: min-content;
+    .date {
+      text-align: end;
+      white-space: nowrap;
+    }
 
-    justify-content: space-between;
-  }
+    .entry-container {
+      &.single-column {
+        @include column-flex;
 
-  .entry {
-    margin-bottom: 3.33%;
-  }
+        p {
+          margin-right: 10%;
+        }
 
-  .entry-info {
-    width: 100%;
+        .entry {
+          margin-bottom: 2%;
+        }
+      }
 
-    .preview-row {
+      display: grid;
+      grid-template-areas: 'entry entry';
+      grid-template-columns: 48% 48%;
+      grid-template-rows: min-content;
+
       justify-content: space-between;
-      align-items: flex-start;
+    }
 
-      gap: 2.5%;
+    .entry {
+      margin-bottom: 3.33%;
+    }
+
+    .entry-info {
+      width: 100%;
+
+      .preview-row {
+        justify-content: space-between;
+        align-items: flex-start;
+
+        gap: 2.5%;
+      }
+
+      .bulletpoints-list {
+        margin-left: 6.5%;
+        .bulletpoint-entry {
+          &::before {
+            content: '\25CF';
+            font-weight: bold;
+            display: inline-block; /* Needed to add space between the bullet and the text */
+            width: 1em; /* Also needed for space (tweak if needed) */
+            margin-left: -1em; /* Also needed for space (tweak if needed) */
+          }
+        }
+      }
     }
   }
 }
@@ -105,6 +143,16 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 
   .resume-section {
     margin-bottom: 3%;
+  }
+
+  .person {
+    .title {
+      font-size: 1.5em;
+    }
+
+    .subtitle {
+      font-size: 1.25em;
+    }
   }
 
   .contact-info {
@@ -142,10 +190,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 
 .theme {
   &#resume-preview {
-    // position: relative;
-    overflow: hidden;
-    // border-radius: $preview-corner-radius-primary;
-
+    // overflow: hidden;
     color: $clr-neutral-500;
     background-color: var(--clr-bg);
     width: $preview-scale-primary;
@@ -221,6 +266,10 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
     padding-top: 75%;
     box-shadow: 3px 0px 3px $clr-primary-shadow-600;
 
+    a {
+      color: var(--clr);
+    }
+
     svg {
       filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
     }
@@ -257,19 +306,24 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
       }
 
       .preview-info-icon {
-        margin-left: 2.5%;
-        margin-right: 2.5%;
+        min-width: 6.66%;
+        margin-left: 2%;
+        margin-right: 2%;
         font-size: 1.24em;
       }
 
       a {
         @include row-flex;
-
         width: 100%;
         justify-content: space-between;
         align-items: center;
-        color: white;
-        margin-right: 5%;
+        margin-right: 3.33%;
+        font-weight: 400;
+        font-size: 0.95em;
+
+        .fa-link {
+          font-size: 0.8em;
+        }
       }
 
       hr {
@@ -292,21 +346,18 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
           justify-content: center;
           align-items: center;
 
-          margin: 1%;
-
           height: calc($preview-scale-primary * 0.05);
-
-          padding: 2%;
+          margin: 1%;
+          padding: calc($preview-scale-primary * 0.005);
           min-width: 25%;
           border-radius: calc($preview-corner-radius-primary * 0.75);
           background-color: var(--clr-bg);
           color: var(--clr);
-
           text-shadow: 2px 2px 4px var(--clr-shadow);
 
           .skill-icon {
             height: 100%;
-            padding-left: calc($preview-scale-primary * 0.0125);
+            // padding-left: calc($preview-scale-primary * 0.0125);
           }
 
           &:nth-child(even) {
@@ -363,6 +414,10 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
     .entry-container {
       padding-left: 1.5%;
     }
+
+    .bulletpoint-entry::before {
+      color: var(--clr);
+    }
   }
 
   .skills {
@@ -377,8 +432,9 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
         @include row-flex;
         justify-content: center;
         align-items: center;
+
+        padding: calc($preview-scale-primary * 0.015);
         margin-bottom: 2%;
-        padding: 2%;
         min-width: 12.5%;
         height: calc($preview-scale-primary * 0.066);
         border-radius: $preview-corner-radius-primary;
@@ -386,9 +442,12 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
         color: var(--clr);
         text-shadow: 2px 2px 4px var(--clr-shadow);
 
+        white-space: pre-wrap;
+        overflow: hidden;
+
         .skill-icon {
           height: 100%;
-          padding-left: calc($preview-scale-primary * 0.0125);
+          filter: drop-shadow(2px 2px 4px var(--clr-shadow));
         }
       }
     }
@@ -431,9 +490,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
           li {
             height: calc($preview-scale-secondary * 0.05);
             border-radius: calc($preview-corner-radius-secondary * 0.75);
-            .skill-icon {
-              padding-left: calc($preview-scale-secondary * 0.0125);
-            }
+            padding: calc($preview-scale-secondary * 0.005);
           }
         }
       }
@@ -444,10 +501,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
         .entry {
           height: calc($preview-scale-secondary * 0.066);
           border-radius: $preview-corner-radius-secondary;
-
-          .skill-icon {
-            padding-left: calc($preview-scale-secondary * 0.0125);
-          }
+          padding: calc($preview-scale-secondary * 0.015);
         }
       }
     }
@@ -487,9 +541,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
           li {
             height: calc($preview-scale-tertiary * 0.05);
             border-radius: calc($preview-corner-radius-tertiary * 0.75);
-            .skill-icon {
-              padding-left: calc($preview-scale-tertiary * 0.0125);
-            }
+            padding: calc($preview-scale-tertiary * 0.005);
           }
         }
       }
@@ -500,10 +552,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
         .entry {
           height: calc($preview-scale-tertiary * 0.066);
           border-radius: $preview-corner-radius-tertiary;
-
-          .skill-icon {
-            padding-left: calc($preview-scale-tertiary * 0.0125);
-          }
+          padding: calc($preview-scale-secondary * 0.015);
         }
       }
     }
@@ -537,9 +586,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
           li {
             height: calc($preview-scale-tertiary * 0.05);
             border-radius: calc($preview-corner-radius-tertiary * 0.75);
-            .skill-icon {
-              padding-left: calc($preview-scale-tertiary * 0.0125);
-            }
+            padding: calc($preview-scale-tertiary * 0.005);
           }
         }
       }
@@ -550,10 +597,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
         .entry {
           height: calc($preview-scale-tertiary * 0.066);
           border-radius: $preview-corner-radius-secondary;
-
-          .skill-icon {
-            padding-left: calc($preview-scale-tertiary * 0.0125);
-          }
+          padding: calc($preview-scale-secondary * 0.015);
         }
       }
     }

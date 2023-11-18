@@ -8,7 +8,10 @@ function ListEntry({ data, type, clr, clrShadow, settings }) {
         '--clr-bg-alt': settings.colors.primaryColorDesatDark,
         '--clr-shadow': clrShadow,
       }}>
-      <div>{data.name}</div>
+      {(data.nameVisible === true || settings.theme === false) && (
+        <div className="list-entry-name">{data.name}</div>
+      )}
+
       {data.photoSrc !== '' && (
         <img
           className={'list-entry-icon ' + type + '-icon'}

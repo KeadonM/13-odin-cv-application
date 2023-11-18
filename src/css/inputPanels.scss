@@ -155,11 +155,11 @@
       color: $clr-secondary-600;
 
       .grip-dots {
+        touch-action: none;
         cursor: grab;
         margin-right: $spc-100;
         font-size: 1.5rem;
         color: $clr-secondary-400;
-
         filter: drop-shadow(4px 4px 2px $clr-accent-shadow-400);
         border-radius: $border-radius;
 
@@ -258,6 +258,7 @@
 
   button,
   .skill-icon-input,
+  .switch-button,
   #file {
     padding: calc($spc-100 * 0.8) $spc-100;
     min-height: 2.755rem;
@@ -281,6 +282,7 @@
   }
 
   #file,
+  .switch-button span,
   .skill-icon-input,
   .switch {
     @include row-flex;
@@ -289,6 +291,13 @@
 
     &:has(input:focus) {
       outline: 2px solid $clr-secondary-600;
+    }
+  }
+
+  .switch-button {
+    max-width: 3.5rem;
+    input + .slider {
+      background-color: $clr-secondary-400;
     }
   }
 
@@ -315,6 +324,7 @@
 
     .form-row {
       @include row-flex;
+      align-items: flex-end;
       gap: $spc-200;
 
       > * {
@@ -328,6 +338,14 @@
           flex-grow: 1;
           max-width: 3.5rem;
         }
+      }
+    }
+    .input-list {
+      margin-top: 0;
+
+      li {
+        width: 100%;
+        max-width: none;
       }
     }
   }

@@ -31,6 +31,7 @@ export default function Builder(props) {
     activeInput,
     changeActiveInput,
     updateData,
+    updateBulletPoint,
     updateColor,
     uploadPicture,
     addEntry,
@@ -41,19 +42,22 @@ export default function Builder(props) {
     updateMap,
   } = props;
 
-  const formDefaults = {
-    updateData: updateData,
-    removeEntry: removeEntry,
-    updateActiveId: updateActiveId,
-  };
-
   const entriesListDefaults = {
     settings: resumeData.info.settings,
     addEntry: addEntry,
     removeEntry: removeEntry,
     updateData: updateData,
+    updateBulletPoint: updateBulletPoint,
     updateActiveId: updateActiveId,
     handleDragEnd: handleDragEnd,
+  };
+
+  const formDefaults = {
+    updateData: updateData,
+    addEntry: addEntry,
+    removeEntry: removeEntry,
+    updateActiveId: updateActiveId,
+    entriesListDefaults: entriesListDefaults,
   };
 
   return (
@@ -209,7 +213,7 @@ export default function Builder(props) {
     setActiveId(id);
   }
 
-  function handleDragEnd(event, type, data) {
+  function handleDragEnd(event, type, data, isBulletPoint, parentId) {
     const { active, over } = event;
 
     if (active.id !== over.id) {
@@ -224,7 +228,7 @@ export default function Builder(props) {
         dataMap.set(id, data.get(id));
       });
 
-      updateMap(type, dataMap);
+      updateMap(type, dataMap, isBulletPoint, parentId);
     }
   }
 }

@@ -10,6 +10,10 @@ import {
   faLink,
 } from '@fortawesome/free-solid-svg-icons';
 
+import {
+  ensureHttpProtocol,
+  ensureLinkedInUrl,
+} from '../utils/linkFormatting.js';
 import ListEntry from './ListEntry.jsx';
 
 function General({ data, settings }) {
@@ -141,31 +145,6 @@ function General({ data, settings }) {
               ''
             )}
 
-            {dataContact.linkedIn !== '' ? (
-              <>
-                <div className="preview-row">
-                  <FontAwesomeIcon
-                    className="preview-info-icon preview-secondary-clr-400 "
-                    icon={faLinkedin}
-                    style={{
-                      '--clr': settings.colors.secondaryColorDark,
-                      display: settings.icons === true ? 'inline' : 'none',
-                    }}
-                  />
-                  &nbsp;
-                  <a
-                    href={ensureLinkedInUrl(dataContact.linkedIn)}
-                    target="_blank">
-                    <span>{dataContact.linkedIn}</span>
-                    <FontAwesomeIcon icon={faLink} />
-                  </a>
-                </div>
-                <hr />
-              </>
-            ) : (
-              ''
-            )}
-
             {dataContact.website !== '' ? (
               <>
                 <div className="preview-row">
@@ -182,6 +161,31 @@ function General({ data, settings }) {
                     href={ensureHttpProtocol(dataContact.website)}
                     target="_blank">
                     <span>{dataContact.website}</span>
+                    <FontAwesomeIcon icon={faLink} />
+                  </a>
+                </div>
+                <hr />
+              </>
+            ) : (
+              ''
+            )}
+
+            {dataContact.linkedIn !== '' ? (
+              <>
+                <div className="preview-row">
+                  <FontAwesomeIcon
+                    className="preview-info-icon preview-secondary-clr-400 "
+                    icon={faLinkedin}
+                    style={{
+                      '--clr': settings.colors.secondaryColorDark,
+                      display: settings.icons === true ? 'inline' : 'none',
+                    }}
+                  />
+                  &nbsp;
+                  <a
+                    href={ensureLinkedInUrl(dataContact.linkedIn)}
+                    target="_blank">
+                    <span>{dataContact.linkedIn}</span>
                     <FontAwesomeIcon icon={faLink} />
                   </a>
                 </div>
@@ -236,33 +240,3 @@ function General({ data, settings }) {
 }
 
 export default General;
-
-function ensureHttpProtocol(link) {
-  link = link.toLowerCase();
-
-  const httpRegex = /^(http:\/\/|https:\/\/)/;
-
-  if (!httpRegex.test(link)) {
-    return 'http://' + link;
-  }
-
-  return link;
-}
-
-function ensureLinkedInUrl(input) {
-  input = input.toLowerCase();
-
-  // Check if the input contains "linkedin.com/in/"
-  if (!input.includes('linkedin.com/in/')) {
-    // If it doesn't, check if the input contains "linkedin.com/"
-    if (input.includes('linkedin.com/')) {
-      // If it does, add "in/" after "linkedin.com/"
-      input = input.replace('linkedin.com/', 'linkedin.com/in/');
-    } else {
-      // If it doesn't contain "linkedin.com/", prepend "https://www.linkedin.com/in/"
-      return 'https://www.linkedin.com/in/' + input;
-    }
-  }
-
-  return ensureHttpProtocol(input);
-}

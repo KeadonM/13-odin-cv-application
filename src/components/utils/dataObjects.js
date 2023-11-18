@@ -1,6 +1,19 @@
 import { v4 as uuidv4, v4 } from 'uuid';
 import defaultPhoto from '../../assets/defaultPhoto.jpg';
 
+import html from '../../assets/logos/html.png';
+import js from '../../assets/logos/js.svg';
+import css from '../../assets/logos/css.svg';
+import sass from '../../assets/logos/sass.png';
+import ts from '../../assets/logos/ts.png';
+import react from '../../assets/logos/react.png';
+import git from '../../assets/logos/git.png';
+import vite from '../../assets/logos/vite.png';
+import node from '../../assets/logos/node.png';
+import npm from '../../assets/logos/npm.png';
+import vercel from '../../assets/logos/vercel.png';
+import figma from '../../assets/logos/figma.svg';
+
 export function dataObjectFactory() {
   return {
     experience: {
@@ -8,30 +21,38 @@ export function dataObjectFactory() {
       position: '',
       exp_start: '',
       exp_end: '',
+      link: '',
       responsibility: '',
+      bulletPoints: new Map([]),
     },
     education: {
       name: '',
-      location: '',
       ed_start: '',
       ed_end: '',
       program: '',
+      link: '',
       addition: '',
+      bulletPoints: new Map([]),
     },
     skill: {
       name: '',
       photoSrc: '',
-      iconScale: '50',
+      iconScale: 50,
+      nameVisible: true,
     },
     interest: {
       name: '',
       photoSrc: '',
-      iconScale: '50',
+      iconScale: 50,
+      nameVisible: true,
+    },
+    bulletPoint: {
+      name: '',
     },
   };
 }
 
-export function defaultData() {
+export function initialData() {
   return {
     info: {
       settings: {
@@ -46,6 +67,58 @@ export function defaultData() {
 
           lightColor: '#fffcfa',
           darkColor: '#000000',
+
+          complementScale: 0.5,
+          contrastFactor: 0.5,
+        },
+        theme: true,
+        icons: true,
+        trademark: true,
+        experienceColumns: true,
+        educationColumns: true,
+        linkedColors: true,
+        previewRef: null,
+      },
+
+      general: {
+        name: '',
+        title: '',
+        blurbTitle: '',
+        blurb: '',
+        photoSrc: '',
+      },
+
+      contact: {
+        sectionTitle: '',
+        phone: '',
+        email: '',
+        linkedIn: '',
+        website: '',
+      },
+
+      experience: new Map([]),
+
+      education: new Map([]),
+
+      skill: new Map([]),
+
+      interest: new Map([]),
+    },
+  };
+}
+
+export function defaultData() {
+  return {
+    info: {
+      settings: {
+        colors: {
+          primaryColor: '#95d8ff',
+          secondaryColor: '#ffb36b',
+          primaryColorDesat: '#667f99',
+          primaryColorDesatDark: '#42658a',
+          secondaryColorDark: '#f5993d',
+          lightColor: '#fffcfa',
+          darkColor: '#000000',
           complementScale: 0.5,
           contrastFactor: 0.5,
         },
@@ -54,7 +127,7 @@ export function defaultData() {
         icons: true,
         trademark: true,
         experienceColumns: true,
-        educatwionColumns: true,
+        educationColumns: true,
         linkedColors: true,
       },
 
@@ -70,9 +143,9 @@ export function defaultData() {
       contact: {
         sectionTitle: 'Contact Me',
         phone: '+1 (111) 111-1111',
-        email: 'Mitchell.Keadon@outlook .com ',
+        email: 'mitchell@keadon.dev ',
         linkedIn: 'KeadonM',
-        website: 'Github.com/KeadonM',
+        website: 'keadon.dev',
       },
 
       experience: new Map([
@@ -81,10 +154,12 @@ export function defaultData() {
           {
             name: 'ResuCraft',
             position: 'Developer - Personal',
-            exp_start: '2023-10',
+            exp_start: '2023',
             exp_end: '',
+            link: 'https://13-odin-cv-application.vercel.app/',
             responsibility:
               'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+            bulletPoints: new Map([]),
           },
         ],
         [
@@ -92,21 +167,12 @@ export function defaultData() {
           {
             name: 'Conspicuous Ink',
             position: 'Full Stack - Freelance',
-            exp_start: '2023-03',
-            exp_end: '2023-04',
+            exp_start: '2023',
+            exp_end: '',
+            link: 'https://conspicuous.ink',
             responsibility:
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
-          },
-        ],
-        [
-          uuidv4(),
-          {
-            name: 'AGI Westeel',
-            position: 'Load Inspector',
-            exp_start: '2018-08',
-            exp_end: '2020-01',
-            responsibility:
-              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
+              'Increased client rate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
+            bulletPoints: new Map([]),
           },
         ],
         [
@@ -114,10 +180,25 @@ export function defaultData() {
           {
             name: 'Duck Farm',
             position: 'Developer - Personal',
-            exp_start: '2018-08',
-            exp_end: '2020-01',
+            exp_start: '2018',
+            exp_end: '',
+            link: '',
             responsibility:
               'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+            bulletPoints: new Map([]),
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'AGI Westeel',
+            position: 'Load Inspector',
+            exp_start: '2017',
+            exp_end: '2020',
+            link: 'https://www.aggrowth.com/en-us/farm-brands-overview/westeel',
+            responsibility:
+              'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
+            bulletPoints: new Map([]),
           },
         ],
       ]),
@@ -127,24 +208,45 @@ export function defaultData() {
           uuidv4(),
           {
             name: 'The Odin Project',
-            location: '',
-            ed_start: '2022-08',
-            ed_end: '2023-10',
             program: 'JavaScript Curriculum',
+            ed_start: '2022',
+            ed_end: '2023',
+            link: 'https://www.theodinproject.com/paths',
             addition:
-              'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+              'Over 100 lessons. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+            bulletPoints: new Map([
+              [
+                uuidv4(),
+                {
+                  name: 'Over 100 lessons.',
+                },
+              ],
+              [
+                uuidv4(),
+                {
+                  name: 'Lorem, ipsum dolor sit amet consectetur.',
+                },
+              ],
+              [
+                uuidv4(),
+                {
+                  name: 'Adipisicing elit. Labore, facilis!',
+                },
+              ],
+            ]),
           },
         ],
         [
           uuidv4(),
           {
             name: 'University of Winnipeg',
-            location: 'Winnipeg, MB, Canada',
-            ed_start: '2019-09',
-            ed_end: '2020-06',
             program: 'Computer Science',
+            ed_start: '2019',
+            ed_end: '2021',
+            link: 'https://www.uwinnipeg.ca/',
             addition:
               'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+            bulletPoints: new Map([]),
           },
         ],
       ]),
@@ -153,89 +255,109 @@ export function defaultData() {
         [
           uuidv4(),
           {
-            name: 'HTML',
-            photoSrc: '',
+            name: 'HTML  ',
+            photoSrc: html,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'CSS',
-            photoSrc: '',
+            name: 'CSS  ',
+            photoSrc: css,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'JS',
-            photoSrc: '',
+            name: 'JS  ',
+            photoSrc: js,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'SCSS',
-            photoSrc: '',
+            name: 'SCSS  ',
+            photoSrc: sass,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'TS',
-            photoSrc: '',
+            name: 'TS  ',
+            photoSrc: ts,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'REACT',
-            photoSrc: '',
+            name: 'REACT  ',
+            photoSrc: react,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'GIT',
-            photoSrc: '',
+            name: 'GIT  ',
+            photoSrc: git,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'VITE',
-            photoSrc: '',
+            name: 'VITE  ',
+            photoSrc: vite,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'NPM',
-            photoSrc: '',
+            name: 'NODE  ',
+            photoSrc: node,
             iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'VERCEL',
-            photoSrc: '',
-            iconScale: 50,
+            name: 'NPM  ',
+            photoSrc: npm,
+            iconScale: 35,
+            nameVisible: true,
           },
         ],
         [
           uuidv4(),
           {
-            name: 'FIGMA',
-            photoSrc: '',
+            name: 'VERCEL  ',
+            photoSrc: vercel,
             iconScale: 50,
+            nameVisible: true,
+          },
+        ],
+        [
+          uuidv4(),
+          {
+            name: 'FIGMA  ',
+            photoSrc: figma,
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
       ]),
@@ -246,7 +368,8 @@ export function defaultData() {
           {
             name: 'Open Source',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
@@ -254,7 +377,8 @@ export function defaultData() {
           {
             name: 'Bowling',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
@@ -262,7 +386,8 @@ export function defaultData() {
           {
             name: 'Poker',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
 
@@ -271,7 +396,8 @@ export function defaultData() {
           {
             name: 'Cooking',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
@@ -279,7 +405,8 @@ export function defaultData() {
           {
             name: 'Philosophy',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
@@ -287,7 +414,8 @@ export function defaultData() {
           {
             name: 'Travel',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
 
@@ -296,7 +424,8 @@ export function defaultData() {
           {
             name: 'Photography',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
         [
@@ -304,7 +433,8 @@ export function defaultData() {
           {
             name: 'Bouldering',
             photoSrc: '',
-            iconScale: '50',
+            iconScale: 50,
+            nameVisible: true,
           },
         ],
       ]),

@@ -1,16 +1,16 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
+import { ensureHttpProtocol } from '../utils/linkFormatting.js';
+
 function Experience({ data, settings }) {
   let date;
 
   if (data.exp_start !== '') {
     date = (
       <div className="preview-primary-clr-400 preview-body-4 bold italic date">
-        <div>{`${data.exp_start.slice(5)}/${data.exp_start.slice(0, 4)}`}</div>
+        <div>{data.exp_start}</div>
 
-        <div>
-          {data.exp_end !== ''
-            ? `${data.exp_end.slice(5)}/${data.exp_end.slice(0, 4)}`
-            : 'Present'}
-        </div>
+        <div>{data.exp_end}</div>
       </div>
     );
   }
@@ -23,7 +23,10 @@ function Experience({ data, settings }) {
       }}>
       <div className="entry-info">
         <div className="preview-row">
-          <div className="title-subtitle-container">
+          <a
+            href={ensureHttpProtocol(data.link)}
+            target="_blank"
+            className="title-subtitle-container">
             <div
               className=" preview-secondary-clr-400 preview-body-1 title bold"
               style={{
@@ -33,14 +36,27 @@ function Experience({ data, settings }) {
             </div>
 
             <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
-              {data.name}
+              {data.name}&nbsp;
+              {data.link !== '' && <FontAwesomeIcon icon={faLink} />}
             </div>
-          </div>
+          </a>
 
           {date}
         </div>
 
         <p className="preview-body-4 text-area">{data.responsibility}</p>
+
+        <ul
+          className="bulletpoints-list preview-body-4 text-area"
+          style={{
+            '--clr': settings.colors.secondaryColorDark,
+          }}>
+          {[...data.bulletPoints.entries()].map((entry) => (
+            <li className="bulletpoint-entry" key={entry[0]}>
+              {entry[1].name}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

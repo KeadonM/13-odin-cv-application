@@ -42,21 +42,20 @@ function InputContact({ updateData, uploadPicture, data }) {
 
       <div className="form-row">
         <label className="form-input-label">
-          LinkedIn
-          <input
-            type="url"
-            name="linkedIn"
-            value={data.linkedIn}
-            onChange={handleUpdate}
-          />
-        </label>
-
-        <label className="form-input-label">
           Website
           <input
             type="url"
             name="website"
             value={data.website}
+            onChange={handleUpdate}
+          />
+        </label>
+        <label className="form-input-label">
+          LinkedIn
+          <input
+            type="url"
+            name="linkedIn"
+            value={data.linkedIn}
             onChange={handleUpdate}
           />
         </label>

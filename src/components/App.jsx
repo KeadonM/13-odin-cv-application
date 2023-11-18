@@ -7,7 +7,11 @@ import {
   incrementBrightness,
 } from './utils/colors.js';
 
-import { dataObjectFactory, defaultData } from './utils/dataObjects.js';
+import {
+  dataObjectFactory,
+  defaultData,
+  initialData,
+} from './utils/dataObjects.js';
 
 import logo from '../assets/ResuCraftLogo.png';
 import icon from '../assets/ResuCraft-icon.png';
@@ -20,58 +24,7 @@ function App() {
   const previewRef = useRef();
   const [activeId, setActiveId] = useState('');
   const [activeInput, setActiveInput] = useState('General');
-  const [resumeData, setResumeData] = useState({
-    info: {
-      settings: {
-        colors: {
-          primaryColor: '#95d8ff',
-          secondaryColor: '#ffb36b',
-
-          primaryColorDesat: '#667f99',
-          primaryColorDesatDark: '#42658a',
-
-          secondaryColorDark: '#f5993d',
-
-          lightColor: '#fffcfa',
-          darkColor: '#000000',
-
-          complementScale: 0.5,
-          contrastFactor: 0.5,
-        },
-        theme: true,
-        icons: true,
-        trademark: true,
-        experienceColumns: true,
-        educationColumns: true,
-        linkedColors: true,
-        previewRef: null,
-      },
-
-      general: {
-        name: '',
-        title: '',
-        blurbTitle: '',
-        blurb: '',
-        photoSrc: '',
-      },
-
-      contact: {
-        sectionTitle: '',
-        phone: '',
-        email: '',
-        linkedIn: '',
-        website: '',
-      },
-
-      experience: new Map([]),
-
-      education: new Map([]),
-
-      skill: new Map([]),
-
-      interest: new Map([]),
-    },
-  });
+  const [resumeData, setResumeData] = useState(initialData);
 
   return (
     <>
@@ -101,6 +54,7 @@ function App() {
             uploadIcon={uploadIcon}
             removeIcon={removeIcon}
             updateMap={updateMap}
+            updateBulletPoint={updateBulletPoint}
           />
           <Preview
             ref={previewRef}
@@ -143,7 +97,11 @@ function App() {
     if (id !== false) {
       const element = dataCopy.info[type].get(id);
 
-      element[e.target.name] = e.target.value;
+      if (e.target.value !== 'on') {
+        element[e.target.name] = e.target.value;
+      } else {
+        element[e.target.name] = e.target.checked;
+      }
 
       dataCopy.info[type].set(id, element);
     } else {
@@ -241,26 +199,6 @@ function App() {
     setResumeData(dataCopy);
   }
 
-  function addEntry(type) {
-    console.log('Adding a ' + type + ' entry');
-
-    const id = uuidv4();
-    const dataCopy = { ...resumeData };
-
-    dataCopy.info[type].set(id, dataObjectFactory()[type]);
-    setResumeData(dataCopy);
-
-    return id;
-  }
-
-  function removeEntry(type, id) {
-    const dataCopy = { ...resumeData };
-
-    dataCopy.info[type].delete(id);
-
-    setResumeData(dataCopy);
-  }
-
   function uploadIcon(e, type, id) {
     console.log('uploading icon ' + type + ' ' + id);
     const dataCopy = { ...resumeData };
@@ -286,10 +224,47 @@ function App() {
     setResumeData(dataCopy);
   }
 
-  function updateMap(type, map) {
+  function addEntry(type, parentId, isBulletPoint = false) {
+    console.log('Adding a ' + type + ' entry');
+
+    const id = uuidv4();
     const dataCopy = { ...resumeData };
 
-    dataCopy.info[type] = map;
+    if (!isBulletPoint) dataCopy.info[type].set(id, dataObjectFactory()[type]);
+    else
+      dataCopy.info[type]
+        .get(parentId)
+        .bulletPoints.set(id, dataObjectFactory().bulletPoint);
+
+    setResumeData(dataCopy);
+
+    return id;
+  }
+
+  function removeEntry(type, id, isBulletPoint = false, parentId) {
+    const dataCopy = { ...resumeData };
+
+    if (!isBulletPoint) dataCopy.info[type].delete(id);
+    else dataCopy.info[type].get(parentId).bulletPoints.delete(id);
+
+    setResumeData(dataCopy);
+  }
+
+  function updateMap(type, map, isBulletPoint = false, parentId) {
+    const dataCopy = { ...resumeData };
+
+    if (!isBulletPoint) dataCopy.info[type] = map;
+    else dataCopy.info[type].get(parentId).bulletPoints = map;
+
+    setResumeData(dataCopy);
+  }
+
+  function updateBulletPoint(e, type, id, parentId) {
+    const dataCopy = { ...resumeData };
+
+    const element = dataCopy.info[type].get(parentId).bulletPoints.get(id);
+
+    element[e.target.name] = e.target.value;
 
     setResumeData(dataCopy);
   }

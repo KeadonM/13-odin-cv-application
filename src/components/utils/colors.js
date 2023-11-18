@@ -1,8 +1,6 @@
 export function findComplement(hexColor, scale = 0.5) {
   const rgbColor = hexToRgb(hexColor);
 
-  console.log(255 - Math.round(rgbColor[0] * scale));
-
   // Calculate the complement
   const complementRed = 255 - Math.round(rgbColor[0] * scale);
   const complementGreen = 255 - Math.round(rgbColor[1] * scale);
