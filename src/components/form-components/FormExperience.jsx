@@ -4,6 +4,7 @@ import {
   faCheck,
   faPlus,
   faList,
+  faCircleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 import EntriesList from './EntriesList';
@@ -110,16 +111,17 @@ function InputExperience(props) {
       )}
 
       <div className="form-row">
-        <button type="button" onClick={handleDelete}>
-          <FontAwesomeIcon icon={faTrash} />
+        <button type="button" onClick={handleSubmit}>
+          <FontAwesomeIcon icon={faCircleLeft} />
         </button>
         <button type="button" onClick={handleAddBulletPoint}>
           <FontAwesomeIcon icon={faPlus} />
           &nbsp;
           <FontAwesomeIcon icon={faList} />
         </button>
-        <button type="button" onClick={handleSubmit}>
-          <FontAwesomeIcon icon={faCheck} />
+
+        <button type="button" onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     </form>

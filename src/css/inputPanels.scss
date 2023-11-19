@@ -135,6 +135,10 @@
     color: $clr-secondary-600;
   }
 
+  .list-of-lists {
+    margin-bottom: $spc-200;
+  }
+
   .input-list {
     @include column-flex;
     align-items: center;
@@ -154,14 +158,17 @@
       gap: $spc-100;
       color: $clr-secondary-600;
 
-      .grip-dots {
-        touch-action: none;
-        cursor: grab;
+      .list-item-icon {
+        min-width: 24px;
         margin-right: $spc-100;
         font-size: 1.5rem;
         color: $clr-secondary-400;
         filter: drop-shadow(4px 4px 2px $clr-accent-shadow-400);
-        border-radius: $border-radius;
+      }
+
+      .grip-dots {
+        touch-action: none;
+        cursor: grab;
 
         &:focus {
           color: $clr-secondary-600;
@@ -220,7 +227,7 @@
       align-self: flex-start;
     }
 
-    .add-button {
+    button {
       min-width: 4.5rem;
     }
   }

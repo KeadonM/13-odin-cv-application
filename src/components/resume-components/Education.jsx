@@ -44,7 +44,7 @@ function Education({ data, settings }) {
       <div className="entry-info">
         <div className="preview-row">
           <a
-            href={ensureHttpProtocol(data.link)}
+            href={data.link !== '' && ensureHttpProtocol(data.link)}
             target="_blank"
             className="title-subtitle-container">
             <div

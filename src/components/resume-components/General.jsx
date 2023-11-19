@@ -6,7 +6,6 @@ import {
   faGlobe,
   faUser,
   faAddressBook,
-  faChessBishop,
   faLink,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -14,12 +13,14 @@ import {
   ensureHttpProtocol,
   ensureLinkedInUrl,
 } from '../utils/linkFormatting.js';
-import ListEntry from './ListEntry.jsx';
+
+import Trademark from './Trademark.jsx';
+import Interests from './Interests.jsx';
+import SoftSkills from './SoftSkills.jsx';
 
 function General({ data, settings }) {
   const dataGeneral = data.general;
   const dataContact = data.contact;
-  const dataInterest = data.interest;
 
   return (
     <>
@@ -68,14 +69,14 @@ function General({ data, settings }) {
         <div className="blurb resume-section">
           {dataGeneral.blurbTitle !== '' && (
             <h2 className="general-section-title preview-title-2 ">
-              <FontAwesomeIcon
+              <span
                 className="preview-general-icon preview-secondary-clr-400 "
-                icon={faUser}
                 style={{
                   '--clr': settings.colors.secondaryColorDark,
                   display: settings.icons === true ? 'inline' : 'none',
-                }}
-              />
+                }}>
+                <FontAwesomeIcon icon={faUser} />
+              </span>
               {dataGeneral.blurbTitle}
             </h2>
           )}
@@ -86,14 +87,14 @@ function General({ data, settings }) {
         <div className="contact resume-section">
           {dataContact.sectionTitle !== '' && (
             <h2 className="general-section-title preview-title-2">
-              <FontAwesomeIcon
+              <span
                 className="preview-general-icon preview-secondary-clr-400 "
-                icon={faAddressBook}
                 style={{
                   '--clr': settings.colors.secondaryColorDark,
                   display: settings.icons === true ? 'inline' : 'none',
-                }}
-              />
+                }}>
+                <FontAwesomeIcon icon={faAddressBook} />
+              </span>
               {dataContact.sectionTitle}
             </h2>
           )}
@@ -195,44 +196,12 @@ function General({ data, settings }) {
             )}
           </div>
         </div>
-
-        <div className="interests resume-section">
-          {[...dataInterest.entries()].length > 0 && (
-            <h2 className="general-section-title preview-title-2">
-              <FontAwesomeIcon
-                className="preview-general-icon preview-secondary-clr-400 "
-                icon={faChessBishop}
-                style={{
-                  '--clr': settings.colors.secondaryColorDark,
-                  display: settings.icons === true ? 'inline' : 'none',
-                }}
-              />
-              Interests
-            </h2>
-          )}
-
-          <ul className="preview-body-4">
-            {[...dataInterest.entries()].map((entry) => {
-              return (
-                <ListEntry
-                  key={entry[0]}
-                  data={entry[1]}
-                  clr={settings.colors.secondaryColorDark}
-                  clrShadow={settings.colors.secondaryColorDark}
-                  type="interest"
-                  settings={settings}
-                />
-              );
-            })}
-          </ul>
-        </div>
-
-        {settings.trademark === true && (
-          <a
-            href="https://github.com/keadonm"
-            className="watermark preview-body-3 italic ">
-            Created with ResuCraft™
-          </a>
+        {settings.theme === true && (
+          <>
+            <SoftSkills data={data.softSkill} settings={settings} />
+            <Interests data={data.interest} settings={settings} />
+            <Trademark settings={settings} />
+          </>
         )}
       </div>
     </>

@@ -4,6 +4,7 @@ import {
   faCheck,
   faPlus,
   faList,
+  faCircleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import EntriesList from './EntriesList';
 
@@ -61,7 +62,7 @@ function InputEducation(props) {
         <label className="form-input-label">
           Start Date
           <input
-            type="date"
+            type="text"
             name="ed_start"
             value={data.ed_start}
             onChange={handleUpdate}
@@ -71,7 +72,7 @@ function InputEducation(props) {
         <label className="form-input-label">
           End Date
           <input
-            type="date"
+            type="text"
             name="ed_end"
             value={data.ed_end}
             onChange={handleUpdate}
@@ -109,16 +110,16 @@ function InputEducation(props) {
       )}
 
       <div className="form-row">
-        <button type="button" onClick={handleDelete}>
-          <FontAwesomeIcon icon={faTrash} />
+        <button type="button" onClick={handleSubmit}>
+          <FontAwesomeIcon icon={faCircleLeft} />
         </button>
         <button type="button" onClick={handleAddBulletPoint}>
           <FontAwesomeIcon icon={faPlus} />
           &nbsp;
           <FontAwesomeIcon icon={faList} />
         </button>
-        <button type="button" onClick={handleSubmit}>
-          <FontAwesomeIcon icon={faCheck} />
+        <button type="button" onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>
     </form>

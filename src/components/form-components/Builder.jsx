@@ -1,5 +1,5 @@
-import '../css/inputPanels.scss';
-import '../css/toggleSwitch.scss';
+import '../../css/inputPanels.scss';
+import '../../css/toggleSwitch.scss';
 import { useState } from 'react';
 
 import { arrayMove } from '@dnd-kit/sortable';
@@ -14,22 +14,22 @@ import {
   faGraduationCap,
   faChessBishop,
   faAngleDown,
+  faBrain,
+  faListUl,
 } from '@fortawesome/free-solid-svg-icons';
 
-import General from './form-components/FormGeneral.jsx';
-import Contact from './form-components/FormContact.jsx';
-import Experience from './form-components/FormExperience.jsx';
-import Education from './form-components/FormEducation.jsx';
-import EntriesList from './form-components/EntriesList';
-import Settings from './form-components/settings.jsx';
+import General from './FormGeneral.jsx';
+import Contact from './FormContact.jsx';
+import Experience from './FormExperience.jsx';
+import Education from './FormEducation.jsx';
+import ListMenu from './ListMenu.jsx';
+import EntriesList from './EntriesList.jsx';
+import Settings from './settings.jsx';
 
 export default function Builder(props) {
   const {
     resumeData,
-    activeId,
-    setActiveId,
-    activeInput,
-    changeActiveInput,
+    state,
     updateData,
     updateBulletPoint,
     updateColor,
@@ -42,7 +42,26 @@ export default function Builder(props) {
     updateMap,
   } = props;
 
+  const {
+    activeId,
+    setActiveId,
+    activeInput,
+    changeActiveInput,
+    activeList,
+    setActiveList,
+  } = state;
+
+  const icons = {
+    experience: faBriefcase,
+    education: faGraduationCap,
+    skill: faBook,
+    softSkill: faBrain,
+    interest: faChessBishop,
+    list: faListUl,
+  };
+
   const entriesListDefaults = {
+    icons: icons,
     settings: resumeData.info.settings,
     addEntry: addEntry,
     removeEntry: removeEntry,
@@ -112,14 +131,14 @@ export default function Builder(props) {
           (activeId !== '' ? (
             <Experience
               defaults={formDefaults}
-              data={resumeData.info.experience.get(activeId)}
+              data={resumeData.info.experience.map.get(activeId)}
               id={activeId}
             />
           ) : (
             <div>
               <EntriesList
                 defaults={{ ...entriesListDefaults }}
-                data={resumeData.info.experience}
+                data={resumeData.info.experience.map}
                 listType={'experience'}
               />
             </div>
@@ -140,54 +159,38 @@ export default function Builder(props) {
           (activeId !== '' ? (
             <Education
               defaults={formDefaults}
-              data={resumeData.info.education.get(activeId)}
+              data={resumeData.info.education.map.get(activeId)}
               id={activeId}
             />
           ) : (
             <div>
               <EntriesList
                 defaults={{ ...entriesListDefaults }}
-                data={resumeData.info.education}
+                data={resumeData.info.education.map}
                 listType={'education'}
               />
             </div>
           ))}
       </InputCard>
 
-      {/* Skills Input */}
-      <InputCard name={activeInput === 'Skills' ? 'active' : 'inactive'}>
+      {/* Lists Menu*/}
+      <InputCard name={activeInput === 'Lists' ? 'active' : 'inactive'}>
         <InputCardTitle
-          title="Skills"
-          faIcon={faBook}
-          active={activeInput === 'Skills'}
-          onSelection={() => changeActiveInput('Skills')}
+          title={
+            activeList === 'list'
+              ? 'Lists'
+              : resumeData.info[activeList].sectionTitle
+          }
+          faIcon={icons[activeList]}
+          active={activeInput === 'Lists'}
+          onSelection={() => changeActiveInput('Lists')}
         />
-
-        {activeInput === 'Skills' && (
-          <EntriesList
+        {activeInput === 'Lists' && (
+          <ListMenu
             defaults={{ ...entriesListDefaults }}
-            data={resumeData.info.skill}
-            listType={'skill'}
-            uploadIcon={uploadIcon}
-            removeIcon={removeIcon}
-          />
-        )}
-      </InputCard>
-
-      {/* Interests Input */}
-      <InputCard name={activeInput === 'Interests' ? 'active' : 'inactive'}>
-        <InputCardTitle
-          title="Interests"
-          faIcon={faChessBishop}
-          active={activeInput === 'Interests'}
-          onSelection={() => changeActiveInput('Interests')}
-        />
-
-        {activeInput === 'Interests' && (
-          <EntriesList
-            defaults={{ ...entriesListDefaults }}
-            data={resumeData.info.interest}
-            listType={'interest'}
+            activeList={activeList}
+            setActiveList={setActiveList}
+            data={resumeData.info}
             uploadIcon={uploadIcon}
             removeIcon={removeIcon}
           />

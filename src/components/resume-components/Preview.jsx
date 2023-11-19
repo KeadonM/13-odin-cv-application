@@ -8,14 +8,17 @@ import {
 
 import { useEffect, useRef, useState } from 'react';
 
-import General from './resume-components/General.jsx';
-import Education from './resume-components/Education.jsx';
-import Experience from './resume-components/Experience.jsx';
-import ListEntry from './resume-components/ListEntry.jsx';
+import General from './General.jsx';
+import Education from './Education.jsx';
+import Experience from './Experience.jsx';
+import ListEntry from './ListEntry.jsx';
+import Trademark from './Trademark.jsx';
+import Interests from './Interests.jsx';
 
-import '../css/preview.scss';
+import '../../css/preview.scss';
 
 import { forwardRef } from 'react';
+import SoftSkills from './SoftSkills.jsx';
 
 export const Preview = forwardRef((props, ref) => {
   const { data, settings } = props;
@@ -48,7 +51,7 @@ export const Preview = forwardRef((props, ref) => {
           <General data={data.info} settings={settings} />
 
           <div className="resume-section experience">
-            {[...data.info.experience.entries()].length !== 0 && (
+            {[...data.info.experience.map.entries()].length !== 0 && (
               <h2
                 className="preview-title-2 bold preview-primary-clr-400"
                 style={{
@@ -58,7 +61,7 @@ export const Preview = forwardRef((props, ref) => {
                   style={{
                     display: settings.icons === true ? 'inline' : 'none',
                   }}>
-                  <FontAwesomeIcon icon={faBriefcase} /> -&nbsp;
+                  <FontAwesomeIcon icon={faBriefcase} />
                 </span>
                 Experience
               </h2>
@@ -69,7 +72,7 @@ export const Preview = forwardRef((props, ref) => {
                   ? 'entry-container'
                   : 'entry-container single-column'
               }>
-              {[...data.info.experience.entries()].map((entry) => {
+              {[...data.info.experience.map.entries()].map((entry) => {
                 return (
                   <Experience
                     key={entry[0]}
@@ -82,7 +85,7 @@ export const Preview = forwardRef((props, ref) => {
           </div>
 
           <div className="resume-section education">
-            {[...data.info.education.entries()].length !== 0 && (
+            {[...data.info.education.map.entries()].length !== 0 && (
               <h2
                 className="preview-title-2 bold preview-primary-clr-400"
                 style={{
@@ -92,7 +95,7 @@ export const Preview = forwardRef((props, ref) => {
                   style={{
                     display: settings.icons === true ? 'inline' : 'none',
                   }}>
-                  <FontAwesomeIcon icon={faGraduationCap} /> -&nbsp;
+                  <FontAwesomeIcon icon={faGraduationCap} />
                 </span>
                 Education
               </h2>
@@ -103,7 +106,7 @@ export const Preview = forwardRef((props, ref) => {
                   ? 'entry-container'
                   : 'entry-container single-column'
               }>
-              {[...data.info.education.entries()].map((entry) => {
+              {[...data.info.education.map.entries()].map((entry) => {
                 return (
                   <Education
                     key={entry[0]}
@@ -116,7 +119,7 @@ export const Preview = forwardRef((props, ref) => {
           </div>
 
           <div className="resume-section skills">
-            {[...data.info.skill.entries()].length !== 0 && (
+            {[...data.info.skill.map.entries()].length !== 0 && (
               <h2
                 className="preview-title-2 bold preview-primary-clr-400"
                 style={{
@@ -126,14 +129,19 @@ export const Preview = forwardRef((props, ref) => {
                   style={{
                     display: settings.icons === true ? 'inline' : 'none',
                   }}>
-                  <FontAwesomeIcon icon={faBook} /> -&nbsp;
+                  <FontAwesomeIcon icon={faBook} />
                 </span>
-                Skills
+                {data.info.skill.sectionTitle}
               </h2>
             )}
 
-            <ul className="entry-container">
-              {[...data.info.skill.entries()].map((entry) => {
+            <ul
+              className={
+                data.info.skill.duoTone === true
+                  ? 'entry-container duo-tone'
+                  : 'entry-container'
+              }>
+              {[...data.info.skill.map.entries()].map((entry) => {
                 return (
                   <ListEntry
                     key={entry[0]}
@@ -147,6 +155,14 @@ export const Preview = forwardRef((props, ref) => {
               })}
             </ul>
           </div>
+
+          {settings.theme === false && (
+            <>
+              <SoftSkills data={data.info.softSkill} settings={settings} />
+              <Interests data={data.info.interest} settings={settings} />
+              <Trademark settings={settings} />
+            </>
+          )}
         </div>
       </div>
     </section>

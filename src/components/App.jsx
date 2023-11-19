@@ -16,14 +16,32 @@ import {
 import logo from '../assets/ResuCraftLogo.png';
 import icon from '../assets/ResuCraft-icon.png';
 import HeaderActions from './HeaderActions.jsx';
-import Builder from './Builder';
-import { Preview } from './Preview';
+import Builder from './form-components/Builder.jsx';
+import { Preview } from './resume-components/Preview.jsx';
 import Footer from './Footer';
 
 function App() {
   const previewRef = useRef();
   const [activeId, setActiveId] = useState('');
   const [activeInput, setActiveInput] = useState('General');
+  const [activeList, setActiveList] = useState('list');
+  function changeActiveInput(input) {
+    setActiveId('');
+    setActiveList('list');
+
+    if (input !== activeInput) setActiveInput(input);
+    else setActiveInput('');
+  }
+
+  const state = {
+    activeId: activeId,
+    setActiveId: setActiveId,
+    activeInput: activeInput,
+    changeActiveInput: changeActiveInput,
+    activeList: activeList,
+    setActiveList: setActiveList,
+  };
+
   const [resumeData, setResumeData] = useState(initialData);
 
   return (
@@ -42,10 +60,7 @@ function App() {
         <div className="build-preview-container">
           <Builder
             resumeData={resumeData}
-            activeId={activeId}
-            setActiveId={setActiveId}
-            activeInput={activeInput}
-            changeActiveInput={changeActiveInput}
+            state={state}
             updateData={updateData}
             updateColor={updateColor}
             uploadPicture={uploadPicture}
@@ -68,19 +83,12 @@ function App() {
     </>
   );
 
-  function changeActiveInput(input) {
-    setActiveId('');
-
-    if (input !== activeInput) setActiveInput(input);
-    else setActiveInput('');
-  }
-
   function loadDefaults() {
     setActiveInput('General');
     setResumeData(defaultData());
   }
 
-  function updateData(e, type, id) {
+  function updateData(e, type, id = false) {
     console.log(
       'Updating: ' +
         e.target.name +
@@ -95,7 +103,7 @@ function App() {
     const dataCopy = { ...resumeData };
 
     if (id !== false) {
-      const element = dataCopy.info[type].get(id);
+      const element = dataCopy.info[type].map.get(id);
 
       if (e.target.value !== 'on') {
         element[e.target.name] = e.target.value;
@@ -103,7 +111,7 @@ function App() {
         element[e.target.name] = e.target.checked;
       }
 
-      dataCopy.info[type].set(id, element);
+      dataCopy.info[type].map.set(id, element);
     } else {
       if (e.target.value !== 'on') {
         dataCopy.info[type][e.target.name] = e.target.value;
@@ -203,10 +211,10 @@ function App() {
     console.log('uploading icon ' + type + ' ' + id);
     const dataCopy = { ...resumeData };
 
-    const element = dataCopy.info[type].get(id);
+    const element = dataCopy.info[type].map.get(id);
     element.photoSrc = URL.createObjectURL(e.target.files[0]);
 
-    dataCopy.info[type].set(id, element);
+    dataCopy.info[type].map.set(id, element);
 
     e.target.value = null;
     setResumeData(dataCopy);
@@ -215,11 +223,11 @@ function App() {
   function removeIcon(type, id) {
     const dataCopy = { ...resumeData };
 
-    const element = dataCopy.info[type].get(id);
+    const element = dataCopy.info[type].map.get(id);
     element.photoSrc = '';
     element.iconScale = '50';
 
-    dataCopy.info[type].set(id, element);
+    dataCopy.info[type].map.set(id, element);
 
     setResumeData(dataCopy);
   }
@@ -230,9 +238,10 @@ function App() {
     const id = uuidv4();
     const dataCopy = { ...resumeData };
 
-    if (!isBulletPoint) dataCopy.info[type].set(id, dataObjectFactory()[type]);
+    if (!isBulletPoint)
+      dataCopy.info[type].map.set(id, dataObjectFactory()[type]);
     else
-      dataCopy.info[type]
+      dataCopy.info[type].map
         .get(parentId)
         .bulletPoints.set(id, dataObjectFactory().bulletPoint);
 
@@ -244,8 +253,8 @@ function App() {
   function removeEntry(type, id, isBulletPoint = false, parentId) {
     const dataCopy = { ...resumeData };
 
-    if (!isBulletPoint) dataCopy.info[type].delete(id);
-    else dataCopy.info[type].get(parentId).bulletPoints.delete(id);
+    if (!isBulletPoint) dataCopy.info[type].map.delete(id);
+    else dataCopy.info[type].map.get(parentId).bulletPoints.delete(id);
 
     setResumeData(dataCopy);
   }
@@ -253,8 +262,8 @@ function App() {
   function updateMap(type, map, isBulletPoint = false, parentId) {
     const dataCopy = { ...resumeData };
 
-    if (!isBulletPoint) dataCopy.info[type] = map;
-    else dataCopy.info[type].get(parentId).bulletPoints = map;
+    if (!isBulletPoint) dataCopy.info[type].map = map;
+    else dataCopy.info[type].map.get(parentId).bulletPoints = map;
 
     setResumeData(dataCopy);
   }
@@ -262,7 +271,7 @@ function App() {
   function updateBulletPoint(e, type, id, parentId) {
     const dataCopy = { ...resumeData };
 
-    const element = dataCopy.info[type].get(parentId).bulletPoints.get(id);
+    const element = dataCopy.info[type].map.get(parentId).bulletPoints.get(id);
 
     element[e.target.name] = e.target.value;
 

@@ -4,13 +4,10 @@ import {
   faPlus,
   faTrash,
   faPenToSquare,
-  faGraduationCap,
-  faBriefcase,
-  faBook,
-  faChessBishop,
   faImage,
   faEye,
   faEyeSlash,
+  faCircleLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 import { DndContext, closestCenter } from '@dnd-kit/core';
@@ -55,7 +52,7 @@ function SortableListItem(props) {
       <div className="list-item-row">
         <FontAwesomeIcon
           icon={faGrip}
-          className="grip-dots"
+          className="grip-dots list-item-icon"
           {...attributes}
           {...listeners}
         />
@@ -68,7 +65,9 @@ function SortableListItem(props) {
           maxLength={listType === 'skill' ? 15 : 48}
         />
 
-        {listType === 'skill' || listType === 'interest' ? (
+        {listType === 'skill' ||
+        listType === 'softSkill' ||
+        listType === 'interest' ? (
           data.photoSrc === '' ? (
             <label className="skill-icon-input">
               <FontAwesomeIcon icon={faImage} />
@@ -77,7 +76,7 @@ function SortableListItem(props) {
                 type="file"
                 accept="image/*"
                 onChange={(e) => uploadIcon(e, listType, id)}
-              />{' '}
+              />
             </label>
           ) : (
             <label className="switch switch-button">
@@ -158,8 +157,10 @@ export default function EntriesList(props) {
     removeIcon,
     isBulletPoint = false,
     parentId,
+    setActiveList,
   } = props;
   const {
+    icons,
     settings,
     addEntry,
     removeEntry,
@@ -168,13 +169,6 @@ export default function EntriesList(props) {
     updateActiveId,
     handleDragEnd,
   } = defaults;
-
-  const icons = {
-    experience: faBriefcase,
-    education: faGraduationCap,
-    skill: faBook,
-    interest: faChessBishop,
-  };
 
   function handleAdd() {
     const id = addEntry(listType);
@@ -199,6 +193,20 @@ export default function EntriesList(props) {
             <span className="slider round"></span>
           </label>
         </div>
+      );
+    }
+  })();
+
+  const backButton = (() => {
+    if (
+      listType === 'skill' ||
+      listType === 'softSkill' ||
+      listType === 'interest'
+    ) {
+      return (
+        <button onClick={() => setActiveList('list')}>
+          <FontAwesomeIcon icon={faCircleLeft} />
+        </button>
       );
     }
   })();
@@ -244,7 +252,7 @@ export default function EntriesList(props) {
       {isBulletPoint === false && (
         <div className="columns-add-container">
           {columnsToggle}
-
+          {backButton}
           {/* add entry button */}
           <button className="add-button" onClick={handleAdd}>
             <FontAwesomeIcon icon={faPlus} />
