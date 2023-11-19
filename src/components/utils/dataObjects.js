@@ -229,8 +229,7 @@ export function defaultData() {
               ed_start: '2022',
               ed_end: '2023',
               link: 'https://www.theodinproject.com/paths',
-              addition:
-                'Over 100 lessons. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
+              addition: '',
               bulletPoints: new Map([
                 [
                   uuidv4(),
