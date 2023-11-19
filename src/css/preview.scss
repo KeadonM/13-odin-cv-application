@@ -123,7 +123,7 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
     font-family: 'Times New Roman', Times, serif;
 
     @include column-flex;
-    padding: 3%;
+    padding: 5% 6.66% 1.5%;
 
     > * {
       font-size: 0.9em;
@@ -391,10 +391,10 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
           align-items: center;
 
           height: calc($preview-scale-primary * 0.05);
-          margin: 1%;
           padding: calc($preview-scale-primary * 0.005);
-          min-width: 25%;
           border-radius: calc($preview-corner-radius-primary * 0.75);
+          margin: 1%;
+          min-width: 25%;
           background-color: var(--clr-bg);
           color: var(--clr);
           text-shadow: 2px 2px 4px var(--clr-shadow);
@@ -486,16 +486,14 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
         @include row-flex;
         justify-content: center;
         align-items: center;
-
         padding: calc($preview-scale-primary * 0.015);
-        margin-bottom: 2%;
-        min-width: 12.5%;
         height: calc($preview-scale-primary * 0.066);
         border-radius: $preview-corner-radius-primary;
+        margin-bottom: 2%;
+        min-width: 12.5%;
         background-color: var(--clr-bg);
         color: var(--clr);
         text-shadow: 2px 2px 4px var(--clr-shadow);
-
         white-space: pre-wrap;
         overflow: hidden;
 
@@ -518,164 +516,166 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 
 //QUERIES
 
-@media (max-width: $media-query-primary) {
-  #size-warning {
-    width: $preview-scale-secondary;
-  }
-
-  .preview {
-    .preview-shadow {
-      border-radius: $preview-corner-radius-secondary;
-    }
-  }
-
-  .theme,
-  .no-theme {
-    align-self: center;
-    &#resume-preview {
+.preview {
+  @media (max-width: $media-query-primary) {
+    #size-warning {
       width: $preview-scale-secondary;
-      font-size: $text-scale-secondary;
     }
-  }
 
-  .theme {
-    .person {
-      .data {
-        img {
-          border-width: calc($preview-scale-secondary * 0.0066);
-        }
+    .preview {
+      .preview-shadow {
+        border-radius: $preview-corner-radius-secondary;
       }
     }
 
-    .about {
-      .interests {
-        ul {
-          li {
-            height: calc($preview-scale-secondary * 0.05);
-            border-radius: calc($preview-corner-radius-secondary * 0.75);
-            padding: calc($preview-scale-secondary * 0.005);
+    .theme,
+    .no-theme {
+      align-self: center;
+      &#resume-preview {
+        width: $preview-scale-secondary;
+        font-size: $text-scale-secondary;
+      }
+    }
+
+    .theme {
+      .person {
+        .data {
+          img {
+            border-width: calc($preview-scale-secondary * 0.0066);
+          }
+        }
+      }
+
+      .about {
+        .list-container {
+          ul {
+            li {
+              height: calc($preview-scale-secondary * 0.05);
+              border-radius: calc($preview-corner-radius-secondary * 0.75);
+              padding: calc($preview-scale-secondary * 0.005);
+            }
+          }
+        }
+      }
+
+      .skills {
+        .entry-container {
+          .entry {
+            height: calc($preview-scale-secondary * 0.066);
+            border-radius: $preview-corner-radius-secondary;
+            padding: calc($preview-scale-secondary * 0.015);
           }
         }
       }
     }
-
-    .skills {
-      .entry-container {
-        .entry {
-          height: calc($preview-scale-secondary * 0.066);
-          border-radius: $preview-corner-radius-secondary;
-          padding: calc($preview-scale-secondary * 0.015);
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: $media-query-secondary) {
-  #size-warning {
-    width: $preview-scale-tertiary;
   }
 
-  .preview {
-    .preview-shadow {
-      border-radius: $preview-corner-radius-tertiary;
-    }
-  }
-
-  .theme,
-  .no-theme {
-    align-self: center;
-    &#resume-preview {
+  @media (max-width: $media-query-secondary) {
+    #size-warning {
       width: $preview-scale-tertiary;
-      font-size: $text-scale-tertiary;
     }
-  }
 
-  .theme {
-    .person {
-      .data {
-        img {
-          border-width: calc($preview-scale-tertiary * 0.0066);
-        }
+    .preview {
+      .preview-shadow {
+        border-radius: $preview-corner-radius-tertiary;
       }
     }
 
-    .about {
-      border-radius: $preview-corner-radius-secondary;
-      .interests {
-        ul {
-          li {
-            height: calc($preview-scale-tertiary * 0.05);
-            border-radius: calc($preview-corner-radius-tertiary * 0.75);
-            padding: calc($preview-scale-tertiary * 0.005);
+    .theme,
+    .no-theme {
+      align-self: center;
+      &#resume-preview {
+        width: $preview-scale-tertiary;
+        font-size: $text-scale-tertiary;
+      }
+    }
+
+    .theme {
+      .person {
+        .data {
+          img {
+            border-width: calc($preview-scale-tertiary * 0.0066);
+          }
+        }
+      }
+
+      .about {
+        border-radius: $preview-corner-radius-tertiary;
+        .list-container {
+          ul {
+            li {
+              height: calc($preview-scale-tertiary * 0.05);
+              border-radius: calc($preview-corner-radius-tertiary * 0.75);
+              padding: calc($preview-scale-tertiary * 0.005);
+            }
+          }
+        }
+      }
+
+      .skills {
+        .entry-container {
+          .entry {
+            height: calc($preview-scale-tertiary * 0.066);
+            border-radius: $preview-corner-radius-tertiary;
+            padding: calc($preview-scale-tertiary * 0.015);
           }
         }
       }
     }
-
-    .skills {
-      .entry-container {
-        .entry {
-          height: calc($preview-scale-tertiary * 0.066);
-          border-radius: $preview-corner-radius-tertiary;
-          padding: calc($preview-scale-secondary * 0.015);
-        }
-      }
-    }
-  }
-}
-
-@media print {
-  $preview-scale-print: 100vw;
-  $text-scale-print: calc($preview-scale-print * 0.0225);
-  $preview-corner-radius-print: calc($preview-scale-print * 0.0125);
-
-  .fa-link {
-    display: none;
   }
 
-  .theme,
-  .no-theme {
-    align-self: center;
-    &#resume-preview {
-      width: $preview-scale-print;
-      font-size: $text-scale-print;
-    }
-  }
+  @media print {
+    $preview-scale-print: 100vw;
+    $text-scale-print: calc($preview-scale-print * 0.0225);
+    $preview-corner-radius-print: calc($preview-scale-print * 0.0125);
 
-  .theme {
-    &#resume-preview {
-      width: $preview-scale-print;
-      font-size: $text-scale-print;
+    .fa-link {
+      display: none;
     }
 
-    .person {
-      .data {
-        img {
-          border-width: calc($preview-scale-print * 0.0066);
-        }
+    .theme,
+    .no-theme {
+      align-self: center;
+      &#resume-preview {
+        width: $preview-scale-print;
+        font-size: $text-scale-print;
       }
     }
 
-    .about {
-      border-radius: $preview-corner-radius-print;
-      .list-container {
-        ul {
-          li {
-            height: calc($preview-scale-print * 0.05);
-            border-radius: calc($preview-corner-radius-print * 0.75);
-            padding: calc($preview-scale-print * 0.005);
+    .theme {
+      &#resume-preview {
+        width: $preview-scale-print;
+        font-size: $text-scale-print;
+      }
+
+      .person {
+        .data {
+          img {
+            border-width: calc($preview-scale-print * 0.0066);
           }
         }
       }
-    }
 
-    .skills {
-      .entry-container {
-        .entry {
-          height: calc($preview-scale-print * 0.066);
-          border-radius: $preview-corner-radius-print;
-          padding: calc($preview-scale-print * 0.015);
+      .about {
+        border-radius: $preview-corner-radius-print;
+        .list-container {
+          ul {
+            li {
+              height: calc($preview-scale-print * 0.05);
+              border-radius: calc($preview-corner-radius-print * 0.75);
+              padding: calc($preview-scale-print * 0.005);
+            }
+          }
+        }
+      }
+
+      .skills {
+        .entry-container {
+          .entry {
+            height: calc($preview-scale-print * 0.066);
+            border-radius: $preview-corner-radius-print;
+            padding: calc($preview-scale-print * 0.015);
+          }
         }
       }
     }

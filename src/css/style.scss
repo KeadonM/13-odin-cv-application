@@ -141,6 +141,11 @@ main {
 
     .settings {
       grid-column: 1 / 6;
+      grid-row: auto;
+    }
+
+    .inactive {
+      grid-column: auto;
     }
 
     .active ~ .inactive {
