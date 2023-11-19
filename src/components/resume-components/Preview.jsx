@@ -138,7 +138,7 @@ export const Preview = forwardRef((props, ref) => {
             <ul
               className={
                 data.info.skill.duoTone === true
-                  ? 'entry-container duo-tone'
+                  ? 'entry-container duo-tone '
                   : 'entry-container'
               }>
               {[...data.info.skill.map.entries()].map((entry) => {

@@ -124,6 +124,10 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 
     @include column-flex;
     padding: 3%;
+
+    > * {
+      font-size: 0.9em;
+    }
   }
 
   img,
@@ -149,11 +153,24 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
     }
   }
 
+  a {
+    color: $clr-neutral-500;
+
+    span::after {
+      content: '  ';
+    }
+
+    .fa-link {
+      font-size: 0.75em;
+    }
+  }
+
   .resume-section {
     margin-bottom: 1.5%;
   }
 
   .person {
+    text-align: center;
     .title {
       font-size: 1.5em;
     }
@@ -515,12 +532,13 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
   .theme,
   .no-theme {
     align-self: center;
-
     &#resume-preview {
       width: $preview-scale-secondary;
       font-size: $text-scale-secondary;
     }
+  }
 
+  .theme {
     .person {
       .data {
         img {
@@ -566,11 +584,14 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 
   .theme,
   .no-theme {
+    align-self: center;
     &#resume-preview {
       width: $preview-scale-tertiary;
       font-size: $text-scale-tertiary;
     }
+  }
 
+  .theme {
     .person {
       .data {
         img {
@@ -605,33 +626,45 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 }
 
 @media print {
-  $preview-scale-tertiary: 1200px;
-  $text-scale-tertiary: calc($preview-scale-tertiary * 0.0225);
-  $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
+  $preview-scale-print: 100vw;
+  $text-scale-print: calc($preview-scale-print * 0.0225);
+  $preview-corner-radius-print: calc($preview-scale-print * 0.0125);
+
+  .fa-link {
+    display: none;
+  }
 
   .theme,
   .no-theme {
+    align-self: center;
     &#resume-preview {
-      width: $preview-scale-tertiary;
-      font-size: $text-scale-tertiary;
+      width: $preview-scale-print;
+      font-size: $text-scale-print;
+    }
+  }
+
+  .theme {
+    &#resume-preview {
+      width: $preview-scale-print;
+      font-size: $text-scale-print;
     }
 
     .person {
       .data {
         img {
-          border-width: calc($preview-scale-tertiary * 0.0066);
+          border-width: calc($preview-scale-print * 0.0066);
         }
       }
     }
 
     .about {
-      border-radius: $preview-corner-radius-tertiary;
-      .interests {
+      border-radius: $preview-corner-radius-print;
+      .list-container {
         ul {
           li {
-            height: calc($preview-scale-tertiary * 0.05);
-            border-radius: calc($preview-corner-radius-tertiary * 0.75);
-            padding: calc($preview-scale-tertiary * 0.005);
+            height: calc($preview-scale-print * 0.05);
+            border-radius: calc($preview-corner-radius-print * 0.75);
+            padding: calc($preview-scale-print * 0.005);
           }
         }
       }
@@ -640,9 +673,9 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
     .skills {
       .entry-container {
         .entry {
-          height: calc($preview-scale-tertiary * 0.066);
-          border-radius: $preview-corner-radius-secondary;
-          padding: calc($preview-scale-secondary * 0.015);
+          height: calc($preview-scale-print * 0.066);
+          border-radius: $preview-corner-radius-print;
+          padding: calc($preview-scale-print * 0.015);
         }
       }
     }
