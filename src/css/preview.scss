@@ -175,7 +175,7 @@ $preview-shadow-scale-secondary: calc($preview-scale-secondary * 0.0065);
     }
   }
 
-  .about {
+  .sections-container {
     @include column-flex;
     flex-direction: column-reverse;
   }
@@ -188,6 +188,12 @@ $preview-shadow-scale-secondary: calc($preview-scale-secondary * 0.0065);
     .preview-row {
       @include row-flex;
       align-items: center;
+    }
+
+    .link {
+      @include row-flex;
+      align-items: center;
+      gap: 0.33em;
     }
   }
 
