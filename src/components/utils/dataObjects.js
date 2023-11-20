@@ -75,7 +75,7 @@ export function initialData() {
           darkColor: '#000000',
 
           complementScale: 0.5,
-          contrastFactor: 0.5,
+          contrastFactor: 0.6,
         },
         theme: true,
         icons: true,
@@ -132,7 +132,7 @@ export function defaultData() {
           lightColor: '#fffcfa',
           darkColor: '#000000',
           complementScale: 0.5,
-          contrastFactor: 0.5,
+          contrastFactor: 0.6,
         },
 
         theme: true,

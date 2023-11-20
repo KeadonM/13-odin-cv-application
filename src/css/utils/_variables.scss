@@ -63,9 +63,7 @@ $app-padding: clamp(0.5rem, calc(0.1rem + 1.75vw), 2.25rem);
 $border-radius: 8px;
 $shadow: 2px 2px 12px rgba(0, 0, 0, 0.25);
 
-$media-query-primary: 75em;
-$media-query-secondary: 51.25em;
-$media-query-tertiary: 24.3em;
+$media-query-primary: 60em;
 
 //Fonts
 @import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');

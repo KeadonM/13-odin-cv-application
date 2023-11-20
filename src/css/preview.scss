@@ -1,16 +1,13 @@
 @import 'utils/variables';
 
-$preview-scale-primary: clamp(600px, 50vw, 800px);
-$preview-scale-secondary: clamp(300px, 90vw, 800px);
-$preview-scale-tertiary: clamp(0px, 90vw, 600px);
+$preview-scale-primary: clamp(500px, 50vw, 800px);
+$preview-scale-secondary: clamp(0px, 90vw, 600px);
 
 $text-scale-primary: calc($preview-scale-primary * 0.0225);
 $text-scale-secondary: calc($preview-scale-secondary * 0.0225);
-$text-scale-tertiary: calc($preview-scale-tertiary * 0.0225);
 
 $preview-corner-radius-primary: calc($preview-scale-primary * 0.0125);
 $preview-corner-radius-secondary: calc($preview-scale-secondary * 0.0125);
-$preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
 
 #size-warning {
   margin-bottom: $spc-300;
@@ -563,60 +560,6 @@ $preview-corner-radius-tertiary: calc($preview-scale-tertiary * 0.0125);
           height: calc($preview-scale-secondary * 0.066);
           border-radius: $preview-corner-radius-secondary;
           padding: calc($preview-scale-secondary * 0.015);
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: $media-query-secondary) {
-  #size-warning {
-    width: $preview-scale-tertiary;
-  }
-
-  .preview {
-    .preview-shadow {
-      border-radius: $preview-corner-radius-tertiary;
-    }
-  }
-
-  .theme,
-  .no-theme {
-    align-self: center;
-    &#resume-preview {
-      width: $preview-scale-tertiary;
-      font-size: $text-scale-tertiary;
-    }
-  }
-
-  .theme {
-    .person {
-      .data {
-        img {
-          border-width: calc($preview-scale-tertiary * 0.0066);
-        }
-      }
-    }
-
-    .about {
-      border-radius: $preview-corner-radius-tertiary;
-      .list-container {
-        ul {
-          li {
-            height: calc($preview-scale-tertiary * 0.05);
-            border-radius: calc($preview-corner-radius-tertiary * 0.75);
-            padding: calc($preview-scale-tertiary * 0.005);
-          }
-        }
-      }
-    }
-
-    .skills {
-      .entry-container {
-        .entry {
-          height: calc($preview-scale-tertiary * 0.066);
-          border-radius: $preview-corner-radius-tertiary;
-          padding: calc($preview-scale-tertiary * 0.015);
         }
       }
     }

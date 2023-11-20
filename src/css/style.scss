@@ -81,48 +81,17 @@ main {
 }
 
 .build-preview-container {
-  display: flex;
+  @include row-flex;
+  justify-content: center;
   gap: $spc-400;
+  width: 90vw;
 }
 
 @media (max-width: $media-query-primary) {
-  .build-preview-container {
-    @include column-flex;
-    margin-inline: $spc-400;
-  }
   .builder {
-    display: grid;
-    grid-template-columns: 0.5fr 1fr;
-    grid-template-rows: repeat(4, 0.1fr);
-    gap: 0 $spc-400;
-    align-items: start;
-
-    .settings {
-      grid-column: 2 / 3;
-      grid-row: 1 / 6;
-    }
-
-    .inactive {
-      grid-column: 1 / 2;
-    }
-
-    .active ~ .inactive,
-    .active ~ .settings {
-      min-width: 0;
-      grid-column: 1 / 2;
-    }
-
-    .active ~ .settings {
-      grid-row: 5 / 6;
-    }
-
-    .active {
-      grid-row: 1 / 7;
-    }
+    width: 100%;
   }
-}
 
-@media (max-width: $media-query-secondary) {
   .logo {
     align-self: center;
   }
@@ -131,7 +100,9 @@ main {
     @include column-flex;
     max-width: 600px;
   }
+
   .builder {
+    max-width: none;
     min-width: 0px;
     display: grid;
     grid-template-columns: auto;
