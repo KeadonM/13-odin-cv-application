@@ -28,7 +28,7 @@ function Experience({ data, settings }) {
             target="_blank"
             className="title-subtitle-container">
             <div
-              className=" preview-secondary-clr-400 preview-body-1 title bold"
+              className="preview-secondary-clr-400 preview-body-1 title bold"
               style={{
                 '--clr': settings.colors.secondaryColorDark,
               }}>
@@ -44,7 +44,9 @@ function Experience({ data, settings }) {
           {date}
         </div>
 
-        <p className="preview-body-4 text-area">{data.responsibility}</p>
+        <p className="addition preview-body-4 text-area">
+          {data.responsibility}
+        </p>
 
         <ul
           className="bulletpoints-list preview-body-4 text-area"

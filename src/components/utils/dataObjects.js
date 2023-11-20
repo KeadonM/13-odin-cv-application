@@ -1,18 +1,21 @@
 import { v4 as uuidv4, v4 } from 'uuid';
 import defaultPhoto from '../../assets/defaultPhoto.jpg';
 
-import html from '../../assets/logos/html.png';
-import js from '../../assets/logos/js.svg';
-import css from '../../assets/logos/css.svg';
+import js from '../../assets/logos/js.png';
+import css from '../../assets/logos/css.png';
 import sass from '../../assets/logos/sass.png';
+import tailwind from '../../assets/logos/tailwind.png';
 import ts from '../../assets/logos/ts.png';
 import react from '../../assets/logos/react.png';
 import git from '../../assets/logos/git.png';
 import vite from '../../assets/logos/vite.png';
 import node from '../../assets/logos/node.png';
-import npm from '../../assets/logos/npm.png';
 import vercel from '../../assets/logos/vercel.png';
+import firebase from '../../assets/logos/firebase.svg';
 import figma from '../../assets/logos/figma.svg';
+import csharp from '../../assets/logos/csharp.png';
+import unity from '../../assets/logos/unity.png';
+import next from '../../assets/logos/next.png';
 
 export function dataObjectFactory() {
   return {
@@ -275,109 +278,139 @@ export function defaultData() {
           [
             uuidv4(),
             {
-              name: 'HTML  ',
-              photoSrc: html,
-              iconScale: 50,
-              nameVisible: true,
-            },
-          ],
-          [
-            uuidv4(),
-            {
-              name: 'CSS  ',
-              photoSrc: css,
-              iconScale: 50,
-              nameVisible: true,
-            },
-          ],
-          [
-            uuidv4(),
-            {
-              name: 'JS  ',
+              name: 'JS',
               photoSrc: js,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'SCSS  ',
-              photoSrc: sass,
-              iconScale: 50,
-              nameVisible: true,
-            },
-          ],
-          [
-            uuidv4(),
-            {
-              name: 'TS  ',
+              name: 'TS',
               photoSrc: ts,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'REACT  ',
+              name: 'NEXT',
+              photoSrc: next,
+              iconScale: 50,
+              nameVisible: false,
+            },
+          ],
+          [
+            uuidv4(),
+            {
+              name: 'REACT',
               photoSrc: react,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
+
           [
             uuidv4(),
             {
-              name: 'GIT  ',
-              photoSrc: git,
+              name: 'C#',
+              photoSrc: csharp,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'VITE  ',
-              photoSrc: vite,
+              name: 'UNITY',
+              photoSrc: unity,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'NODE  ',
+              name: 'NODE',
               photoSrc: node,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
+            },
+          ],
+
+          [
+            uuidv4(),
+            {
+              name: 'CSS',
+              photoSrc: css,
+              iconScale: 50,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'NPM  ',
-              photoSrc: npm,
-              iconScale: 35,
-              nameVisible: true,
+              name: 'SCSS',
+              photoSrc: sass,
+              iconScale: 50,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'VERCEL  ',
+              name: 'TAILWIND',
+              photoSrc: tailwind,
+              iconScale: 50,
+              nameVisible: false,
+            },
+          ],
+          [
+            uuidv4(),
+            {
+              name: 'VERCEL',
               photoSrc: vercel,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
           [
             uuidv4(),
             {
-              name: 'FIGMA  ',
+              name: 'FIREBASE',
+              photoSrc: firebase,
+              iconScale: 50,
+              nameVisible: false,
+            },
+          ],
+
+          [
+            uuidv4(),
+            {
+              name: 'VITE',
+              photoSrc: vite,
+              iconScale: 50,
+              nameVisible: false,
+            },
+          ],
+          [
+            uuidv4(),
+            {
+              name: 'GIT',
+              photoSrc: git,
+              iconScale: 50,
+              nameVisible: false,
+            },
+          ],
+          [
+            uuidv4(),
+            {
+              name: 'FIGMA',
               photoSrc: figma,
               iconScale: 50,
-              nameVisible: true,
+              nameVisible: false,
             },
           ],
         ]),

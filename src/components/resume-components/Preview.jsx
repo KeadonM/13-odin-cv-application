@@ -50,10 +50,10 @@ export const Preview = forwardRef((props, ref) => {
           className={settings.theme === true ? 'theme' : 'no-theme'}>
           <General data={data.info} settings={settings} />
 
-          <div className="resume-section experience">
+          <div className="experience grid-block resume-section main">
             {[...data.info.experience.map.entries()].length !== 0 && (
               <h2
-                className="preview-title-2 bold preview-primary-clr-400"
+                className="entry-title preview-title-2 bold preview-primary-clr-400"
                 style={{
                   '--clr': settings.colors.primaryColorDesatDark,
                 }}>
@@ -84,10 +84,10 @@ export const Preview = forwardRef((props, ref) => {
             </div>
           </div>
 
-          <div className="resume-section education">
+          <div className="education grid-block resume-section main">
             {[...data.info.education.map.entries()].length !== 0 && (
               <h2
-                className="preview-title-2 bold preview-primary-clr-400"
+                className="entry-title preview-title-2 bold preview-primary-clr-400"
                 style={{
                   '--clr': settings.colors.primaryColorDesatDark,
                 }}>
@@ -118,10 +118,10 @@ export const Preview = forwardRef((props, ref) => {
             </div>
           </div>
 
-          <div className="resume-section skills">
+          <div className="skills grid-block resume-section main">
             {[...data.info.skill.map.entries()].length !== 0 && (
               <h2
-                className="preview-title-2 bold preview-primary-clr-400"
+                className="entry-title preview-title-2 bold preview-primary-clr-400"
                 style={{
                   '--clr': settings.colors.primaryColorDesatDark,
                 }}>
@@ -138,8 +138,8 @@ export const Preview = forwardRef((props, ref) => {
             <ul
               className={
                 data.info.skill.duoTone === true
-                  ? 'entry-container duo-tone '
-                  : 'entry-container '
+                  ? 'entry-container list-container duo-tone '
+                  : 'entry-container list-container'
               }>
               {[...data.info.skill.map.entries()].map((entry) => {
                 return (
@@ -147,7 +147,9 @@ export const Preview = forwardRef((props, ref) => {
                     key={entry[0]}
                     data={entry[1]}
                     clr={settings.colors.secondaryColor}
+                    clrBgAlt={settings.colors.primaryColorDesat}
                     clrShadow={settings.colors.secondaryColorDark}
+                    clrShadowAlt={settings.colors.primaryColorDesatDark}
                     type="skill"
                     settings={settings}
                   />

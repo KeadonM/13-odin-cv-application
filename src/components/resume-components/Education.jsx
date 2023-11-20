@@ -64,7 +64,7 @@ function Education({ data, settings }) {
           {date}
         </div>
 
-        <p className="preview-body-4 text-area">{data.addition}</p>
+        <p className="addition preview-body-4 text-area">{data.addition}</p>
 
         <ul
           className="bulletpoints-list preview-body-4 text-area"

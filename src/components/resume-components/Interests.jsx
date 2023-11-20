@@ -5,9 +5,9 @@ import ListEntry from './ListEntry.jsx';
 
 export default function Interests({ data, settings }) {
   return (
-    <div className="list-container resume-section">
+    <div className="interests resume-section">
       {[...data.map.entries()].length > 0 && (
-        <h2 className="general-section-title preview-title-2">
+        <h2 className="aside-section-title preview-title-2">
           <span
             className="preview-general-icon preview-secondary-clr-400 "
             style={{
@@ -22,7 +22,9 @@ export default function Interests({ data, settings }) {
 
       <ul
         className={
-          data.duoTone === true ? 'preview-body-4 duo-tone' : 'preview-body-4'
+          data.duoTone === true
+            ? 'list-container preview-body-4 duo-tone'
+            : 'list-container preview-body-4'
         }>
         {[...data.map.entries()].map((entry) => {
           return (
@@ -30,7 +32,9 @@ export default function Interests({ data, settings }) {
               key={entry[0]}
               data={entry[1]}
               clr={settings.colors.secondaryColorDark}
-              clrShadow={settings.colors.secondaryColorDark}
+              clrBgAlt={settings.colors.primaryColorDesatDark}
+              clrShadow={'rgba(0, 0, 0, 0.15)'}
+              clrShadowAlt={'rgba(0, 0, 0, 0.15)'}
               type="interest"
               settings={settings}
             />
