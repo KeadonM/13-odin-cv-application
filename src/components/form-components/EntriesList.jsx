@@ -62,7 +62,6 @@ function SortableListItem(props) {
           name="name"
           value={data.name}
           onChange={handleUpdate}
-          maxLength={listType === 'skill' ? 15 : 48}
         />
 
         {listType === 'skill' ||

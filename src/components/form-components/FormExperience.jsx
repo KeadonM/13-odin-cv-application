@@ -91,11 +91,11 @@ function InputExperience(props) {
       </label>
 
       <label className="form-input-label">
-        Responsibilities
+        Description
         <textarea
           type="text"
-          name="responsibility"
-          value={data.responsibility}
+          name="description"
+          value={data.description}
           onChange={handleUpdate}
         />
       </label>

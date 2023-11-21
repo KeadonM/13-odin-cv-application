@@ -32,21 +32,22 @@ function Experience({ data, settings }) {
               style={{
                 '--clr': settings.colors.secondaryColorDark,
               }}>
-              {data.position}
+              <span>
+                {data.position}
+                &nbsp;
+                {data.link !== '' && <FontAwesomeIcon icon={faLink} />}
+              </span>
             </div>
-
             <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
-              {data.name}&nbsp;
-              {data.link !== '' && <FontAwesomeIcon icon={faLink} />}
+              <span className="name">
+                {data.name}&nbsp;
+                <span className="summary">{data.description}</span>
+              </span>
             </div>
+            <div></div>
           </a>
-
           {date}
         </div>
-
-        <p className="addition preview-body-4 text-area">
-          {data.responsibility}
-        </p>
 
         <ul
           className="bulletpoints-list preview-body-4 text-area"

@@ -52,19 +52,23 @@ function Education({ data, settings }) {
               style={{
                 '--clr': settings.colors.secondaryColorDark,
               }}>
-              {data.name}
+              <span>
+                {data.name}
+                &nbsp;
+                {data.link !== '' && <FontAwesomeIcon icon={faLink} />}
+              </span>
             </div>
 
             <div className="preview-primary-clr-400 preview-body-2 subtitle bold italic">
-              {data.program}&nbsp;
-              {data.link !== '' && <FontAwesomeIcon icon={faLink} />}
+              <span className="name">
+                {data.program}&nbsp;
+                <span className="summary">{data.addition}</span>
+              </span>
             </div>
           </a>
 
           {date}
         </div>
-
-        <p className="addition preview-body-4 text-area">{data.addition}</p>
 
         <ul
           className="bulletpoints-list preview-body-4 text-area"

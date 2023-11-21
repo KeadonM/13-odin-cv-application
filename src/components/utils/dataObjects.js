@@ -25,9 +25,10 @@ export function dataObjectFactory() {
       exp_start: '',
       exp_end: '',
       link: '',
-      responsibility: '',
+      description: '',
       bulletPoints: new Map([]),
     },
+
     education: {
       name: '',
       ed_start: '',
@@ -141,7 +142,7 @@ export function defaultData() {
         theme: true,
         icons: true,
         trademark: true,
-        experienceColumns: true,
+        experienceColumns: false,
         educationColumns: true,
         linkedColors: true,
       },
@@ -151,7 +152,7 @@ export function defaultData() {
         title: 'Full Stack Developer',
         blurbTitle: 'About Me',
         blurb:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
+          'Enjoys efficient problem-solving and communicating effective solutions. Brings forth a motivated attitude and a variety of strong interpersonal skills. Excels in fast-paced environments which foster learning and self-improvement opportunities.',
         photoSrc: defaultPhoto,
       },
 
@@ -169,27 +170,72 @@ export function defaultData() {
           [
             uuidv4(),
             {
-              name: 'ResuCraft',
-              position: 'Developer - Personal',
+              name: 'Conspicuous Ink',
+              position: 'Full Stack - Freelance',
+              link: 'https://conspicuous.ink',
               exp_start: '2023',
               exp_end: '',
-              link: 'https://13-odin-cv-application.vercel.app/',
-              responsibility:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
-              bulletPoints: new Map([]),
+              description:
+                'Freelanced tattoo studio website, deployed to Hostinger. Built using vanilla HTML, CSS, JS, Firebase, ImageKit, and Vite.',
+              bulletPoints: new Map([
+                [
+                  uuidv4(),
+                  {
+                    name: 'Integrated a dynamic instagram feed with serverless functions.',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Increased rate of clientele by upwards of 25% per month by implementing a compelling copywriting scheme and unique design, securing a conversion rate of ~5%.',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Achieves lighthouse scores between 95-100. Successfully beating local competition by over 50%.',
+                  },
+                ],
+              ]),
             },
           ],
           [
             uuidv4(),
             {
-              name: 'Conspicuous Ink',
-              position: 'Full Stack - Freelance',
+              name: 'ResuCraft',
+              position: 'Developer - Personal',
               exp_start: '2023',
               exp_end: '',
-              link: 'https://conspicuous.ink',
-              responsibility:
-                'Increased client rate. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
-              bulletPoints: new Map([]),
+              link: 'https://13-odin-cv-application.vercel.app/',
+              description:
+                'Realtime templated resume crafter, deployed to Vercel. Built using React, Sass, JS, and Vite.',
+              bulletPoints: new Map([
+                [
+                  // Managed dynamic app state using react hooks.
+                  uuidv4(),
+                  {
+                    name: 'Integrating DndKit and React-to-Print',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Integrated DnDkit, allowing the user to dynamically organize lists.',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Implemented React-to-Print allowing users to print the previewed resume.',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Implemented a variety of settings allowing detailed control of the product',
+                  },
+                ],
+              ]),
             },
           ],
           [
@@ -200,9 +246,28 @@ export function defaultData() {
               exp_start: '2018',
               exp_end: '',
               link: '',
-              responsibility:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
-              bulletPoints: new Map([]),
+              description:
+                'Creative mobile idle clicker, deployed to Android/iOS. Built using Unity and C#.',
+              bulletPoints: new Map([
+                [
+                  uuidv4(),
+                  {
+                    name: ' integrating google admobs.',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Achieved over 5000 downloads, while maintaining an active user base over a year after release.',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Mainted ratings of 4.4/5 over 100+ user reviews.',
+                  },
+                ],
+              ]),
             },
           ],
           [
@@ -213,9 +278,21 @@ export function defaultData() {
               exp_start: '2017',
               exp_end: '2020',
               link: 'https://www.aggrowth.com/en-us/farm-brands-overview/westeel',
-              responsibility:
-                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, consequatur doloremque nostrum culpa nemo consequuntur.',
-              bulletPoints: new Map([]),
+              description: '',
+              bulletPoints: new Map([
+                [
+                  uuidv4(),
+                  {
+                    name: 'Caught over 100 errors prior to shipment adding in saving the company thousands of dollars',
+                  },
+                ],
+                [
+                  uuidv4(),
+                  {
+                    name: 'Developed efficient processes to effectively and efficiently inspect shipments reducing operating times by over 20%',
+                  },
+                ],
+              ]),
             },
           ],
         ]),
@@ -237,19 +314,13 @@ export function defaultData() {
                 [
                   uuidv4(),
                   {
-                    name: 'Over 100 lessons.',
+                    name: 'Over 100 lessons completed.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
                     name: 'Lorem, ipsum dolor sit amet consectetur.',
-                  },
-                ],
-                [
-                  uuidv4(),
-                  {
-                    name: 'Adipisicing elit. Labore, facilis!',
                   },
                 ],
               ]),
@@ -404,15 +475,15 @@ export function defaultData() {
               nameVisible: false,
             },
           ],
-          [
-            uuidv4(),
-            {
-              name: 'FIGMA',
-              photoSrc: figma,
-              iconScale: 50,
-              nameVisible: false,
-            },
-          ],
+          // [
+          //   uuidv4(),
+          //   {
+          //     name: 'FIGMA',
+          //     photoSrc: figma,
+          //     iconScale: 50,
+          //     nameVisible: false,
+          //   },
+          // ],
         ]),
       },
 

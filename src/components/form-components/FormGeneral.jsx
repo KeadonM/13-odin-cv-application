@@ -31,7 +31,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
       </div>
 
       <label className="form-input-label">
-        Blurb Title
+        Statement Title
         <input
           type="text"
           name="blurbTitle"
@@ -41,7 +41,7 @@ function InputGeneral({ updateData, uploadPicture, data }) {
       </label>
 
       <label className="form-input-label">
-        Blurb
+        Personal Statement
         <textarea name="blurb" value={data.blurb} onChange={handleUpdate} />
       </label>
 
