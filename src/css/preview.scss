@@ -416,13 +416,6 @@ $preview-shadow-scale-secondary: calc($preview-scale-secondary * 0.0065);
             min-width: 25%;
             margin: 1%;
           }
-
-          &.duo-tone > :nth-child(even) {
-            background-color: var(--clr-bg-alt);
-            .list-icon {
-              color: var(--clr-shadow-alt);
-            }
-          }
         }
       }
 
@@ -506,12 +499,11 @@ $preview-shadow-scale-secondary: calc($preview-scale-secondary * 0.0065);
             calc($preview-shadow-scale-primary * 2)
         );
       }
-
-      &.duo-tone > :nth-child(even) {
-        background-color: var(--clr-bg-alt);
-        .list-icon {
-          color: var(--clr-shadow-alt);
-        }
+    }
+    &.duo-tone > :nth-child(even) {
+      background-color: var(--clr-bg-alt);
+      .list-icon {
+        color: var(--clr-shadow-alt);
       }
     }
   }
