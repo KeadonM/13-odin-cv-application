@@ -82,7 +82,9 @@ function General({ data, settings }) {
               </h2>
             )}
 
-            <p className="preview-body-3 text-area">{dataGeneral.blurb}</p>
+            <p className="preview-body-3 text-area statement">
+              {dataGeneral.blurb}
+            </p>
           </div>
 
           <div className="contact resume-section">

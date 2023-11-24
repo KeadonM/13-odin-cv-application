@@ -150,17 +150,17 @@ export function defaultData() {
       general: {
         name: 'Keadon Mitchell',
         title: 'Full Stack Developer',
-        blurbTitle: 'About Me',
+        blurbTitle: 'Highlights',
         blurb:
-          'Enjoys efficient problem-solving and communicating effective solutions. Brings forth a motivated attitude and a variety of strong interpersonal skills. Excels in fast-paced environments which foster learning and self-improvement opportunities.',
+          'Excels in growth environments, fostering valued improvement and learning opportunities. Communicates creative technical solutions for efficient and collaborative problem-solving. Demonstrates practical interpersonal skills and an adaptable rational perspective. Executes tasks with comprehensive focus and resolution-driven flexibility.',
         photoSrc: defaultPhoto,
       },
 
       contact: {
-        sectionTitle: 'Contact Me',
+        sectionTitle: 'Reach out',
         phone: '+1 (111) 111-1111',
-        email: 'mitchell@keadon.dev ',
-        linkedIn: 'KeadonM',
+        email: 'reach@keadon.dev ',
+        linkedIn: '',
         website: 'keadon.dev',
       },
 
@@ -173,27 +173,27 @@ export function defaultData() {
               name: 'Conspicuous Ink',
               position: 'Full Stack - Freelance',
               link: 'https://conspicuous.ink',
-              exp_start: '2023',
+              exp_start: '03/2023',
               exp_end: '',
               description:
-                'Freelanced tattoo studio website, deployed to Hostinger. Built using vanilla HTML, CSS, JS, Firebase, ImageKit, and Vite.',
+                'Freelanced custom tattoo studio website. JS, CSS, Firebase, ImageKit, MapBox, Vite. Deployed to Hostinger',
               bulletPoints: new Map([
                 [
                   uuidv4(),
                   {
-                    name: 'Integrated a dynamic instagram feed with serverless functions.',
+                    name: 'Generated a 25%+ clientele boost through respectful copywriting strategies.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
-                    name: 'Increased rate of clientele by upwards of 25% per month by implementing a compelling copywriting scheme and unique design, securing a conversion rate of ~5%.',
+                    name: 'Streamlined DevOps via GitHub CI/CD, rapid prototyping and Agile methods.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
-                    name: 'Achieves lighthouse scores between 95-100. Successfully beating local competition by over 50%.',
+                    name: 'Slashed bounce rates through maximized performance and best practice compliance, delivering 98-100 in web vitals metrics, outperforming competitors by 33%+.',
                   },
                 ],
               ]),
@@ -204,35 +204,29 @@ export function defaultData() {
             {
               name: 'ResuCraft',
               position: 'Developer - Personal',
-              exp_start: '2023',
+              exp_start: '10/2023',
               exp_end: '',
               link: 'https://13-odin-cv-application.vercel.app/',
               description:
-                'Realtime templated resume crafter, deployed to Vercel. Built using React, Sass, JS, and Vite.',
+                'Feature-rich scalable resume crafter. React.js, SCSS, Font Awesome, Google Fonts, Vite. Deployed to Vercel.',
               bulletPoints: new Map([
                 [
                   // Managed dynamic app state using react hooks.
                   uuidv4(),
                   {
-                    name: 'Integrating DndKit and React-to-Print',
+                    name: 'Feature-rich scalable resume crafter. React.js, SCSS, Font Awesome, Google Fonts, Vite. Deployed to Vercel.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
-                    name: 'Integrated DnDkit, allowing the user to dynamically organize lists.',
+                    name: 'Enhanced user engagement through the incorporation of dnd-kit for dynamically sortable lists.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
-                    name: 'Implemented React-to-Print allowing users to print the previewed resume.',
-                  },
-                ],
-                [
-                  uuidv4(),
-                  {
-                    name: 'Implemented a variety of settings allowing detailed control of the product',
+                    name: 'Continued development of feature set with the intention of developing a marketable product.',
                   },
                 ],
               ]),
@@ -244,27 +238,21 @@ export function defaultData() {
               name: 'Duck Farm',
               position: 'Developer - Personal',
               exp_start: '2018',
-              exp_end: '',
-              link: '',
+              exp_end: '2019',
+              link: 'https://www.youtube.com/watch?v=jwxJ7XPa15g',
               description:
-                'Creative mobile idle clicker, deployed to Android/iOS. Built using Unity and C#.',
+                'Accessible, innovative casual mobile game. Unity, C#, Google AdMob. Deployed to iOS and Android.',
               bulletPoints: new Map([
                 [
                   uuidv4(),
                   {
-                    name: ' integrating google admobs.',
+                    name: 'Achieved 5k+ downloads while maintaining a dedicated active user base of over 200, leading to a 4.4/5 average rating and 100+ reviews.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
-                    name: 'Achieved over 5000 downloads, while maintaining an active user base over a year after release.',
-                  },
-                ],
-                [
-                  uuidv4(),
-                  {
-                    name: 'Mainted ratings of 4.4/5 over 100+ user reviews.',
+                    name: 'Succeeded in integrating Google AdMob and in-app purchases, grossing $500+ in its lifespan.',
                   },
                 ],
               ]),
@@ -276,20 +264,20 @@ export function defaultData() {
               name: 'AGI Westeel',
               position: 'Load Inspector',
               exp_start: '2017',
-              exp_end: '2020',
+              exp_end: '2019',
               link: 'https://www.aggrowth.com/en-us/farm-brands-overview/westeel',
               description: '',
               bulletPoints: new Map([
                 [
                   uuidv4(),
                   {
-                    name: 'Caught over 100 errors prior to shipment adding in saving the company thousands of dollars',
+                    name: 'Spearheaded a data-driven error reporting system, enabling identification of leading production issues, resulting in an error reduction rate upwards of 15%.',
                   },
                 ],
                 [
                   uuidv4(),
                   {
-                    name: 'Developed efficient processes to effectively and efficiently inspect shipments reducing operating times by over 20%',
+                    name: 'Detected 100+ errors, substantially reducing overhead and elevating customer satisfaction.',
                   },
                 ],
               ]),
@@ -314,13 +302,7 @@ export function defaultData() {
                 [
                   uuidv4(),
                   {
-                    name: 'Over 100 lessons completed.',
-                  },
-                ],
-                [
-                  uuidv4(),
-                  {
-                    name: 'Lorem, ipsum dolor sit amet consectetur.',
+                    name: 'Completed over 150 lessons and 15 projects',
                   },
                 ],
               ]),
@@ -333,10 +315,16 @@ export function defaultData() {
               program: 'Computer Science',
               ed_start: '2019',
               ed_end: '2021',
-              link: 'https://www.uwinnipeg.ca/',
-              addition:
-                'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, facilis!',
-              bulletPoints: new Map([]),
+              link: '',
+              addition: '',
+              bulletPoints: new Map([
+                [
+                  uuidv4(),
+                  {
+                    name: 'Fundamentals, Databases, Data Structures, Algorithm.',
+                  },
+                ],
+              ]),
             },
           ],
         ]),
@@ -512,7 +500,7 @@ export function defaultData() {
           [
             uuidv4(),
             {
-              name: 'Leadership',
+              name: 'Analytical',
               photoSrc: '',
               iconScale: 50,
               nameVisible: true,
@@ -521,7 +509,7 @@ export function defaultData() {
           [
             uuidv4(),
             {
-              name: 'Analytical',
+              name: 'Resilient',
               photoSrc: '',
               iconScale: 50,
               nameVisible: true,
