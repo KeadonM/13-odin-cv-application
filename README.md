@@ -1,3 +1,3 @@
 # Resume Builder
 
-**Live 👉** [here](https://13-odin-cv-application.vercel.app/)
+**Live 👉** [here](resucraft.keadon.dev)
