@@ -1,5 +1,4 @@
 import { v4 as uuidv4, v4 } from 'uuid';
-import defaultPhoto from '../../assets/defaultPhoto.jpg';
 
 import js from '../../assets/logos/js.png';
 import css from '../../assets/logos/css.png';
@@ -153,7 +152,7 @@ export function defaultData() {
         blurbTitle: 'Highlights',
         blurb:
           'Excels in growth environments, fostering valued improvement and learning opportunities. Communicates creative technical solutions for efficient and collaborative problem-solving. Demonstrates practical interpersonal skills and an adaptable rational perspective. Executes tasks with comprehensive focus and resolution-driven flexibility.',
-        photoSrc: defaultPhoto,
+        photoSrc: '',
       },
 
       contact: {
